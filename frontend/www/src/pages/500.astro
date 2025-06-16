@@ -1,0 +1,16 @@
+---
+import { CONFIG } from '~/shared/model/config';
+import RootLayout from '~/shared/ui/layouts/RootLayout.astro';
+
+interface Props {
+  error: unknown;
+}
+
+const { error } = Astro.props;
+---
+<RootLayout title={`Server Error | ${CONFIG.TITLE}`}>
+  <div>
+    <h1>500 - Internal Server Error</h1>
+    <p>{error instanceof Error ? error.message : "Unknown error"}</p>
+  </div>
+</RootLayout>

@@ -1,0 +1,12 @@
+---
+import RootLayout from "~/shared/ui/layouts/RootLayout.astro";
+
+export const prerender = false;
+const { username } = Astro.params;
+---
+
+<RootLayout title={username || ""}>
+  <div>
+    <h1>{username}</h1>
+  </div>
+</RootLayout>

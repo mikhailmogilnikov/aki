@@ -1,0 +1,33 @@
+---
+import { CONFIG } from "~/shared/model/config";
+import "~/app/globals.css";
+
+type Props = {
+  title?: string;
+  description?: string;
+  faviconUrl?: string;
+};
+
+const {
+  title = CONFIG.TITLE,
+  description = CONFIG.DESCRIPTION,
+  faviconUrl = "/favicon.svg",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={faviconUrl} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-background text-foreground min-h-screen antialiased">
+    <slot />
+  </body>
+</html>
+
+<style>
+</style>
