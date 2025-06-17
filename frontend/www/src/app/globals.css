@@ -5,10 +5,8 @@
   --color-foreground: hsl(0, 0%, 100%);
 }
 
-@layer components {
-  .squircle {
-    --squircle-smooth: 1;
-    --squircle-radius: 16px;
-    mask-image: paint(squircle);
-  }
+.squircle {
+  --squircle-smooth: 1;
+  --squircle-radius: 16px;
+  mask-image: paint(squircle);
 }
