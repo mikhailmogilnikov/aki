@@ -1,0 +1,15 @@
+export async function initSquircle() {
+  if (!("paintWorklet" in CSS)) {
+    console.log("paintWorklet not in CSS");
+
+    const script = document.createElement("script");
+    script.src = "/scripts/css-paint-polyfill.js";
+    document.head.appendChild(script);
+
+    await new Promise((resolve) => {
+      script.onload = resolve;
+    });
+  }
+
+  (CSS as any).paintWorklet.addModule("/scripts/squircle.min.js");
+}

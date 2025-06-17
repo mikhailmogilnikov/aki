@@ -1,5 +1,7 @@
 ---
 import { CONFIG } from "~/shared/model/config";
+import { SEO } from "astro-seo";
+
 import "~/app/globals.css";
 
 type Props = {
@@ -19,15 +21,33 @@ const {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href={faviconUrl} />
-    <meta name="description" content={description} />
-    <title>{title}</title>
+    <SEO
+      title={title}
+      description={description}
+      openGraph={{
+        basic: {
+          title: title,
+          type: "website",
+          image: faviconUrl,
+          url: Astro.url,
+        },
+      }}
+      extend={{
+        meta: [
+          {
+            name: "viewport",
+            content: "width=device-width, initial-scale=1.0",
+          },
+        ],
+      }}
+    />
+    <script>
+      import { initSquircle } from "~/shared/scripts/squircle";
+      initSquircle();
+    </script>
   </head>
   <body class="bg-background text-foreground min-h-screen antialiased">
     <slot />
   </body>
 </html>
-
-<style>
-</style>

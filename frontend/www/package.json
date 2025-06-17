@@ -12,6 +12,10 @@
     "@astrojs/vercel": "^8.1.5",
     "@tailwindcss/vite": "^4.1.10",
     "astro": "^5.9.3",
-    "tailwindcss": "^4.1.10"
+    "astro-seo": "^0.8.4",
+    "css-houdini-squircle": "^0.3.0",
+    "css-paint-polyfill": "^3.4.0",
+    "tailwindcss": "^4.1.10",
+    "tailwindcss-animate": "^1.0.7"
   }
 }
