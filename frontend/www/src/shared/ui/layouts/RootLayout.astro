@@ -3,6 +3,7 @@ import { CONFIG } from "~/shared/model/config";
 import { SEO } from "astro-seo";
 
 import "~/app/globals.css";
+import Squircle from "~/shared/scripts/squircle.astro";
 
 type Props = {
   title?: string;
@@ -42,12 +43,9 @@ const {
         ],
       }}
     />
-    <script>
-      import { initSquircle } from "~/shared/scripts/squircle";
-      initSquircle();
-    </script>
   </head>
   <body class="bg-background text-foreground min-h-screen antialiased">
     <slot />
+    <Squircle />
   </body>
 </html>
