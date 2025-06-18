@@ -10,15 +10,18 @@
   --color-default: oklch(1 0 0);
   --color-outline: oklch(0.87 0 0);
 
-  --container-8xl: 96rem;
-  --radius: 20px;
-  --smooth: 1;
+  --container-8xl: 114rem;
+  --radius: 24px;
+  --smooth: 0.85;
+
+  --animate-squircle-shadow: squircle-shadow 1s ease-in-out infinite;
 }
 
 .dark {
   --color-background: oklch(0 0 0);
   --color-foreground: oklch(0.95 0 0);
   --color-default: oklch(0.2 0 0);
+  --color-outline: oklch(0.25 0 0);
 }
 
 .squircle {
@@ -42,10 +45,19 @@
   --squircle-radius: var(--radius);
   --squircle-fill: var(--color-default);
   background: paint(squircle);
-  filter: drop-shadow(0 4px 6px hsla(0, 0%, 0%, 0.1));
   border-radius: var(--radius);
+  animation: squircle-shadow-fix 9999s linear infinite;
 }
 
 .dark .squircle-shadow {
-  filter: none;
+  animation: none;
+}
+
+@keyframes squircle-shadow-fix {
+  0% {
+    filter: drop-shadow(0 4px 6px hsla(0, 0%, 0%, 0.1));
+  }
+  100% {
+    filter: drop-shadow(0 4px 6px hsla(0, 0%, 0%, 0.1));
+  }
 }
