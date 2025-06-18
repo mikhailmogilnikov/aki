@@ -11,8 +11,37 @@
 
     if (!("paintWorklet" in CSS)) {
       await import("/scripts/css-paint-polyfill.js");
+
+      // Ждём полной инициализации полифилла в Safari
+      await new Promise((resolve) => {
+        const checkPaintWorklet = () => {
+          if (CSS.paintWorklet && CSS.paintWorklet.addModule) {
+            resolve();
+          } else {
+            setTimeout(checkPaintWorklet, 50);
+          }
+        };
+        checkPaintWorklet();
+      });
+
+      await new Promise((resolve) => setTimeout(resolve, 100));
     }
 
-    CSS.paintWorklet.addModule("/scripts/squircle.min.js");
+    try {
+      await CSS.paintWorklet.addModule("/scripts/squircle.min.js");
+    } catch (error) {
+      console.warn("Failed to load squircle paintWorklet:", error);
+
+      setTimeout(async () => {
+        try {
+          await CSS.paintWorklet.addModule("/scripts/squircle.min.js");
+        } catch (retryError) {
+          console.error(
+            "Failed to load squircle paintWorklet on retry:",
+            retryError
+          );
+        }
+      }, 200);
+    }
   })();
 </script>
