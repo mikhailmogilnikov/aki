@@ -1,12 +1,51 @@
 @import "tailwindcss";
 
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
 @theme {
-  --color-background: hsl(0, 0%, 0%);
-  --color-foreground: hsl(0, 0%, 100%);
+  --color-background: oklch(0.95 0 0);
+  --color-foreground: oklch(0.05 0 0);
+  --color-default: oklch(1 0 0);
+  --color-outline: oklch(0.87 0 0);
+
+  --container-8xl: 96rem;
+  --radius: 20px;
+  --smooth: 1;
+}
+
+.dark {
+  --color-background: oklch(0 0 0);
+  --color-foreground: oklch(0.95 0 0);
+  --color-default: oklch(0.2 0 0);
 }
 
 .squircle {
-  --squircle-smooth: 1;
-  --squircle-radius: 16px;
+  --squircle-smooth: var(--smooth);
+  --squircle-radius: var(--radius);
   mask-image: paint(squircle);
+  border-radius: var(--radius);
+}
+
+.squircle-outline {
+  --squircle-smooth: var(--smooth);
+  --squircle-radius: var(--radius);
+  --squircle-outline: 1px;
+  --squircle-fill: var(--color-outline);
+  background: paint(squircle);
+  border-radius: var(--radius);
+}
+
+.squircle-shadow {
+  --squircle-smooth: var(--smooth);
+  --squircle-radius: var(--radius);
+  --squircle-fill: var(--color-default);
+  background: paint(squircle);
+  filter: drop-shadow(0 4px 6px hsla(0, 0%, 0%, 0.1));
+  border-radius: var(--radius);
+}
+
+.dark .squircle-shadow {
+  filter: none;
 }
