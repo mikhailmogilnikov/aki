@@ -12,7 +12,6 @@
     if (!("paintWorklet" in CSS)) {
       await import("/scripts/css-paint-polyfill.js");
 
-      // Ждём полной инициализации полифилла в Safari
       await new Promise((resolve) => {
         const checkPaintWorklet = () => {
           if (CSS.paintWorklet && CSS.paintWorklet.addModule) {
@@ -29,12 +28,15 @@
 
     try {
       await CSS.paintWorklet.addModule("/scripts/squircle.min.js");
+
+      forceRepaintSquircleElements();
     } catch (error) {
       console.warn("Failed to load squircle paintWorklet:", error);
 
       setTimeout(async () => {
         try {
           await CSS.paintWorklet.addModule("/scripts/squircle.min.js");
+          forceRepaintSquircleElements();
         } catch (retryError) {
           console.error(
             "Failed to load squircle paintWorklet on retry:",
@@ -42,6 +44,25 @@
           );
         }
       }, 200);
+    }
+
+    function forceRepaintSquircleElements() {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const squircleElements = document.querySelectorAll(
+            ".squircle, .squircle-outline, .squircle-shadow"
+          );
+
+          squircleElements.forEach((element) => {
+            const originalTransform = element.style.transform;
+            element.style.transform = "translateZ(0)";
+
+            requestAnimationFrame(() => {
+              element.style.transform = originalTransform;
+            });
+          });
+        });
+      });
     }
   })();
 </script>
