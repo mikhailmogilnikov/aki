@@ -1,5 +1,14 @@
 <script is:inline type="module">
   (async () => {
+    await new Promise((resolve, reject) => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "/squircle.css";
+      link.onload = () => resolve();
+      link.onerror = () => reject(new Error("Failed to load CSS"));
+      document.head.appendChild(link);
+    });
+
     if (!("paintWorklet" in CSS)) {
       await import("/scripts/css-paint-polyfill.js");
     }
