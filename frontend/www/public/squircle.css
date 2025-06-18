@@ -2,16 +2,16 @@
   --squircle-smooth: var(--smooth);
   --squircle-radius: var(--radius);
   mask-image: paint(squircle);
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
 }
 
 .squircle-outline {
   --squircle-smooth: var(--smooth);
   --squircle-radius: var(--radius);
-  --squircle-outline: 1px;
+  --squircle-outline: var(--border-width);
   --squircle-fill: var(--color-outline);
   background: paint(squircle);
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
 }
 
 .squircle-shadow {
@@ -19,7 +19,7 @@
   --squircle-radius: var(--radius);
   --squircle-fill: var(--color-default);
   background: paint(squircle);
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   animation: squircle-shadow-fix 9999s linear infinite;
 }
 

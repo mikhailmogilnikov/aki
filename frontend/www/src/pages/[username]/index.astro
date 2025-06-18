@@ -6,11 +6,26 @@ const { username } = Astro.params;
 ---
 
 <RootLayout title={username || ""}>
-  <div class="max-w-8xl mx-auto flex flex-col gap-6 p-4 flex-wrap">
-    <div class="w-full h-40 squircle-shadow"></div>
-    <div class="grid grid-cols-2 gap-5 h-40 max-w-[428px]">
-      <div class="squircle-outline aspect-square"></div>
-      <div class="squircle-shadow aspect-square"></div>
+  <div class="max-w-8xl mx-auto flex flex-col gap-6 px-4 py-5 flex-wrap">
+    <div class="grid grid-cols-2 gap-5 max-w-[428px] mx-auto w-full">
+      <div class="col-span-2 squircle-outline aspect-[2/1]"></div>
+
+      <div class="squircle-outline aspect-square p-4">
+        <p class="text-2xl font-bold">Hello</p>
+      </div>
+      <div class="squircle-shadow aspect-square p-4 pressable">
+        <p class="text-2xl font-bold">Hello</p>
+      </div>
+      <div
+        class="squircle-outline pressable col-span-2 row-span-2 aspect-square"
+      >
+      </div>
+      <div class="squircle-shadow aspect-[1/2] row-span-2 p-4"></div>
+      <div class="squircle bg-default aspect-square p-4"></div>
+      <div class="squircle-outline row-span-2 aspect-[1/2] p-4"></div>
+      <div class="squircle-shadow aspect-square p-4"></div>
+      <div class="squircle-shadow row-span-[0.5] aspect-[2/1]"></div>
+      <div class="squircle-shadow row-span-1 aspect-[2/1]"></div>
     </div>
   </div>
 </RootLayout>
