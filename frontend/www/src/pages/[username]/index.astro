@@ -1,4 +1,5 @@
 ---
+import Avatar from "~/shared/ui/kit/Avatar.astro";
 import RootLayout from "~/shared/ui/layouts/RootLayout.astro";
 
 export const prerender = false;
@@ -6,8 +7,24 @@ const { username } = Astro.params;
 ---
 
 <RootLayout title={username || ""}>
-  <div class="max-w-8xl mx-auto flex flex-col gap-6 px-4 py-5 flex-wrap">
-    <div class="grid grid-cols-2 gap-5 max-w-[428px] mx-auto w-full">
+  <div
+    class="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 px-4 lg:px-8 py-10 lg:py-20"
+  >
+    <div
+      class="flex gap-4 flex-col items-start max-lg:max-w-107 max-lg:mx-auto lg:sticky lg:top-20 lg:h-fit lg:max-w-120 w-full"
+    >
+      <Avatar
+        src="https://avatars.githubusercontent.com/u/125604210?v=4"
+        alt="Mikhail Mogilnikov"
+        className="size-46"
+        blur
+      />
+      <h1 class="text-4xl font-bold px-2 mt-4 z-1">Mikhail Mogilnikov</h1>
+      <p class="text-lg text-muted-foreground px-2 z-1">
+        Software & Design Engineer
+      </p>
+    </div>
+    <div class="grid grid-cols-2 gap-5 max-w-107 mx-auto w-full">
       <div class="col-span-2 squircle-outline aspect-[2/1]"></div>
 
       <div class="squircle-outline aspect-square p-4">
@@ -24,8 +41,6 @@ const { username } = Astro.params;
       <div class="squircle bg-default aspect-square p-4"></div>
       <div class="squircle-outline row-span-2 aspect-[1/2] p-4"></div>
       <div class="squircle-shadow aspect-square p-4"></div>
-      <div class="squircle-shadow row-span-[0.5] aspect-[2/1]"></div>
-      <div class="squircle-shadow row-span-1 aspect-[2/1]"></div>
     </div>
   </div>
 </RootLayout>

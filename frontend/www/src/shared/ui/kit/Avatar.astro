@@ -1,0 +1,25 @@
+---
+type Props = {
+  src: string;
+  alt: string;
+  size?: number;
+  className?: string;
+  blur?: boolean;
+};
+
+const { src, alt, className, blur = false } = Astro.props;
+---
+
+<div class:list={["bg-default rounded-full relative", className]}>
+  <img src={src} alt={alt} class="size-full object-cover rounded-full" />
+  {
+    blur && (
+      <img
+        src={src}
+        alt={alt}
+        draggable={false}
+        class="size-full object-cover rounded-full blur-2xl absolute top-14 left-10 opacity-35 scale-x-175 scale-y-140"
+      />
+    )
+  }
+</div>
