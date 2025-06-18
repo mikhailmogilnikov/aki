@@ -47,49 +47,99 @@
     }
 
           function forceRepaintSquircleElements() {
-        // Повторяем несколько раз с разными задержками для Safari
-        const repaintAttempts = [0, 100, 300, 500];
-        
-        repaintAttempts.forEach(delay => {
-          setTimeout(() => {
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                const squircleElements = document.querySelectorAll(
-                  ".squircle, .squircle-outline, .squircle-shadow"
-                );
+        const squircleElements = document.querySelectorAll(
+          ".squircle, .squircle-outline, .squircle-shadow"
+        );
 
-                if (squircleElements.length === 0) return;
+        if (squircleElements.length === 0) {
+          // Если элементы еще не найдены, попробуем через MutationObserver
+          setupSquircleObserver();
+          return;
+        }
 
-                squircleElements.forEach((element) => {
-                  const originalTransform = element.style.transform;
-                  const originalOpacity = element.style.opacity;
-                  
-                  element.style.transform = "translateZ(0)";
-                  
-                  element.style.opacity = "0.999";
-                  
-                  element.offsetHeight;
+        squircleElements.forEach((element) => {
+          // Метод 1: Переключение классов
+          const classes = Array.from(element.classList).filter(cls => 
+            cls.includes('squircle')
+          );
+          
+          classes.forEach(cls => {
+            element.classList.remove(cls);
+            element.offsetHeight; // Принудительный reflow
+            element.classList.add(cls);
+          });
 
-                  requestAnimationFrame(() => {
-                    element.style.transform = originalTransform;
-                    element.style.opacity = originalOpacity;
-                  });
-                });
-              });
-            });
-          }, delay);
+          // Метод 2: Принудительное изменение CSS переменной (если используется)
+          const currentRadius = getComputedStyle(element).getPropertyValue('--squircle-radius');
+          if (currentRadius) {
+            element.style.setProperty('--squircle-radius', currentRadius);
+          }
         });
       }
+
+      // Наблюдатель за изменениями DOM для динамически добавляемых элементов
+      function setupSquircleObserver() {
+        const observer = new MutationObserver((mutations) => {
+          let hasSquircleElements = false;
+          
+          mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+              if (node.nodeType === Node.ELEMENT_NODE) {
+                if (node.matches?.('.squircle, .squircle-outline, .squircle-shadow') ||
+                    node.querySelector?.('.squircle, .squircle-outline, .squircle-shadow')) {
+                  hasSquircleElements = true;
+                }
+              }
+            });
+          });
+
+          if (hasSquircleElements) {
+            setTimeout(() => {
+              forceRepaintSquircleElements();
+            }, 50);
+          }
+        });
+
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+
+        // Отключаем observer через 10 секунд чтобы не тратить ресурсы
+        setTimeout(() => observer.disconnect(), 10000);
+      }
+
+      // Многоуровневая стратегия для Safari
+      const safariRetrySchedule = [100, 300, 500, 1000, 2000];
+      
+      safariRetrySchedule.forEach(delay => {
+        setTimeout(forceRepaintSquircleElements, delay);
+      });
 
       // Дополнительный fallback для полной загрузки страницы
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-          setTimeout(forceRepaintSquircleElements, 100);
+          setTimeout(forceRepaintSquircleElements, 50);
+          setTimeout(forceRepaintSquircleElements, 200);
         });
       }
       
       window.addEventListener('load', () => {
-        setTimeout(forceRepaintSquircleElements, 200);
+        setTimeout(forceRepaintSquircleElements, 100);
+        setTimeout(forceRepaintSquircleElements, 500);
+      });
+
+      // Последняя попытка при взаимодействии пользователя
+      const userInteractionEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+      let interactionAttempted = false;
+      
+      userInteractionEvents.forEach(event => {
+        document.addEventListener(event, () => {
+          if (!interactionAttempted) {
+            interactionAttempted = true;
+            setTimeout(forceRepaintSquircleElements, 100);
+          }
+        }, { once: true, passive: true });
       });
   })();
 </script>
