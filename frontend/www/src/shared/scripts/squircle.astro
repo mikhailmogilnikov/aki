@@ -46,23 +46,50 @@
       }, 200);
     }
 
-    function forceRepaintSquircleElements() {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const squircleElements = document.querySelectorAll(
-            ".squircle, .squircle-outline, .squircle-shadow"
-          );
-
-          squircleElements.forEach((element) => {
-            const originalTransform = element.style.transform;
-            element.style.transform = "translateZ(0)";
-
+          function forceRepaintSquircleElements() {
+        // Повторяем несколько раз с разными задержками для Safari
+        const repaintAttempts = [0, 100, 300, 500];
+        
+        repaintAttempts.forEach(delay => {
+          setTimeout(() => {
             requestAnimationFrame(() => {
-              element.style.transform = originalTransform;
+              requestAnimationFrame(() => {
+                const squircleElements = document.querySelectorAll(
+                  ".squircle, .squircle-outline, .squircle-shadow"
+                );
+
+                if (squircleElements.length === 0) return;
+
+                squircleElements.forEach((element) => {
+                  const originalTransform = element.style.transform;
+                  const originalOpacity = element.style.opacity;
+                  
+                  element.style.transform = "translateZ(0)";
+                  
+                  element.style.opacity = "0.999";
+                  
+                  element.offsetHeight;
+
+                  requestAnimationFrame(() => {
+                    element.style.transform = originalTransform;
+                    element.style.opacity = originalOpacity;
+                  });
+                });
+              });
             });
-          });
+          }, delay);
         });
+      }
+
+      // Дополнительный fallback для полной загрузки страницы
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(forceRepaintSquircleElements, 100);
+        });
+      }
+      
+      window.addEventListener('load', () => {
+        setTimeout(forceRepaintSquircleElements, 200);
       });
-    }
   })();
 </script>

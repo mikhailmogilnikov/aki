@@ -5,9 +5,10 @@ type Props = {
   size?: number;
   className?: string;
   blur?: boolean;
+  blurClassName?: string;
 };
 
-const { src, alt, className, blur = false } = Astro.props;
+const { src, alt, className, blur = false, blurClassName } = Astro.props;
 ---
 
 <div class:list={["bg-default rounded-full relative", className]}>
@@ -18,7 +19,10 @@ const { src, alt, className, blur = false } = Astro.props;
         src={src}
         alt={alt}
         draggable={false}
-        class="size-full object-cover rounded-full blur-2xl absolute top-14 left-10 opacity-35 scale-x-175 scale-y-140"
+        class:list={[
+          "size-full object-cover rounded-full blur-2xl absolute top-14 left-10 opacity-35 scale-x-175 scale-y-140",
+          blurClassName,
+        ]}
       />
     )
   }
