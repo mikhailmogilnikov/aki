@@ -4,7 +4,29 @@
       const link = document.createElement("link");
       link.rel = "stylesheet";
       link.href = "/squircle.css";
-      link.onload = () => resolve();
+      link.onload = () => {
+        // Принудительно заставляем полифилл переобработать стили после загрузки CSS
+        setTimeout(() => {
+          // Способ 1: Вызываем внутренние функции полифилла
+          if (typeof window.$$paintWorkletUpdate === 'function') {
+            window.$$paintWorkletUpdate();
+          }
+          
+          // Способ 2: Создаем и удаляем временный стиль чтобы триггерить MutationObserver
+          const tempStyle = document.createElement('style');
+          tempStyle.textContent = '.temp-squircle { background: paint(squircle); }';
+          document.head.appendChild(tempStyle);
+          setTimeout(() => {
+            document.head.removeChild(tempStyle);
+          }, 10);
+          
+          // Способ 3: Триггерим resize event
+          const updateEvent = new Event('resize');
+          window.dispatchEvent(updateEvent);
+          
+          resolve();
+        }, 50);
+      };
       link.onerror = () => reject(new Error("Failed to load CSS"));
       document.head.appendChild(link);
     });
@@ -29,8 +51,35 @@
     try {
       await CSS.paintWorklet.addModule("/scripts/squircle.min.js");
 
-      forceRepaintSquircleElements();
-    } catch (error) {
+              forceRepaintSquircleElements();
+        
+        // Отладочная информация для понимания проблемы
+        setTimeout(() => {
+          const squircleElements = document.querySelectorAll('.squircle, .squircle-outline, .squircle-shadow');
+          const elementsWithDataAttr = document.querySelectorAll('[data-css-paint]');
+          
+          console.log('🔍 Squircle Debug Safari:', {
+            'CSS загружен': !!document.querySelector('link[href="/squircle.css"]'),
+            'Worklet загружен': !!window.CSS.paintWorklet,
+            'Элементов с классами': squircleElements.length,
+            'Элементов с data-css-paint': elementsWithDataAttr.length,
+            'Полифилл активен': typeof CSS.paintWorklet?.addModule === 'function' && !CSS.paintWorklet.addModule.toString().includes('[native code]'),
+            'Проблемные элементы': Array.from(squircleElements).filter(el => !el.getAttribute('data-css-paint')).length
+          });
+          
+          // Если есть элементы без data-css-paint, показываем их стили
+          const problematic = Array.from(squircleElements).filter(el => !el.getAttribute('data-css-paint'));
+          if (problematic.length > 0) {
+            console.log('🚨 Элементы без data-css-paint:', problematic.map(el => ({
+              element: el,
+              computedStyles: {
+                background: getComputedStyle(el).background,
+                maskImage: getComputedStyle(el).maskImage
+              }
+            })));
+          }
+        }, 500);
+      } catch (error) {
       console.warn("Failed to load squircle paintWorklet:", error);
 
       setTimeout(async () => {
