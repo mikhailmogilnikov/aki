@@ -46,6 +46,22 @@
     // Загружаем squircle worklet
     try {
       await CSS.paintWorklet.addModule("/scripts/squircle.min.js");
+      
+      // Принудительная перерисовка для Safari (несколько попыток)
+      [100, 300, 500].forEach(delay => {
+        setTimeout(() => {
+          const squircleElements = document.querySelectorAll(".squircle, .squircle-outline, .squircle-shadow");
+          squircleElements.forEach((element) => {
+            // Принудительный repaint через transform
+            const originalTransform = element.style.transform;
+            element.style.transform = "translateZ(0)";
+            requestAnimationFrame(() => {
+              element.style.transform = originalTransform;
+            });
+          });
+        }, delay);
+      });
+      
     } catch (error) {
       console.warn("Failed to load squircle paintWorklet:", error);
       // Повторная попытка
