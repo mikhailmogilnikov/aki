@@ -1,0 +1,50 @@
+@layer base {
+  .blue {
+    --color-background: hsl(205.43, 100%, 93.85%);
+    --color-foreground: hsl(203, 56%, 20%);
+    --color-default: hsl(206, 50%, 77%);
+    --color-outline: hsl(205, 61%, 81%);
+  }
+
+  .green {
+    --color-background: hsl(123, 77%, 95%);
+    --color-foreground: hsl(124, 57%, 20%);
+    --color-default: hsl(127, 50%, 77%);
+    --color-outline: hsl(126, 61%, 81%);
+  }
+
+  .purple {
+    --color-background: hsl(270, 100%, 93.85%);
+    --color-foreground: hsl(270, 56%, 20%);
+    --color-default: hsl(268, 57%, 81%);
+    --color-outline: hsl(270, 61%, 81%);
+  }
+
+  .pink {
+    --color-background: hsl(320, 100%, 93.85%);
+    --color-foreground: hsl(320, 56%, 20%);
+    --color-default: hsl(320, 57%, 81%);
+    --color-outline: hsl(320, 61%, 81%);
+  }
+
+  .golden {
+    --color-background: hsl(30, 100%, 93.85%);
+    --color-foreground: hsl(30, 56%, 20%);
+    --color-default: hsl(30, 57%, 81%);
+    --color-outline: hsl(30, 61%, 81%);
+  }
+
+  .dark {
+    --color-background: hsl(0, 0%, 0%);
+    --color-foreground: hsl(0, 0%, 100%);
+    --color-default: hsl(0, 0%, 10%);
+    --color-outline: hsl(0, 0%, 15%);
+  }
+
+  .dark-blue {
+    --color-background: hsl(205, 66%, 6%);
+    --color-foreground: hsl(205, 53%, 83%);
+    --color-default: hsl(204, 79%, 13%);
+    --color-outline: hsl(206, 63%, 23%);
+  }
+}

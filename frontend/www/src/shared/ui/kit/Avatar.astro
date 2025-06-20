@@ -1,4 +1,6 @@
 ---
+import Image from "astro/components/Image.astro";
+
 type Props = {
   src: string;
   alt: string;
@@ -12,15 +14,24 @@ const { src, alt, className, blur = false, blurClassName } = Astro.props;
 ---
 
 <div class:list={["bg-default rounded-full relative", className]}>
-  <img src={src} alt={alt} class="size-full object-cover rounded-full" />
+  <Image
+    inferSize={true}
+    loading="eager"
+    src={src}
+    alt={alt}
+    class="size-full object-cover rounded-full select-none"
+    draggable={false}
+  />
   {
     blur && (
-      <img
+      <Image
+        inferSize={true}
+        loading="eager"
         src={src}
         alt={alt}
         draggable={false}
         class:list={[
-          "size-full object-cover rounded-full blur-2xl absolute top-14 left-10 opacity-35 scale-x-175 scale-y-140",
+          "size-full will-change-transform object-cover select-none rounded-full blur-2xl absolute top-14 left-10 opacity-35 scale-x-175 scale-y-140",
           blurClassName,
         ]}
       />

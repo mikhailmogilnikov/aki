@@ -3,6 +3,7 @@
 @plugin "tailwindcss-animate";
 
 @import "./scrollbar.css";
+@import "./themes.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -24,31 +25,24 @@
   --animate-squircle-shadow: squircle-shadow 1s ease-in-out infinite;
 }
 
-@layer base {
-  .dark {
-    --color-background: hsl(0, 0%, 0%);
-    --color-foreground: hsl(0, 0%, 100%);
-    --color-default: hsl(0, 0%, 10%);
-    --color-outline: hsl(0, 0%, 15%);
-  }
-
-  .blue {
-    --color-background: hsl(205.43, 100%, 93.85%);
-    --color-foreground: hsl(203, 56%, 20%);
-    --color-default: hsl(206, 50%, 77%);
-    --color-outline: hsl(205, 61%, 81%);
-  }
-
-  .green {
-    --color-background: hsl(123, 77%, 95%);
-    --color-foreground: hsl(124, 57%, 20%);
-    --color-default: hsl(127, 50%, 77%);
-    --color-outline: hsl(126, 61%, 81%);
-  }
-}
-
 @layer components {
   .pressable {
     @apply active:scale-98 transition-transform;
+  }
+}
+
+@layer base {
+  :root {
+    ::selection {
+      background: var(--color-foreground);
+      color: var(--color-default);
+      text-shadow: none;
+    }
+
+    ::-moz-selection {
+      background: var(--color-foreground);
+      color: var(--color-default);
+      text-shadow: none;
+    }
   }
 }
