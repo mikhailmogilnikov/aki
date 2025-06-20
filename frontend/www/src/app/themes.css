@@ -21,7 +21,7 @@
   }
 
   .pink {
-    --color-background: hsl(320, 100%, 93.85%);
+    --color-background: hsl(318, 80%, 94%);
     --color-foreground: hsl(320, 56%, 20%);
     --color-default: hsl(320, 57%, 81%);
     --color-outline: hsl(320, 61%, 81%);

@@ -4,6 +4,7 @@
 
 @import "./scrollbar.css";
 @import "./themes.css";
+@import "./fonts.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -13,9 +14,8 @@
   --color-default: hsl(0, 0%, 100%);
   --color-outline: hsl(0, 0%, 85%);
 
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: "Open Runde", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --container-8xl: 114rem;
   --radius: 24px;
@@ -35,13 +35,13 @@
   :root {
     ::selection {
       background: var(--color-foreground);
-      color: var(--color-default);
+      color: var(--color-background);
       text-shadow: none;
     }
 
     ::-moz-selection {
       background: var(--color-foreground);
-      color: var(--color-default);
+      color: var(--color-background);
       text-shadow: none;
     }
   }
