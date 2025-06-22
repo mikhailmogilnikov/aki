@@ -2,9 +2,10 @@
 
 @plugin "tailwindcss-animate";
 
-@import "./scrollbar.css";
-@import "./themes.css";
-@import "./fonts.css";
+@import "./css/scrollbar.css";
+@import "./css/themes.css";
+@import "./css/fonts.css";
+@import "../features/bento/ui/bento.css";
 
 @custom-variant dark (&:is(.dark *));
 

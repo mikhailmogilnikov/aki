@@ -1,0 +1,62 @@
+.grid-item {
+  transition: scale 0.1s;
+  will-change: transform;
+}
+
+.grid-item.is-dragging,
+.grid-item.is-positioning-post-drag {
+  scale: 1.03;
+  z-index: 2;
+}
+
+.packery-drop-placeholder {
+  opacity: 0.5;
+  background: var(--color-default);
+  border-radius: var(--radius);
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.grid-sizer-half,
+.grid-sizer-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  aspect-ratio: 1/1;
+  z-index: -1;
+  visibility: hidden;
+}
+
+.grid-sizer-half {
+  width: calc(50% - 8px);
+}
+
+.grid-sizer-full {
+  width: 100%;
+}
+
+.grid-item-2-2 {
+  width: var(--half-size);
+  height: var(--half-size);
+}
+
+.grid-item-2-1 {
+  width: var(--half-size);
+  height: var(--half-size);
+}
+
+.grid-item-2-4 {
+  width: var(--half-size);
+  height: var(--full-size);
+}
+
+.grid-item-4-2 {
+  width: var(--full-size);
+  height: var(--half-size);
+}
+
+.grid-item-4-4 {
+  width: var(--full-size);
+  height: var(--full-size);
+}

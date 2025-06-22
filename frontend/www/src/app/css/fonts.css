@@ -1,4 +1,4 @@
-@import "../../public/fonts/open-runde/open-runde.css";
+@import "../../../public/fonts/open-runde/open-runde.css";
 
 @layer components {
   .open-runde {

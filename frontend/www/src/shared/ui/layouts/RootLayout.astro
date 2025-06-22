@@ -9,12 +9,14 @@ type Props = {
   title?: string;
   description?: string;
   faviconUrl?: string;
+  className?: string;
 };
 
 const {
   title = CONFIG.TITLE,
   description = CONFIG.DESCRIPTION,
   faviconUrl = "/favicon.svg",
+  className,
 } = Astro.props;
 ---
 
@@ -51,7 +53,12 @@ const {
       }}
     />
   </head>
-  <body class="bg-background text-foreground min-h-screen antialiased dark">
+  <body
+    class:list={[
+      "bg-background text-foreground min-h-screen antialiased",
+      className,
+    ]}
+  >
     <Squircle />
     <slot />
   </body>
