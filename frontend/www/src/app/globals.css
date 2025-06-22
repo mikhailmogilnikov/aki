@@ -14,8 +14,9 @@
   --color-default: hsl(0, 0%, 100%);
   --color-outline: hsl(0, 0%, 85%);
 
-  --font-sans: "Open Runde", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --container-8xl: 114rem;
   --radius: 24px;
