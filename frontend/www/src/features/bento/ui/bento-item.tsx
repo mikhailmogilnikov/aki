@@ -39,7 +39,7 @@ export const BentoItem = ({ children, size, onSizeChange }: BentoItemProps) => {
   return (
     <div
       onDoubleClick={handleClick}
-      className={`grid-item ${gridItemClassNames[bentoItemSize]} `}
+      className={`grid-item ${gridItemClassNames[bentoItemSize]}`}
     >
       <div
         className={`size-full relative duration-300 will-change-[width,height] ${gridItemClassNames[bentoItemSize]}`}

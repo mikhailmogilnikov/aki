@@ -1,24 +1,21 @@
 <script is:inline type="module">
   (async () => {
-    // Асинхронно подключаем CSS файл
     await new Promise((resolve, reject) => {
       const link = document.createElement("link");
       link.rel = "stylesheet";
       link.href = "/squircle.css";
       link.onload = () => {
-        // Принудительно заставляем полифилл переобработать стили после загрузки CSS
         setTimeout(() => {
-          // Создаем и удаляем временный стиль чтобы триггерить полифилл
           const tempStyle = document.createElement("style");
-          tempStyle.textContent = ".temp-squircle { background: paint(squircle); }";
+          tempStyle.textContent =
+            ".temp-squircle { background: paint(squircle); }";
           document.head.appendChild(tempStyle);
           setTimeout(() => {
             document.head.removeChild(tempStyle);
           }, 10);
 
-          // Триггерим resize event для полифилла
           window.dispatchEvent(new Event("resize"));
-          
+
           resolve();
         }, 50);
       };
@@ -26,11 +23,9 @@
       document.head.appendChild(link);
     });
 
-    // Загружаем полифилл для Safari
     if (!("paintWorklet" in CSS)) {
       await import("/scripts/css-paint-polyfill.js");
-      
-      // Ждём инициализации полифилла
+
       await new Promise((resolve) => {
         const checkPaintWorklet = () => {
           if (CSS.paintWorklet && CSS.paintWorklet.addModule) {
@@ -43,14 +38,14 @@
       });
     }
 
-    // Загружаем squircle worklet
     try {
       await CSS.paintWorklet.addModule("/scripts/squircle.min.js");
-      
-      // Принудительная перерисовка для Safari (несколько попыток)
-      [100, 300, 500].forEach(delay => {
+
+      [100, 300, 500].forEach((delay) => {
         setTimeout(() => {
-          const squircleElements = document.querySelectorAll(".squircle, .squircle-outline, .squircle-shadow");
+          const squircleElements = document.querySelectorAll(
+            ".squircle, .squircle-outline, .squircle-shadow"
+          );
           squircleElements.forEach((element) => {
             // Принудительный repaint через transform
             const originalTransform = element.style.transform;
@@ -61,15 +56,16 @@
           });
         }, delay);
       });
-      
     } catch (error) {
       console.warn("Failed to load squircle paintWorklet:", error);
-      // Повторная попытка
       setTimeout(async () => {
         try {
           await CSS.paintWorklet.addModule("/scripts/squircle.min.js");
         } catch (retryError) {
-          console.error("Failed to load squircle paintWorklet on retry:", retryError);
+          console.error(
+            "Failed to load squircle paintWorklet on retry:",
+            retryError
+          );
         }
       }, 200);
     }

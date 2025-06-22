@@ -48,6 +48,7 @@ export const useBento = () => {
       columnWidth: ".grid-sizer-half",
       rowHeight: ".grid-sizer-half",
       percentPosition: true,
+      isOriginTop: true,
       isResizeBound: true,
       isInitLayout: true,
       gutter: 16,

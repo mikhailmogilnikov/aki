@@ -1,11 +1,9 @@
 .grid-item {
-  transition: scale 0.1s;
   will-change: transform;
 }
 
 .grid-item.is-dragging,
 .grid-item.is-positioning-post-drag {
-  scale: 1.03;
   z-index: 2;
 }
 
