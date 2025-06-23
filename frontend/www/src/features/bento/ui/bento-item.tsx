@@ -2,27 +2,36 @@ import { useEffect, useMemo, useState } from "react";
 import { type BentoItem, type BentoSize } from "../model/bento.type";
 import { getResponsiveStyle, useRefresh } from "muuri-react";
 import { BentoSizes } from "../view-model/bento-sizes";
+import { clsx } from "clsx";
 
-interface ItemProps extends BentoItem {
+export interface BentoItemProps extends BentoItem {
   gridSize: number;
+  onSizeChange?: (id: string, size: BentoSize) => void;
 }
 
-export const Item = ({ id, size, gridSize }: ItemProps) => {
+export const Item = ({
+  id,
+  size,
+  gridSize,
+  onSizeChange,
+  style,
+}: BentoItemProps) => {
   const refresh = useRefresh();
   const [itemSize, setItemSize] = useState<BentoSize>(size);
 
   const handleChangeSize = () => {
-    setItemSize(
-      Object.keys(BentoSizes(gridSize))[
-        Math.floor(Math.random() * Object.keys(BentoSizes(gridSize)).length)
-      ] as BentoSize
-    );
+    const newSize = Object.keys(BentoSizes(gridSize))[
+      Math.floor(Math.random() * Object.keys(BentoSizes(gridSize)).length)
+    ] as BentoSize;
+
+    setItemSize(newSize);
+    onSizeChange?.(id, newSize);
   };
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       refresh();
-    }, 250);
+    }, 300);
 
     return () => clearTimeout(timeout);
   }, [itemSize]);
@@ -44,7 +53,13 @@ export const Item = ({ id, size, gridSize }: ItemProps) => {
       data-size={itemSize}
     >
       <div className="relative size-full" onDoubleClick={handleChangeSize}>
-        <div className="size-full squircle-shadow">Item</div>
+        <div
+          className={clsx("size-full", {
+            "squircle-shadow": style === "shadow",
+            "squircle-outline": style === "outline",
+            squircle: style === "plain",
+          })}
+        ></div>
         <div className="size-8 cursor-grab bg-foreground/50 handle absolute -bottom-2 -right-2 rounded-full"></div>
       </div>
     </div>

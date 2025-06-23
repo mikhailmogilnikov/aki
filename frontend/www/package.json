@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/react": "^4.3.0",
     "@astrojs/vercel": "^8.1.5",
+    "@nanostores/react": "^1.0.0",
     "@tailwindcss/vite": "^4.1.10",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
@@ -21,10 +22,12 @@
     "css-paint-polyfill": "^3.4.0",
     "muuri": "^0.9.5",
     "muuri-react": "^3.1.7",
+    "nanostores": "^1.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.10",
     "tailwindcss-animate": "^1.0.7",
+    "typed-local-store": "^2.0.2",
     "usehooks-ts": "^3.1.1"
   }
 }

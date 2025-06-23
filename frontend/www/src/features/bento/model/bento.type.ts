@@ -12,4 +12,6 @@ export type BentoSize = `${BentoItemSize}`;
 export interface BentoItem {
   id: string;
   size: BentoSize;
+  order: number;
+  style: "plain" | "shadow" | "outline" | "transparent";
 }
