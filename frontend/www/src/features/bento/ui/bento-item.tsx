@@ -1,50 +1,50 @@
-import { useState } from "react";
-import { BentoItemSize } from "../model/bento.type";
+import { useEffect, useMemo, useState } from "react";
+import { type BentoItem, type BentoSize } from "../model/bento.type";
+import { getResponsiveStyle, useRefresh } from "muuri-react";
+import { BentoSizes } from "../view-model/bento-sizes";
 
-const gridItemClassNames = {
-  [BentoItemSize.TWO_BY_TWO]: "grid-item-2-2",
-  [BentoItemSize.TWO_BY_ONE]: "grid-item-2-1",
-  [BentoItemSize.TWO_BY_FOUR]: "grid-item-2-4",
-  [BentoItemSize.FOUR_BY_TWO]: "grid-item-4-2",
-  [BentoItemSize.FOUR_BY_FOUR]: "grid-item-4-4",
-};
-
-interface BentoItemProps {
-  children?: React.ReactNode;
-  size: `${BentoItemSize}`;
-  onSizeChange?: (size: BentoItemSize) => void;
+interface ItemProps extends BentoItem {
+  gridSize: number;
 }
 
-export const BentoItem = ({ children, size, onSizeChange }: BentoItemProps) => {
-  const [bentoItemSize, setBentoItemSize] = useState<BentoItemSize>(
-    size as BentoItemSize
-  );
+export const Item = ({ id, size, gridSize }: ItemProps) => {
+  const refresh = useRefresh();
+  const [itemSize, setItemSize] = useState<BentoSize>(size);
 
-  const handleClick = () => {
-    if (bentoItemSize === BentoItemSize.TWO_BY_TWO) {
-      setBentoItemSize(BentoItemSize.FOUR_BY_TWO);
-      onSizeChange?.(BentoItemSize.FOUR_BY_TWO);
-    } else if (bentoItemSize === BentoItemSize.FOUR_BY_TWO) {
-      setBentoItemSize(BentoItemSize.TWO_BY_FOUR);
-      onSizeChange?.(BentoItemSize.TWO_BY_FOUR);
-    } else if (bentoItemSize === BentoItemSize.TWO_BY_FOUR) {
-      setBentoItemSize(BentoItemSize.FOUR_BY_FOUR);
-      onSizeChange?.(BentoItemSize.FOUR_BY_FOUR);
-    } else {
-      setBentoItemSize(BentoItemSize.TWO_BY_TWO);
-      onSizeChange?.(BentoItemSize.TWO_BY_TWO);
-    }
+  const handleChangeSize = () => {
+    setItemSize(
+      Object.keys(BentoSizes(gridSize))[
+        Math.floor(Math.random() * Object.keys(BentoSizes(gridSize)).length)
+      ] as BentoSize
+    );
   };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      refresh();
+    }, 250);
+
+    return () => clearTimeout(timeout);
+  }, [itemSize]);
+
+  const responsiveStyle = useMemo(
+    () =>
+      getResponsiveStyle({
+        ...BentoSizes(gridSize)[itemSize],
+        margin: 8,
+      }),
+    [itemSize, gridSize]
+  );
 
   return (
     <div
-      onDoubleClick={handleClick}
-      className={`grid-item ${gridItemClassNames[bentoItemSize]}`}
+      className="transition-[width,height] duration-250"
+      style={responsiveStyle}
+      data-id={id}
+      data-size={itemSize}
     >
-      <div
-        className={`size-full relative duration-300 will-change-[width,height] ${gridItemClassNames[bentoItemSize]}`}
-      >
-        <div className="size-full squircle-shadow">{children}</div>
+      <div className="relative size-full" onDoubleClick={handleChangeSize}>
+        <div className="size-full squircle-shadow">Item</div>
         <div className="size-8 cursor-grab bg-foreground/50 handle absolute -bottom-2 -right-2 rounded-full"></div>
       </div>
     </div>

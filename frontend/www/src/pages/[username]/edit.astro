@@ -9,13 +9,13 @@ const { username } = Astro.params;
 
 <RootLayout
   title={`Edit ${username}`}
-  className="overflow-x-hidden overflow-y-scroll dark-blue"
+  className="overflow-x-hidden overflow-y-scroll purple open-runde"
 >
   <main
-    class="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 px-4 lg:px-8 py-10 lg:py-20"
+    class="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 lg:px-8 py-10 lg:py-20"
   >
     <header
-      class="flex gap-4 flex-col items-start max-lg:max-w-107 max-lg:mx-auto lg:sticky lg:top-20 lg:h-fit lg:max-w-120 w-full"
+      class="flex gap-4 flex-col items-start max-lg:max-w-107 px-4 max-lg:mx-auto lg:sticky lg:top-20 lg:h-fit lg:max-w-120 w-full"
       role="banner"
     >
       <Avatar
@@ -31,7 +31,9 @@ const { username } = Astro.params;
       </p>
     </header>
 
-    <section class="w-full max-w-107 mx-auto">
+    <section
+      class="w-full max-w-107 mx-auto px-2 lg:px-0"
+    >
       <BentoGrid client:only />
     </section>
   </main>
