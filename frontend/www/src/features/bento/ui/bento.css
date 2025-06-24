@@ -11,32 +11,38 @@
   z-index: 3;
 }
 
+#bento-grid {
+  --grid-full: var(--grid-size);
+  --grid-half: calc(var(--grid-size) / 2 - 0.5rem);
+  --grid-quarter: calc(var(--grid-size) / 4 - 1rem);
+}
+
 .bento-4x1 {
-  width: var(--grid-size);
-  height: calc(var(--grid-size) / 4 - 1rem);
+  width: var(--grid-full);
+  height: var(--grid-quarter);
 }
 
 .bento-2x1 {
-  width: calc(var(--grid-size) / 2 - 0.5rem);
-  height: calc(var(--grid-size) / 4 - 1rem);
+  width: var(--grid-half);
+  height: var(--grid-quarter);
 }
 
 .bento-2x2 {
-  width: calc(var(--grid-size) / 2 - 0.5rem);
-  height: calc(var(--grid-size) / 2 - 0.5rem);
+  width: var(--grid-half);
+  height: var(--grid-half);
 }
 
 .bento-2x4 {
-  width: calc(var(--grid-size) / 2 - 0.5rem);
-  height: var(--grid-size);
+  width: var(--grid-half);
+  height: var(--grid-full);
 }
 
 .bento-4x2 {
-  width: var(--grid-size);
-  height: calc(var(--grid-size) / 2 - 0.5rem);
+  width: var(--grid-full);
+  height: var(--grid-half);
 }
 
 .bento-4x4 {
-  width: var(--grid-size);
-  height: var(--grid-size);
+  width: var(--grid-full);
+  height: var(--grid-full);
 }

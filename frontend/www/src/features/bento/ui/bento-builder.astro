@@ -24,7 +24,16 @@ const GridSizes: Record<BentoSize, string> = {
   <div id="bento-sizer" class="aspect-square absolute w-full"></div>
   {
     sortedItems.map((item) => (
-      <div class:list={[GridSizes[item.size], "squircle-shadow"]}></div>
+      <article
+        class:list={[
+          GridSizes[item.size],
+          {
+            "squircle-shadow": item.style === "shadow",
+            "squircle-outline": item.style === "outline",
+            "squircle": item.style === "plain",
+          },
+        ]}
+      />
     ))
   }
 </div>
