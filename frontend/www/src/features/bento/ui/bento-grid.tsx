@@ -1,11 +1,12 @@
 import { AutoScroller, MuuriComponent } from "muuri-react";
 import { useState } from "react";
-import { Item, type BentoItemProps } from "./bento-item";
+import { BentoItemComponent, type BentoItemProps } from "./bento-item";
 import { type BentoItem, type BentoSize } from "../model/bento.type";
 import { useBentoSize } from "../model/useBentoSize";
 import { sortBy } from "~/shared/lib/utils/sort-by";
 import { LocalStorageService } from "~/shared/lib/services/storage";
 import { BentoItems } from "../view-model/mock-items";
+import { useBlendy } from "~/shared/lib/hooks/useBlendy";
 
 export const BentoGrid = () => {
   const { sizerRef, size } = useBentoSize();
@@ -23,6 +24,8 @@ export const BentoGrid = () => {
 };
 
 const BentoGridE = ({ size }: { size: number }) => {
+  const { blendy } = useBlendy();
+
   const initialItems =
     LocalStorageService.getItem("bento", "safe") || BentoItems;
 
@@ -92,7 +95,6 @@ const BentoGridE = ({ size }: { size: number }) => {
         setItems(items);
         // @ts-expect-error
         grid.refreshItems();
-        console.log(grid);
       }}
       containerClass="bento"
       itemClass="bento-item"
@@ -104,11 +106,12 @@ const BentoGridE = ({ size }: { size: number }) => {
       itemPlaceholderClass="bento-item-placeholder"
     >
       {items.map((props) => (
-        <Item
+        <BentoItemComponent
           key={props.id}
           {...props}
           gridSize={size}
           onSizeChange={handleSizeChange}
+          blendy={blendy}
         />
       ))}
     </MuuriComponent>

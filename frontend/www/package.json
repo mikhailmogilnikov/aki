@@ -17,6 +17,7 @@
     "@types/react-dom": "^19.1.6",
     "astro": "^5.9.3",
     "astro-seo": "^0.8.4",
+    "blendy": "^0.0.1",
     "clsx": "^2.1.1",
     "css-houdini-squircle": "^0.3.0",
     "css-paint-polyfill": "^3.4.0",
