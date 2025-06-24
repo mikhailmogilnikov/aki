@@ -1,0 +1,41 @@
+---
+import { sortBy } from "~/shared/lib/utils/sort-by";
+import type { BentoItem, BentoSize } from "../model/bento.type";
+
+type Props = {
+  items: BentoItem[];
+};
+
+const { items } = Astro.props;
+
+const sortedItems = sortBy(items, "order");
+
+const GridSizes: Record<BentoSize, string> = {
+  "4x1": "bento-4x1",
+  "2x1": "bento-2x1",
+  "2x2": "bento-2x2",
+  "2x4": "bento-2x4",
+  "4x2": "bento-4x2",
+  "4x4": "bento-4x4",
+};
+---
+
+<div id="bento-grid" class="flex flex-wrap gap-4 relative">
+  <div id="bento-sizer" class="aspect-square absolute w-full"></div>
+  {
+    sortedItems.map((item) => (
+      <div class:list={[GridSizes[item.size], "squircle-shadow"]}></div>
+    ))
+  }
+</div>
+
+<script>
+  const sizer = document.getElementById("bento-sizer");
+  const grid = document.getElementById("bento-grid");
+
+  grid?.setAttribute("style", `--grid-size: ${sizer?.clientWidth}px;`);
+
+  window.addEventListener("resize", () => {
+    grid?.setAttribute("style", `--grid-size: ${sizer?.clientWidth}px;`);
+  });
+</script>

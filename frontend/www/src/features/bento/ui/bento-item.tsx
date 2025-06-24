@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { type BentoItem, type BentoSize } from "../model/bento.type";
 import { getResponsiveStyle, useRefresh } from "muuri-react";
-import { BentoSizes } from "../view-model/bento-sizes";
+import { BentoSizes, BentoTransitionSizes } from "../view-model/bento-sizes";
 import { clsx } from "clsx";
 
 export interface BentoItemProps extends BentoItem {
@@ -16,8 +16,8 @@ export const Item = ({
   onSizeChange,
   style,
 }: BentoItemProps) => {
-  const refresh = useRefresh();
   const [itemSize, setItemSize] = useState<BentoSize>(size);
+  useRefresh([itemSize]);
 
   const handleChangeSize = () => {
     const newSize = Object.keys(BentoSizes(gridSize))[
@@ -27,14 +27,6 @@ export const Item = ({
     setItemSize(newSize);
     onSizeChange?.(id, newSize);
   };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      refresh();
-    }, 300);
-
-    return () => clearTimeout(timeout);
-  }, [itemSize]);
 
   const responsiveStyle = useMemo(
     () =>
@@ -46,13 +38,12 @@ export const Item = ({
   );
 
   return (
-    <div
-      className="transition-[width,height] duration-250"
-      style={responsiveStyle}
-      data-id={id}
-      data-size={itemSize}
-    >
-      <div className="relative size-full" onDoubleClick={handleChangeSize}>
+    <div style={responsiveStyle}>
+      <div
+        className="relative size-full transition-[width,height] will-change-[width,height] duration-300"
+        onDoubleClick={handleChangeSize}
+        style={BentoTransitionSizes(gridSize)[itemSize]}
+      >
         <div
           className={clsx("size-full", {
             "squircle-shadow": style === "shadow",

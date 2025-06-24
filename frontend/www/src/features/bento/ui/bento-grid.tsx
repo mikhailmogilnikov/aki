@@ -5,15 +5,7 @@ import { type BentoItem, type BentoSize } from "../model/bento.type";
 import { useBentoSize } from "../model/useBentoSize";
 import { sortBy } from "~/shared/lib/utils/sort-by";
 import { LocalStorageService } from "~/shared/lib/services/storage";
-
-const BentoItems: BentoItem[] = [
-  { id: "1", size: "4x1", order: 1, style: "shadow" },
-  { id: "2", size: "2x2", order: 2, style: "outline" },
-  { id: "3", size: "2x4", order: 3, style: "shadow" },
-  { id: "4", size: "4x2", order: 4, style: "outline" },
-  { id: "5", size: "4x4", order: 5, style: "shadow" },
-  { id: "6", size: "2x1", order: 6, style: "plain" },
-];
+import { BentoItems } from "../view-model/mock-items";
 
 export const BentoGrid = () => {
   const { sizerRef, size } = useBentoSize();
@@ -102,6 +94,14 @@ const BentoGridE = ({ size }: { size: number }) => {
         grid.refreshItems();
         console.log(grid);
       }}
+      containerClass="bento"
+      itemClass="bento-item"
+      itemVisibleClass="bento-item-shown"
+      itemHiddenClass="bento-item-hidden"
+      itemDraggingClass="bento-item-dragging"
+      itemPositioningClass="bento-item-positioning"
+      itemReleasingClass="bento-item-releasing"
+      itemPlaceholderClass="bento-item-placeholder"
     >
       {items.map((props) => (
         <Item

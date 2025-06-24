@@ -1,4 +1,6 @@
 ---
+import BentoBuilder from "~/features/bento/ui/bento-builder.astro";
+import { BentoItems } from "~/features/bento/view-model/mock-items";
 import Avatar from "~/shared/ui/kit/Avatar.astro";
 import RootLayout from "~/shared/ui/layouts/RootLayout.astro";
 
@@ -27,57 +29,8 @@ const { username } = Astro.params;
       </p>
     </header>
 
-    <section
-      class="grid grid-cols-2 gap-5 max-w-107 mx-auto w-full"
-      aria-label="Портфолио и проекты"
-    >
-      <article
-        class="col-span-2 squircle-outline aspect-[2/1]"
-        aria-label="Основной проект"
-      >
-        <!-- Здесь должен быть контент основного проекта -->
-      </article>
-
-      <article class="squircle-outline aspect-square p-4">
-        <h2 class="text-2xl font-bold" id="about">О себе</h2>
-        <!-- Добавить описание -->
-      </article>
-
-      <article
-        class="squircle-shadow aspect-square p-4 pressable"
-        aria-label="Интерактивная карточка"
-      >
-        <h2 class="text-2xl font-bold">Навыки</h2>
-        <!-- Добавить список навыков -->
-      </article>
-
-      <article
-        class="squircle-outline pressable col-span-2 row-span-2 aspect-square"
-        aria-label="Большой проект"
-      >
-        <h2 class="sr-only">Главный проект</h2>
-        <!-- Контент большого проекта -->
-      </article>
-
-      <article class="squircle-shadow aspect-[1/2] row-span-2 p-4">
-        <h2 class="text-xl font-bold">Опыт</h2>
-        <!-- Временная шкала опыта -->
-      </article>
-
-      <article class="squircle bg-default aspect-square p-4">
-        <h2 class="text-xl font-bold">Контакты</h2>
-        <!-- Контактная информация -->
-      </article>
-
-      <article class="squircle-outline row-span-2 aspect-[1/2] p-4">
-        <h2 class="text-xl font-bold">Блог</h2>
-        <!-- Последние посты блога -->
-      </article>
-
-      <article class="squircle-shadow aspect-square p-4">
-        <h2 class="text-xl font-bold">Достижения</h2>
-        <!-- Награды и сертификаты -->
-      </article>
+    <section class="gap-5 max-w-107 mx-auto w-full">
+      <BentoBuilder items={BentoItems} />
     </section>
   </main>
 </RootLayout>

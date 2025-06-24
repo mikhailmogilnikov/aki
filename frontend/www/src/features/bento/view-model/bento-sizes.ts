@@ -2,7 +2,7 @@ import type { BentoSize } from "../model/bento.type";
 
 const getCommonHeight = (gridSize: number) => gridSize / 2 - 8;
 const getMinHeight = (gridSize: number) => gridSize / 4 - 12;
-const getBigHeight = (gridSize: number) => gridSize;
+const getMaxHeight = (gridSize: number) => gridSize;
 
 export const BentoSizes = (
   gridSize: number
@@ -27,7 +27,7 @@ export const BentoSizes = (
   },
   "2x4": {
     columns: 1 / 2,
-    height: getBigHeight(gridSize),
+    height: getMaxHeight(gridSize),
   },
   "4x2": {
     columns: 1,
@@ -35,6 +35,41 @@ export const BentoSizes = (
   },
   "4x4": {
     columns: 1,
-    height: getBigHeight(gridSize),
+    height: getMaxHeight(gridSize),
+  },
+});
+
+export const BentoTransitionSizes = (
+  gridSize: number
+): Record<
+  BentoSize,
+  {
+    width: number;
+    height: number;
+  }
+> => ({
+  "4x1": {
+    width: getMaxHeight(gridSize),
+    height: getMinHeight(gridSize),
+  },
+  "2x1": {
+    width: getCommonHeight(gridSize),
+    height: getMinHeight(gridSize),
+  },
+  "2x2": {
+    width: getCommonHeight(gridSize),
+    height: getCommonHeight(gridSize),
+  },
+  "2x4": {
+    width: getCommonHeight(gridSize),
+    height: getMaxHeight(gridSize),
+  },
+  "4x2": {
+    width: getMaxHeight(gridSize),
+    height: getCommonHeight(gridSize),
+  },
+  "4x4": {
+    width: getMaxHeight(gridSize),
+    height: getMaxHeight(gridSize),
   },
 });

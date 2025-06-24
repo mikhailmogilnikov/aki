@@ -1,15 +1,42 @@
-.muuri-item {
+.bento-item {
   z-index: 1;
 }
 
-.muuri-item-releasing {
+.bento-item-releasing,
+.bento-item-positioning {
   z-index: 2;
 }
 
-.muuri-item-positioning {
-  z-index: 2;
-}
-
-.muuri-item-dragging {
+.bento-item-dragging {
   z-index: 3;
+}
+
+.bento-4x1 {
+  width: var(--grid-size);
+  height: calc(var(--grid-size) / 4 - 1rem);
+}
+
+.bento-2x1 {
+  width: calc(var(--grid-size) / 2 - 0.5rem);
+  height: calc(var(--grid-size) / 4 - 1rem);
+}
+
+.bento-2x2 {
+  width: calc(var(--grid-size) / 2 - 0.5rem);
+  height: calc(var(--grid-size) / 2 - 0.5rem);
+}
+
+.bento-2x4 {
+  width: calc(var(--grid-size) / 2 - 0.5rem);
+  height: var(--grid-size);
+}
+
+.bento-4x2 {
+  width: var(--grid-size);
+  height: calc(var(--grid-size) / 2 - 0.5rem);
+}
+
+.bento-4x4 {
+  width: var(--grid-size);
+  height: var(--grid-size);
 }
