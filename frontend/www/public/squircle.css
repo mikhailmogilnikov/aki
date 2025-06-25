@@ -2,7 +2,7 @@
   --squircle-smooth: var(--smooth);
   --squircle-radius: var(--radius);
   mask-image: paint(squircle);
-  background-color: var(--color-default, var(--bg));
+  background-color: var(--bg, var(--color-default));
 }
 
 .squircle-outline {
