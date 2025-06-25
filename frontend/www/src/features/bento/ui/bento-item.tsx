@@ -115,7 +115,7 @@ export const BentoItemComponent = ({
         createPortal(
           <div className="fixed inset-0 z-50">
             <div
-              className="absolute inset-0 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:duration-300 data-[state=open]:duration-300 bg-background/50 backdrop-blur-lg z-1 fade-in animate-in duration-100"
+              className="absolute inset-0 data-[state=open]:motion-opacity-in-0 data-[state=closed]:motion-opacity-out-0 motion-duration-300 bg-background/50 backdrop-blur-lg z-1 fade-in animate-in duration-100"
               onClick={handleUnfocus}
               id={`bento-item-${id}-backdrop`}
             />
@@ -158,7 +158,7 @@ export const BentoItemComponent = ({
                     } as CSSProperties
                   }
                   data-state="open"
-                  className="w-60 h-100 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-0 data-[state=open]:zoom-in-0 data-[state=closed]:duration-300 data-[state=open]:duration-300 origin-top-left bg-default/50 squircle"
+                  className="w-60 h-100 data-[state=closed]:motion-opacity-out-0 data-[state=open]:motion-opacity-in-0 data-[state=open]:motion-scale-in-0 motion-duration-300 data-[state=open]:motion-delay-200 origin-top-left bg-default/50 squircle"
                 ></div>
               </div>
             </div>

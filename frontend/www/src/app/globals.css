@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-@plugin "tailwindcss-animate";
+/* @plugin "tailwindcss-animate"; */
+@plugin "tailwindcss-motion";
 
 @import "./css/scrollbar.css";
 @import "./css/themes.css";
