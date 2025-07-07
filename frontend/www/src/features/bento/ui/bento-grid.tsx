@@ -1,6 +1,6 @@
 import { AutoScroller, MuuriComponent } from "muuri-react";
 import { useState } from "react";
-import { BentoItemComponent, type BentoItemProps } from "./bento-item";
+import { BentoItemComponent, type BentoItemProps } from "./bento-item/index";
 import { type BentoItem, type BentoSize } from "../model/bento.type";
 import { useBentoSize } from "../model/useBentoSize";
 import { sortBy } from "~/shared/lib/utils/sort-by";
