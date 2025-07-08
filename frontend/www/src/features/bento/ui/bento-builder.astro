@@ -43,14 +43,55 @@ const GridSizes: Record<BentoSize, string> = {
   const grid = document.getElementById("bento-grid");
 
   const handleResizeGrid = () => {
-    grid?.setAttribute("style", `--grid-size: ${sizer?.clientWidth}px;`);
+    const width = sizer?.clientWidth;
+    if (width && width > 0) {
+      grid?.setAttribute("style", `--grid-size: ${width}px;`);
+    }
   };
+
+  const initializeGrid = () => {
+    // Пробуем несколько раз для более надежной инициализации
+    let attempts = 0;
+    const maxAttempts = 10;
+    
+    const tryResize = () => {
+      const width = sizer?.clientWidth;
+      if (width && width > 0) {
+        grid?.setAttribute("style", `--grid-size: ${width}px;`);
+        return true;
+      }
+      return false;
+    };
+
+    const retryResize = () => {
+      if (tryResize()) return;
+      
+      attempts++;
+      if (attempts < maxAttempts) {
+        requestAnimationFrame(retryResize);
+      }
+    };
+
+    retryResize();
+  };
+
+  // Используем ResizeObserver для более точного отслеживания изменений размеров
+  if (sizer && 'ResizeObserver' in window) {
+    const resizeObserver = new ResizeObserver(() => {
+      handleResizeGrid();
+    });
+    resizeObserver.observe(sizer);
+  }
 
   window.addEventListener("resize", handleResizeGrid);
 
-  handleResizeGrid();
+  // Инициализируем сетку после загрузки DOM
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeGrid);
+  } else {
+    initializeGrid();
+  }
 
-  queueMicrotask(() => {
-    handleResizeGrid();
-  });
+  // Дополнительная проверка через небольшую задержку для Safari
+  setTimeout(initializeGrid, 100);
 </script>
