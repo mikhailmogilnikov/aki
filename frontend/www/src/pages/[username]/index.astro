@@ -5,10 +5,19 @@ import Avatar from "~/shared/ui/kit/Avatar.astro";
 import RootLayout from "~/shared/ui/layouts/RootLayout.astro";
 
 export const prerender = false;
-const { username } = Astro.params;
+// const { username } = Astro.params;
+
+const title = "Mikhail Mogilnikov";
+const description = "Software & Design Engineer";
+const avatarUrl = "https://avatars.githubusercontent.com/u/125604210?v=4";
 ---
 
-<RootLayout title={username || ""} className="purple open-runde">
+<RootLayout
+  title={title}
+  description={description}
+  image={avatarUrl}
+  className="purple open-runde"
+>
   <main
     class="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 px-4 lg:px-8 lg:gap-8 xl:px-20 xl:gap-20 py-10 lg:py-20"
   >
@@ -17,16 +26,14 @@ const { username } = Astro.params;
       role="banner"
     >
       <Avatar
-        src="https://avatars.githubusercontent.com/u/125604210?v=4"
-        alt="Mikhail Mogilnikov"
+        src={avatarUrl}
+        alt={title}
         className="size-46"
         blur={true}
         blurClassName="lg:top-38 lg:left-20 lg:scale-x-210 lg:scale-y-170"
       />
-      <h1 class="text-4xl font-bold px-2 mt-4 z-1">Mikhail Mogilnikov</h1>
-      <p class="text-lg text-muted-foreground px-2 z-1">
-        Software & Design Engineer
-      </p>
+      <h1 class="text-4xl font-bold px-2 mt-4 z-1">{title}</h1>
+      <p class="text-lg text-muted-foreground px-2 z-1">{description}</p>
     </header>
 
     <section class="gap-5 max-w-[428px] mx-auto w-full">
