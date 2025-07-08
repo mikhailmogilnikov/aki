@@ -12,7 +12,7 @@ export const EditName = () => {
       type="text"
       value={profile.name}
       onChange={handleChange}
-      className="text-4xl font-bold px-2 mt-4 z-1 outline-none"
+      className="text-4xl font-bold px-2 mt-4 z-1 outline-none w-full"
       placeholder="Your name"
     />
   );
