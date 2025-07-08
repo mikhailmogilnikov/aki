@@ -1,9 +1,18 @@
 // @ts-check
+import { loadEnv } from "vite";
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import vercel from "@astrojs/vercel";
 
 import react from "@astrojs/react";
+
+import node from "@astrojs/node";
+
+const { DEPLOY_ADAPTER } = loadEnv(
+  process.env.NODE_ENV ?? "",
+  process.cwd(),
+  ""
+);
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,6 +20,11 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  adapter: vercel({}),
+  adapter:
+    DEPLOY_ADAPTER === "vercel"
+      ? vercel({})
+      : node({
+          mode: "standalone",
+        }),
   integrations: [react()],
 });

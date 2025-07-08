@@ -20,7 +20,7 @@ const GridSizes: Record<BentoSize, string> = {
 };
 ---
 
-<div id="bento-grid" class="flex flex-wrap gap-4 relative">
+<div id="bento-grid" class="flex flex-wrap gap-[16px] relative">
   <div id="bento-sizer" class="aspect-square absolute w-full"></div>
   {
     sortedItems.map((item) => (
@@ -30,7 +30,7 @@ const GridSizes: Record<BentoSize, string> = {
           {
             "squircle-shadow": item.style === "shadow",
             "squircle-outline": item.style === "outline",
-            "squircle": item.style === "plain",
+            squircle: item.style === "plain",
           },
         ]}
       />
@@ -42,9 +42,15 @@ const GridSizes: Record<BentoSize, string> = {
   const sizer = document.getElementById("bento-sizer");
   const grid = document.getElementById("bento-grid");
 
-  grid?.setAttribute("style", `--grid-size: ${sizer?.clientWidth}px;`);
-
-  window.addEventListener("resize", () => {
+  const handleResizeGrid = () => {
     grid?.setAttribute("style", `--grid-size: ${sizer?.clientWidth}px;`);
+  };
+
+  window.addEventListener("resize", handleResizeGrid);
+
+  handleResizeGrid();
+
+  queueMicrotask(() => {
+    handleResizeGrid();
   });
 </script>
