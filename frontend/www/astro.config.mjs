@@ -21,10 +21,10 @@ export default defineConfig({
   },
 
   adapter:
-    DEPLOY_ADAPTER === "vercel"
-      ? vercel({})
-      : node({
+    DEPLOY_ADAPTER === "node"
+      ? node({
           mode: "standalone",
-        }),
+        })
+      : vercel({}),
   integrations: [react()],
 });
