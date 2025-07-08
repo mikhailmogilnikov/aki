@@ -29,6 +29,14 @@ export const PortalOverlay = ({
             aria-modal="true"
             className={clsx("fixed inset-0 z-50", className)}
           >
+            <button
+              id={overlayId}
+              data-state={isOpen ? "open" : "closed"}
+              className="absolute top-4 right-4 size-12 bg-default rounded-full z-2 data-[state=open]:motion-opacity-in-0 data-[state=closed]:motion-opacity-out-0 motion-duration-300"
+              onClick={onClose}
+            >
+              Close
+            </button>
             <div
               id={overlayId}
               data-state={isOpen ? "open" : "closed"}

@@ -47,7 +47,6 @@
             ".squircle, .squircle-outline, .squircle-shadow"
           );
           squircleElements.forEach((element) => {
-            // Принудительный repaint через transform
             const originalTransform = element.style.transform;
             element.style.transform = "translateZ(0)";
             requestAnimationFrame(() => {

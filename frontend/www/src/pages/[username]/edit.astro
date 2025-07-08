@@ -1,6 +1,5 @@
 ---
-import { BentoGrid } from "~/features/bento/ui/bento-grid";
-import Avatar from "~/shared/ui/kit/Avatar.astro";
+import { Profile } from "~/services/edit-profile/ui/profile";
 import RootLayout from "~/shared/ui/layouts/RootLayout.astro";
 
 export const prerender = false;
@@ -14,25 +13,6 @@ const { username } = Astro.params;
   <main
     class="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 lg:px-20 lg:gap-20 py-10 lg:py-20"
   >
-    <header
-      class="flex gap-4 flex-col items-start max-lg:max-w-107 max-lg:px-4 max-lg:mx-auto lg:sticky lg:top-20 lg:h-fit lg:max-w-120 w-full"
-      role="banner"
-    >
-      <Avatar
-        src="https://avatars.githubusercontent.com/u/125604210?v=4"
-        alt="Mikhail Mogilnikov"
-        className="size-46"
-        blur={true}
-        blurClassName="lg:top-38 lg:left-20 lg:scale-x-210 lg:scale-y-170"
-      />
-      <h1 class="text-4xl font-bold px-2 mt-4 z-1">Mikhail Mogilnikov</h1>
-      <p class="text-lg text-muted-foreground px-2 z-1">
-        Software & Design Engineer
-      </p>
-    </header>
-
-    <section class="w-full max-w-[428px] mx-auto px-[8px] lg:px-0">
-      <BentoGrid client:only />
-    </section>
+    <Profile client:only />
   </main>
 </RootLayout>

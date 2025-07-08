@@ -98,10 +98,10 @@ export const BentoItemComponent = ({
           style={transitionStyle}
           data-blendy-from={`bento-item-${id}`}
         >
-          <div
+          <button
             className={clsx("size-full", BentoColors[style])}
             onClick={handleFocus}
-          ></div>
+          ></button>
           <div
             id={`bento-item-${id}-handle`}
             className="size-8 cursor-grab bg-foreground/50 handle absolute -bottom-2 -right-2 rounded-full"
