@@ -9,9 +9,11 @@ export const enum BentoItemSize {
 
 export type BentoSize = `${BentoItemSize}`;
 
+export type BentoStyle = "plain" | "shadow" | "outline" | "transparent";
+
 export interface BentoItem {
   id: string;
   size: BentoSize;
   order: number;
-  style: "plain" | "shadow" | "outline" | "transparent";
+  style: BentoStyle;
 }

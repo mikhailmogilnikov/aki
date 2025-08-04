@@ -1,8 +1,8 @@
 import TypedLocalStore from "typed-local-store";
-import type { BentoItem } from "~/features/bento/model/bento.type";
+import type { Profile } from "~/services/edit-profile/model/profile-provider";
 
 export interface LocalStorageSchema {
-  bento: BentoItem[];
+  profileSnapshots: Record<string, Profile>;
 }
 
 export const LocalStorageService = new TypedLocalStore<LocalStorageSchema>({

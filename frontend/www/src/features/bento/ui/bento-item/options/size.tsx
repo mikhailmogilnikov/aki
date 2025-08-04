@@ -23,7 +23,7 @@ export const BentoItemSize = ({ sizes, onSelect }: BentoItemSizeProps) => {
           key={size}
           type="button"
           onClick={() => onSelect(size)}
-          className="w-full h-10 bg-default/50 squircle-shadow"
+          className="w-full h-10 squircle-shadow"
         >
           {size}
         </button>

@@ -93,7 +93,7 @@ export const EditAvatar = ({
 
       <AnimatePresence
         show={!!src}
-        className="absolute top-0 right-0 motion-duration-200 motion-ease-in-out-cubic"
+        className="absolute top-0 left-0 motion-duration-200 motion-ease-in-out-cubic"
         inClass="motion-opacity-in-0 motion-scale-in-0"
         outClass="motion-opacity-out-0 motion-scale-out-0"
       >
@@ -107,7 +107,7 @@ export const EditAvatar = ({
 
       <AnimatePresence
         show={!!src}
-        className="absolute top-0 left-0 motion-duration-200 motion-ease-in-out-cubic"
+        className="absolute top-0 right-0 motion-duration-200 motion-ease-in-out-cubic"
         inClass="motion-opacity-in-0 motion-scale-in-0"
         outClass="motion-opacity-out-0 motion-scale-out-0"
       >

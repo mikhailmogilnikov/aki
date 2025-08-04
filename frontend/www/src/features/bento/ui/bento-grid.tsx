@@ -1,15 +1,17 @@
 import { AutoScroller, MuuriComponent } from "muuri-react";
-import { useState } from "react";
 import { BentoItemComponent, type BentoItemProps } from "./bento-item/index";
-import { type BentoItem, type BentoSize } from "../model/bento.type";
+import type { BentoSize } from "../model/bento.type";
 import { useBentoSize } from "../model/useBentoSize";
 import { sortBy } from "~/shared/lib/utils/sort-by";
-import { LocalStorageService } from "~/shared/lib/services/storage";
-import { BentoItems } from "../view-model/mock-items";
 import { useBlendy } from "~/shared/lib/hooks/useBlendy";
+import { useProfile } from "~/services/edit-profile/model/profile-provider";
+import { AddBentoItemButton } from "./add-item/add-item-button";
+import type { RefObject } from "react";
+import type { Blendy } from "blendy";
 
 export const BentoGrid = () => {
   const { sizerRef, size } = useBentoSize();
+  const { blendy } = useBlendy();
 
   return (
     <div className="relative w-full">
@@ -18,28 +20,32 @@ export const BentoGrid = () => {
         id="grid-sizer"
         className="w-full aspect-square absolute top-0 invisible m-2"
       ></div>
-      {size && <BentoGridE size={size} />}
+      {size && <BentoGridE size={size} blendy={blendy} />}
+      <AddBentoItemButton onAdd={() => blendy.current?.update()} />
     </div>
   );
 };
 
-const BentoGridE = ({ size }: { size: number }) => {
-  const { blendy } = useBlendy();
+const BentoGridE = ({
+  size,
+  blendy,
+}: {
+  size: number;
+  blendy: RefObject<Blendy | null>;
+}) => {
+  const { profile, updateProfile } = useProfile();
 
-  const initialItems =
-    LocalStorageService.getItem("bento", "safe") || BentoItems;
-
-  const [items, setItems] = useState<BentoItem[]>(
-    sortBy(initialItems, "order")
-  );
+  const items = sortBy(profile.bento, "order");
 
   const handleSizeChange = (id: string, size: BentoSize) => {
     const newItems = items.map((item) =>
       item.id === id ? { ...item, size } : item
     );
 
-    setItems(newItems);
-    LocalStorageService.setItem("bento", newItems);
+    updateProfile({
+      ...profile,
+      bento: newItems,
+    });
   };
 
   return (
@@ -52,6 +58,9 @@ const BentoGridE = ({ size }: { size: number }) => {
       dragEnabled
       dragRelease={{
         duration: 300,
+      }}
+      onMount={() => {
+        blendy.current?.update();
       }}
       layoutOnResize={false}
       layoutDuration={300}
@@ -91,8 +100,11 @@ const BentoGridE = ({ size }: { size: number }) => {
           };
         });
 
-        LocalStorageService.setItem("bento", items);
-        setItems(items);
+        updateProfile({
+          ...profile,
+          bento: items,
+        });
+
         // @ts-expect-error
         grid.refreshItems();
       }}

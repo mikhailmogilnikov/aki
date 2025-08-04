@@ -1,4 +1,6 @@
 import { createContext, useContext, useState } from "react";
+import { ProfileSnapshots } from "./profile-snapshot-service";
+import type { BentoItem } from "~/features/bento/model/bento.type";
 
 type Font =
   | "inter"
@@ -27,7 +29,7 @@ export interface Theme {
 export interface Profile {
   name: string;
   description: string;
-  bento: {}[];
+  bento: BentoItem[];
   theme: Theme;
 }
 
@@ -59,10 +61,13 @@ export const ProfileProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [profile, setProfile] = useState<Profile>(DEFAULT_PROFILE);
+  const [profile, setProfile] = useState<Profile>(
+    ProfileSnapshots.getLatestSnapshot() ?? DEFAULT_PROFILE
+  );
 
   const updateProfile = (profile: Profile) => {
     setProfile(profile);
+    ProfileSnapshots.capture(profile);
   };
 
   return (

@@ -154,7 +154,13 @@ export const BentoItemComponent = ({
                 sizes={["2x2", "2x4", "4x2", "4x4"]}
                 onSelect={handleChangeSize}
               />
-              <BentoItemDelete />
+              <BentoItemDelete
+                id={id}
+                onDelete={() => {
+                  handleUnfocus();
+                  blendy.current?.update();
+                }}
+              />
             </div>
           </div>
         </div>
