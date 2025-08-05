@@ -14,6 +14,8 @@ import { BentoColors } from "../../view-model/bento-colors";
 import { PortalOverlay } from "~/shared/ui/kit/overlays/portal-overlay";
 import { BentoItemSize } from "./options/size";
 import { BentoItemDelete } from "./options/delete";
+import { BentoItemOptions } from "./options";
+import { BentoItemGallery } from "./variants/gallery";
 
 export interface BentoItemProps extends BentoItem {
   gridSize: number;
@@ -101,10 +103,19 @@ export const BentoItemComponent = ({
           <button
             className={clsx("size-full", BentoColors[style])}
             onClick={handleFocus}
-          ></button>
+          >
+            <img
+              className="size-full object-cover"
+              draggable={false}
+              src={
+                "https://i.scdn.co/image/ab67616d0000b27398d711627751989d1ae8b0fb"
+              }
+              alt="bento"
+            />
+          </button>
           <div
             id={`bento-item-${id}-handle`}
-            className="size-8 cursor-grab bg-foreground/50 handle absolute -bottom-2 -right-2 rounded-full"
+            className="size-8 cursor-grab bg-foreground/70 handle absolute -bottom-2 -right-2 rounded-full"
           ></div>
         </div>
       </div>
@@ -127,41 +138,34 @@ export const BentoItemComponent = ({
               data-blendy-to={`bento-item-${id}`}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="size-full p-4 flex items-center">
-                {/* <div
+              {/* <img
+                className="size-full object-cover"
+                draggable={false}
+                src={
+                  "https://i.scdn.co/image/ab67616d0000b27398d711627751989d1ae8b0fb"
+                }
+                alt="bento"
+              /> */}
+              <BentoItemGallery />
+              {/* <div className="size-full p-4 flex items-center"> */}
+              {/* <div
                   contentEditable
                   className="w-full min-h-6 max-h-full h-fit outline-none text-center overflow-y-auto"
                 /> */}
-                {/* <textarea
+              {/* <textarea
                   className="size-full outline-none text-left text-lg resize-none"
                   placeholder="Enter your text"
                 /> */}
-              </div>
+              {/* </div> */}
             </div>
-            <div
-              onClick={(e) => e.stopPropagation()}
-              id={`bento-item-${id}-panel`}
-              style={
-                {
-                  "--bg":
-                    "color-mix(in oklab, var(--color-default) 50%, transparent)",
-                } as CSSProperties
-              }
-              data-state="open"
-              className="w-60  data-[state=closed]:motion-opacity-out-0 data-[state=open]:motion-opacity-in-0 data-[state=open]:motion-scale-in-0 motion-duration-300 data-[state=open]:motion-delay-200 origin-top-left bg-default/50 squircle p-4 flex flex-col gap-4"
-            >
-              <BentoItemSize
-                sizes={["2x2", "2x4", "4x2", "4x4"]}
-                onSelect={handleChangeSize}
-              />
-              <BentoItemDelete
-                id={id}
-                onDelete={() => {
-                  handleUnfocus();
-                  blendy.current?.update();
-                }}
-              />
-            </div>
+            <BentoItemOptions
+              id={id}
+              onSizeChange={handleChangeSize}
+              onDelete={() => {
+                handleUnfocus();
+                blendy.current?.update();
+              }}
+            />
           </div>
         </div>
       </PortalOverlay>

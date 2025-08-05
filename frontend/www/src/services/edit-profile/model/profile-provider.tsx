@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { ProfileSnapshots } from "./profile-snapshot-service";
 import type { BentoItem } from "~/features/bento/model/bento.type";
+import { LocalStorageService } from "~/shared/lib/services/storage";
 
 type Font =
   | "inter"
@@ -61,13 +61,14 @@ export const ProfileProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [profile, setProfile] = useState<Profile>(
-    ProfileSnapshots.getLatestSnapshot() ?? DEFAULT_PROFILE
-  );
+  const [profile, setProfile] = useState<Profile>(() => {
+    const localProfile = LocalStorageService.getItem("localProfile", "safe");
+    return localProfile ?? DEFAULT_PROFILE;
+  });
 
   const updateProfile = (profile: Profile) => {
     setProfile(profile);
-    ProfileSnapshots.capture(profile);
+    LocalStorageService.setItem("localProfile", profile);
   };
 
   return (

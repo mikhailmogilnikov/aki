@@ -9,7 +9,7 @@ export const AddBentoItemButton = ({ onAdd }: { onAdd: () => void }) => {
       id: crypto.randomUUID(),
       size: "2x2",
       order: profile.bento.length + 1,
-      style: "shadow",
+      style: "plain",
     };
 
     const newBento = [...profile.bento, newItem];

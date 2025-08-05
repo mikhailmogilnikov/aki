@@ -20,7 +20,7 @@ export const BentoItemDelete = ({ id, onDelete }: BentoItemDeleteProps) => {
   return (
     <button
       type="button"
-      className="w-full h-10 bg-default/50 squircle-shadow"
+      className="w-full h-10 bg-default squircle-shadow"
       onClick={handleDelete}
     >
       Delete

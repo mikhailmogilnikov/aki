@@ -15,6 +15,7 @@
   --color-foreground: hsl(0, 0%, 0%);
   --color-default: hsl(0, 0%, 100%);
   --color-outline: hsl(0, 0%, 85%);
+  --color-shadow: hsla(0, 0%, 0%, 0.058);
 
   --font-sans:
     "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
