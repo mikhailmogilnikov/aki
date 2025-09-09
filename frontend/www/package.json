@@ -32,6 +32,7 @@
     "react-dom": "^19.1.1",
     "react-focus-lock": "^2.13.6",
     "react-remove-scroll": "^2.7.1",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.13",
     "tailwindcss-animate": "^1.0.7",
     "typed-local-store": "^2.0.2",
