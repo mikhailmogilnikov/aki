@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useProfile } from "../model/profile-provider";
 import { useRef, useState } from "react";
 import { AnimatePresence } from "~/shared/ui/utils/AnimatePresense";
-import { Lamp, Trash, Trash2 } from "lucide-react";
+import { Lamp, Trash2 } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,

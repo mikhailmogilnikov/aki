@@ -27,6 +27,7 @@ export interface Theme {
 }
 
 export interface Profile {
+  id: string;
   name: string;
   description: string;
   bento: BentoItem[];
@@ -34,6 +35,7 @@ export interface Profile {
 }
 
 const DEFAULT_PROFILE: Profile = {
+  id: "1",
   name: "Mikhail Mogilnikov",
   description: "Software & Design Engineer",
   bento: [],

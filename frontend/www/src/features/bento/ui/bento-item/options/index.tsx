@@ -1,6 +1,7 @@
 import type { BentoSize } from "~/features/bento/model/bento.type";
 import { BentoItemDelete } from "./delete";
 import { BentoItemSize } from "./size";
+import { useProfile } from "~/services/edit-profile/model/profile-provider";
 
 interface BentoItemOptionsProps {
   id: string;
@@ -8,7 +9,16 @@ interface BentoItemOptionsProps {
   onDelete: () => void;
 }
 
-export const BentoItemOptions = ({ id, onSizeChange, onDelete }: BentoItemOptionsProps) => {
+export const BentoItemOptions = ({
+  id,
+  onSizeChange,
+  onDelete,
+}: BentoItemOptionsProps) => {
+  const { profile } = useProfile();
+
+  const bentoItem = profile.bento.find((item) => item.id === id);
+  const size = bentoItem?.size;
+
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -22,12 +32,10 @@ export const BentoItemOptions = ({ id, onSizeChange, onDelete }: BentoItemOption
     >
       <BentoItemSize
         sizes={["2x2", "2x4", "4x2", "4x4"]}
+        activeSize={size}
         onSelect={onSizeChange}
       />
-      <BentoItemDelete
-        id={id}
-        onDelete={onDelete}
-      />
+      <BentoItemDelete id={id} onDelete={onDelete} />
     </div>
   );
 };
