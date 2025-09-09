@@ -1,11 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useCarousel from "~/shared/lib/hooks/useCarousel";
 import useFancybox from "~/shared/lib/hooks/useFancybox";
 
-export const BentoItemGallery = () => {
+interface BentoItemGalleryProps {
+  onBlock: () => void;
+  onUnblock: () => void;
+}
+
+export const BentoItemGallery = ({
+  onBlock,
+  onUnblock,
+}: BentoItemGalleryProps) => {
   const [currentIndex, setCurrentIndex] = useState(1);
 
-  const [fancyboxRef] = useFancybox({});
+  const pointerDownRef = useRef(false);
+
+  const [fancyboxRef] = useFancybox({
+    Carousel: {
+      Arrows: {},
+      Toolbar: {
+        display: {
+          right: ["rotateCW", "close"],
+        },
+      },
+    },
+  });
 
   const [carouselRef, carouselInstance] = useCarousel({});
 
@@ -32,6 +51,20 @@ export const BentoItemGallery = () => {
       ref={(ref) => {
         carouselRef(ref);
         fancyboxRef?.(ref);
+      }}
+      onPointerDown={() => {
+        pointerDownRef.current = true;
+      }}
+      onPointerUp={() => {
+        console.log("pointer up");
+        onUnblock();
+        pointerDownRef.current = false;
+      }}
+      onPointerLeave={() => {
+        if (pointerDownRef.current) {
+          onBlock();
+          pointerDownRef.current = false;
+        }
       }}
       className="size-full relative"
     >

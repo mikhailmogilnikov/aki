@@ -1,0 +1,12 @@
+@media (max-width: 640px) {
+  button[data-carousel-go-next],
+  button[data-carousel-go-prev] {
+    display: none;
+    display: none;
+  }
+}
+
+.f-carousel__toolbar__column.is-right {
+  border-radius: 9999px;
+  overflow: hidden;
+}

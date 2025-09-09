@@ -3,6 +3,7 @@ import { ProfileProvider } from "../model/profile-provider";
 import { EditAvatar } from "./avatar";
 import { EditName } from "./name";
 import { EditDescription } from "./description";
+import { EditBar } from "~/features/edit-bar/ui/edit-bar";
 
 export const Profile = () => {
   return (
@@ -22,6 +23,8 @@ export const Profile = () => {
       <section className="w-full max-w-[428px] mx-auto px-[8px] lg:px-0 motion-opacity-in-0">
         <BentoGrid />
       </section>
+
+      <EditBar />
     </ProfileProvider>
   );
 };

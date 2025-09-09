@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { createPortal } from "react-dom";
 import { RemoveScroll } from "react-remove-scroll";
 import FocusLock from "react-focus-lock";
+import { X } from "lucide-react";
 
 interface PortalOverlayProps {
   children: React.ReactNode;
@@ -32,10 +33,10 @@ export const PortalOverlay = ({
             <button
               id={overlayId}
               data-state={isOpen ? "open" : "closed"}
-              className="absolute top-4 right-4 size-12 bg-default rounded-full z-2 data-[state=open]:motion-opacity-in-0 data-[state=closed]:motion-opacity-out-0 motion-duration-300 max-sm:hidden"
+              className="absolute top-4 right-4 size-12 bg-default rounded-full z-2 data-[state=open]:motion-opacity-in-0 data-[state=closed]:motion-opacity-out-0 motion-duration-300 max-sm:hidden pressable flex items-center justify-center"
               onClick={onClose}
             >
-              Close
+              <X className="size-6 text-foreground" />
             </button>
             <div
               id={overlayId}

@@ -2,6 +2,12 @@ import clsx from "clsx";
 import { useProfile } from "../model/profile-provider";
 import { useRef, useState } from "react";
 import { AnimatePresence } from "~/shared/ui/utils/AnimatePresense";
+import { Lamp, Trash, Trash2 } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "~/shared/ui/kit/overlays/react-tooltip";
 
 export const EditAvatar = ({
   className,
@@ -97,12 +103,19 @@ export const EditAvatar = ({
         inClass="motion-opacity-in-0 motion-scale-in-0"
         outClass="motion-opacity-out-0 motion-scale-out-0"
       >
-        <button
-          className="size-11 bg-default backdrop-blur-md rounded-full"
-          onClick={handleDelete}
-        >
-          Del
-        </button>
+        <Tooltip>
+          <TooltipTrigger>
+            <button
+              className="size-11 bg-default backdrop-blur-md rounded-full pressable flex items-center justify-center"
+              onClick={handleDelete}
+            >
+              <Trash2 className="size-5 text-danger" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Delete avatar</p>
+          </TooltipContent>
+        </Tooltip>
       </AnimatePresence>
 
       <AnimatePresence
@@ -111,15 +124,26 @@ export const EditAvatar = ({
         inClass="motion-opacity-in-0 motion-scale-in-0"
         outClass="motion-opacity-out-0 motion-scale-out-0"
       >
-        <button
-          className={clsx("size-11 rounded-full transition-colors", {
-            "bg-foreground text-background": profile.theme.show_avatar_blur,
-            "bg-default text-foreground": !profile.theme.show_avatar_blur,
-          })}
-          onClick={handleToggleBlur}
-        >
-          Blur
-        </button>
+        <Tooltip>
+          <TooltipTrigger>
+            <button
+              className={clsx(
+                "size-11 rounded-full transition-colors pressable flex items-center justify-center",
+                {
+                  "bg-foreground text-background":
+                    profile.theme.show_avatar_blur,
+                  "bg-default text-foreground": !profile.theme.show_avatar_blur,
+                }
+              )}
+              onClick={handleToggleBlur}
+            >
+              <Lamp className="size-6" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Toggle avatar blur</p>
+          </TooltipContent>
+        </Tooltip>
       </AnimatePresence>
     </div>
   );

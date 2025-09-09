@@ -33,6 +33,7 @@ export const BentoItemComponent = ({
 }: BentoItemProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [itemSize, setItemSize] = useState<BentoSize>(size);
+  const [isRestrictedToClose, setIsRestrictedToClose] = useState(false);
 
   const isAnimatingRef = useRef(false);
 
@@ -59,7 +60,7 @@ export const BentoItemComponent = ({
   };
 
   const handleUnfocus = () => {
-    if (isAnimatingRef.current) return;
+    if (isAnimatingRef.current || isRestrictedToClose) return;
 
     const panel = document.getElementById(`bento-item-${id}-panel`);
     const overlay = document.getElementById(`portal-overlay`);
@@ -146,7 +147,16 @@ export const BentoItemComponent = ({
                 }
                 alt="bento"
               /> */}
-              <BentoItemGallery />
+              <BentoItemGallery
+                onBlock={() => {
+                  console.log("block");
+                  setIsRestrictedToClose(true);
+                }}
+                onUnblock={() => {
+                  console.log("unblock");
+                  setIsRestrictedToClose(false);
+                }}
+              />
               {/* <div className="size-full p-4 flex items-center"> */}
               {/* <div
                   contentEditable
