@@ -104,7 +104,7 @@ export const EditAvatar = ({
         outClass="motion-opacity-out-0 motion-scale-out-0"
       >
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <button
               className="size-11 bg-default backdrop-blur-md rounded-full pressable flex items-center justify-center"
               onClick={handleDelete}
@@ -125,7 +125,7 @@ export const EditAvatar = ({
         outClass="motion-opacity-out-0 motion-scale-out-0"
       >
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <button
               className={clsx(
                 "size-11 rounded-full transition-colors pressable flex items-center justify-center",

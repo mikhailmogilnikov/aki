@@ -12,7 +12,7 @@ export const EditBar = () => {
   return (
     <div className="fixed sm:bottom-6 bottom-4 left-1/2 -translate-x-1/2 w-fit max-w-72 h-14 bg-default/50 backdrop-blur-md shadow-md shadow-shadow rounded-full overflow-clip z-2 flex items-center justify-between px-2 gap-1.5">
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <button className="w-10 h-10 pressable rounded-full bg-default/50 backdrop-blur-md flex items-center justify-center shadow shadow-shadow">
             <Menu strokeWidth={2.5} className="size-5 text-foreground" />
           </button>
@@ -23,7 +23,7 @@ export const EditBar = () => {
       </Tooltip>
 
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <button className="w-10 h-10 pressable rounded-full bg-default/50 backdrop-blur-md flex items-center justify-center shadow shadow-shadow">
             <PlusCircle className="size-6 text-foreground" />
           </button>
@@ -34,7 +34,7 @@ export const EditBar = () => {
       </Tooltip>
 
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <a
             target="_blank"
             // TODO: Replace with actual live page
@@ -50,7 +50,7 @@ export const EditBar = () => {
       </Tooltip>
 
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <button className="w-fit px-3 h-10 pressable rounded-full bg-success/50 backdrop-blur-md flex items-center justify-center gap-1 text-sm font-semibold shadow shadow-shadow">
             <Check className="size-5 text-foreground" />
             Synced

@@ -20,7 +20,8 @@ export const BentoItemGallery = ({
       Arrows: {},
       Toolbar: {
         display: {
-          right: ["rotateCW", "close"],
+          left: [],
+          right: ["close"],
         },
       },
     },
@@ -68,8 +69,8 @@ export const BentoItemGallery = ({
       }}
       className="size-full relative"
     >
-      <div className="absolute top-3 right-3 bg-foreground/40 backdrop-blur-lg text-background px-1.5 py-0.5 rounded-full">
-        <p className="text-sm font-medium">
+      <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-lg text-white px-1.5 py-0.5 rounded-full">
+        <p className="text-xs font-medium">
           {currentIndex}/{carouselInstance?.getSlides().length}
         </p>
       </div>

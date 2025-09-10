@@ -10,3 +10,7 @@
   border-radius: 9999px;
   overflow: hidden;
 }
+
+.fancybox__container .fancybox__backdrop {
+  background-color: var(--color-black);
+}

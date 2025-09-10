@@ -24,17 +24,14 @@ export const BentoItemOptions = ({
       onClick={(e) => e.stopPropagation()}
       id={`bento-item-${id}-panel`}
       data-state="open"
-      style={{
-        backgroundColor:
-          "color-mix(in oklab, var(--color-default) 50%, transparent)",
-      }}
-      className="w-60  data-[state=closed]:motion-opacity-out-0 data-[state=open]:motion-opacity-in-0 data-[state=open]:motion-scale-in-0 motion-duration-300 data-[state=open]:motion-delay-200 origin-top-left squircle p-4 flex flex-col gap-4"
+      className="w-60 data-[state=closed]:motion-opacity-out-0 data-[state=open]:motion-opacity-in-0 data-[state=open]:motion-scale-in-0 motion-duration-300 data-[state=open]:motion-delay-200 origin-top-left squircle-outline p-4 flex flex-col gap-4"
     >
       <BentoItemSize
         sizes={["2x2", "2x4", "4x2", "4x4"]}
         activeSize={size}
         onSelect={onSizeChange}
       />
+      <hr className="border-outline" />
       <BentoItemDelete id={id} onDelete={onDelete} />
     </div>
   );

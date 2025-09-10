@@ -20,7 +20,7 @@ export const BentoItemSize = ({
       case "2x1":
         return <Square className="size-6" />;
       case "2x2":
-        return <Square className="size-4" />;
+        return <Square strokeWidth={2.5} className="size-4" />;
       case "2x4":
         return <RectangleVertical className="size-6" />;
       case "4x2":

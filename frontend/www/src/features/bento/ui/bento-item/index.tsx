@@ -12,10 +12,9 @@ import { clsx } from "clsx";
 import type { Blendy } from "blendy";
 import { BentoColors } from "../../view-model/bento-colors";
 import { PortalOverlay } from "~/shared/ui/kit/overlays/portal-overlay";
-import { BentoItemSize } from "./options/size";
-import { BentoItemDelete } from "./options/delete";
 import { BentoItemOptions } from "./options";
 import { BentoItemGallery } from "./variants/gallery";
+import { Move } from "lucide-react";
 
 export interface BentoItemProps extends BentoItem {
   gridSize: number;
@@ -60,14 +59,18 @@ export const BentoItemComponent = ({
   };
 
   const handleUnfocus = () => {
-    if (isAnimatingRef.current || isRestrictedToClose) return;
+    if (isAnimatingRef.current) return;
 
     const panel = document.getElementById(`bento-item-${id}-panel`);
-    const overlay = document.getElementById(`portal-overlay`);
+    const overlays = document.querySelectorAll(`#portal-overlay`);
     const handle = document.getElementById(`bento-item-${id}-handle`);
 
-    if (overlay) overlay.dataset.state = "closed";
+    console.log(overlays);
 
+    if (overlays)
+      overlays.forEach(
+        (overlay) => ((overlay as HTMLElement).dataset.state = "closed")
+      );
     if (panel) panel.dataset.state = "closed";
 
     blendy.current?.untoggle(`bento-item-${id}`, () => {
@@ -116,8 +119,10 @@ export const BentoItemComponent = ({
           </button>
           <div
             id={`bento-item-${id}-handle`}
-            className="size-8 cursor-grab bg-foreground/70 handle absolute -bottom-2 -right-2 rounded-full"
-          ></div>
+            className="size-8 cursor-grab bg-background/70 outline outline-outline handle absolute -bottom-2 -right-2 rounded-full flex items-center justify-center active:scale-120 transition-transform"
+          >
+            <Move className="size-5 text-foreground" />
+          </div>
         </div>
       </div>
 
