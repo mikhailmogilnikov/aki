@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useCarousel from "~/shared/lib/hooks/useCarousel";
 import useFancybox from "~/shared/lib/hooks/useFancybox";
+import { GalleryBadge } from "./gallery-badge";
 
 interface BentoItemGalleryProps {
   onBlock: () => void;
@@ -69,11 +70,10 @@ export const BentoItemGallery = ({
       }}
       className="size-full relative"
     >
-      <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-lg text-white px-1.5 py-0.5 rounded-full">
-        <p className="text-xs font-medium">
-          {currentIndex}/{carouselInstance?.getSlides().length}
-        </p>
-      </div>
+      <GalleryBadge
+        currentIndex={currentIndex}
+        total={carouselInstance?.getSlides().length || 0}
+      />
       <a
         data-fancybox="gallery"
         className="f-carousel__slide h-full"

@@ -15,6 +15,7 @@ import { PortalOverlay } from "~/shared/ui/kit/overlays/portal-overlay";
 import { BentoItemOptions } from "./options";
 import { BentoItemGallery } from "./variants/gallery";
 import { Move } from "lucide-react";
+import { GalleryBadge } from "./variants/gallery/gallery-badge";
 
 export interface BentoItemProps extends BentoItem {
   gridSize: number;
@@ -114,6 +115,7 @@ export const BentoItemComponent = ({
               }
               alt="bento"
             />
+            <GalleryBadge currentIndex={1} total={2} />
           </button>
           <div
             id={`bento-item-${id}-handle`}
