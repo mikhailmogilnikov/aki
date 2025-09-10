@@ -5,9 +5,7 @@ import { useBentoSize } from "../model/useBentoSize";
 import { sortBy } from "~/shared/lib/utils/sort-by";
 import { useBlendy } from "~/shared/lib/hooks/useBlendy";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
-import { AddBentoItemButton } from "./add-item/add-item-button";
-import { useEffect, type RefObject } from "react";
-import type { Blendy } from "blendy";
+import { useEffect } from "react";
 
 export const BentoGrid = () => {
   const { sizerRef, size } = useBentoSize();
@@ -26,20 +24,14 @@ export const BentoGrid = () => {
         id="grid-sizer"
         className="w-full aspect-square absolute top-0 invisible"
       ></div>
-      {size && <BentoGridE size={size} blendy={blendy} />}
-      <AddBentoItemButton onAdd={() => blendy.current?.update()} />
+      {size && <BentoGridE size={size} />}
     </div>
   );
 };
 
-const BentoGridE = ({
-  size,
-  blendy,
-}: {
-  size: number;
-  blendy: RefObject<Blendy | null>;
-}) => {
+const BentoGridE = ({ size }: { size: number }) => {
   const { profile, updateProfile } = useProfile();
+  const { blendy } = useBlendy();
 
   const items = sortBy(profile.bento, "order");
 
@@ -129,7 +121,6 @@ const BentoGridE = ({
           {...props}
           gridSize={size}
           onSizeChange={handleSizeChange}
-          blendy={blendy}
         />
       ))}
     </MuuriComponent>

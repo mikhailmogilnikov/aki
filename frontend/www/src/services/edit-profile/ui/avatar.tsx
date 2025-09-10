@@ -1,13 +1,17 @@
 import clsx from "clsx";
 import { useProfile } from "../model/profile-provider";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "~/shared/ui/utils/AnimatePresense";
-import { Lamp, Trash2 } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "~/shared/ui/kit/overlays/react-tooltip";
+import { DeleteIcon, type DeleteIconHandle } from "~/shared/ui/icons/delete";
+import {
+  SparklesIcon,
+  type SparklesIconHandle,
+} from "~/shared/ui/icons/sparkles";
 
 export const EditAvatar = ({
   className,
@@ -18,6 +22,10 @@ export const EditAvatar = ({
   blurClassName: string;
 }) => {
   const { profile, updateProfile } = useProfile();
+
+  const deleteIconRef = useRef<DeleteIconHandle>(null);
+  const sparklesIconRef = useRef<SparklesIconHandle>(null);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [src, setSrc] = useState<string | null>(
@@ -35,7 +43,19 @@ export const EditAvatar = ({
     }
   };
 
+  useEffect(() => {
+    if (profile.theme.show_avatar_blur) {
+      sparklesIconRef.current?.startAnimation();
+    }
+  }, []);
+
   const handleToggleBlur = () => {
+    if (profile.theme.show_avatar_blur) {
+      sparklesIconRef.current?.stopAnimation();
+    } else {
+      sparklesIconRef.current?.startAnimation();
+    }
+
     updateProfile({
       ...profile,
       theme: {
@@ -88,6 +108,7 @@ export const EditAvatar = ({
             loading="eager"
             src={src}
             aria-hidden={true}
+            alt={profile.name}
             draggable={false}
             className={clsx(
               "size-full will-change-transform object-cover select-none rounded-full blur-2xl opacity-35 scale-x-175 scale-y-130",
@@ -106,10 +127,16 @@ export const EditAvatar = ({
         <Tooltip>
           <TooltipTrigger asChild>
             <button
+              onMouseEnter={() => deleteIconRef.current?.startAnimation()}
+              onMouseLeave={() => deleteIconRef.current?.stopAnimation()}
               className="size-11 bg-default backdrop-blur-md rounded-full pressable flex items-center justify-center"
               onClick={handleDelete}
             >
-              <Trash2 className="size-5 text-danger" />
+              <DeleteIcon
+                ref={deleteIconRef}
+                className="text-danger"
+                size={20}
+              />
             </button>
           </TooltipTrigger>
           <TooltipContent>
@@ -137,7 +164,7 @@ export const EditAvatar = ({
               )}
               onClick={handleToggleBlur}
             >
-              <Lamp className="size-6" />
+              <SparklesIcon ref={sparklesIconRef} size={20} />
             </button>
           </TooltipTrigger>
           <TooltipContent>

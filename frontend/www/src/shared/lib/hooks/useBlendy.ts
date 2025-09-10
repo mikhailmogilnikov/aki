@@ -2,8 +2,9 @@ import { useEffect, useRef } from "react";
 
 import { createBlendy } from "./blendy.dist";
 import type { Blendy } from "blendy";
+import { createGStore } from "create-gstore";
 
-export const useBlendy = () => {
+export const useBlendy = createGStore(() => {
   const blendy = useRef<Blendy | null>(null);
 
   useEffect(() => {
@@ -13,4 +14,4 @@ export const useBlendy = () => {
   return {
     blendy,
   };
-};
+});

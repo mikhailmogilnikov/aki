@@ -16,11 +16,11 @@ import { BentoItemOptions } from "./options";
 import { BentoItemGallery } from "./variants/gallery";
 import { Move } from "lucide-react";
 import { GalleryBadge } from "./variants/gallery/gallery-badge";
+import { useBlendy } from "~/shared/lib/hooks/useBlendy";
 
 export interface BentoItemProps extends BentoItem {
   gridSize: number;
   onSizeChange?: (id: string, size: BentoSize) => void;
-  blendy: RefObject<Blendy | null>;
 }
 
 export const BentoItemComponent = ({
@@ -29,8 +29,9 @@ export const BentoItemComponent = ({
   gridSize,
   onSizeChange,
   style,
-  blendy,
 }: BentoItemProps) => {
+  const { blendy } = useBlendy();
+
   const [isFocused, setIsFocused] = useState(false);
   const [itemSize, setItemSize] = useState<BentoSize>(size);
   const [isRestrictedToClose, setIsRestrictedToClose] = useState(false);
