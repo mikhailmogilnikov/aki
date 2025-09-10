@@ -65,8 +65,6 @@ export const BentoItemComponent = ({
     const overlays = document.querySelectorAll(`#portal-overlay`);
     const handle = document.getElementById(`bento-item-${id}-handle`);
 
-    console.log(overlays);
-
     if (overlays)
       overlays.forEach(
         (overlay) => ((overlay as HTMLElement).dataset.state = "closed")

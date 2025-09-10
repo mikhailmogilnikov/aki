@@ -10,7 +10,7 @@ export const EditBar = () => {
   const { profile } = useProfile();
 
   return (
-    <div className="fixed sm:bottom-6 bottom-4 left-1/2 -translate-x-1/2 w-fit max-w-72 h-14 bg-default/50 backdrop-blur-md shadow-md shadow-shadow rounded-full overflow-clip z-2 flex items-center justify-between px-2 gap-1.5">
+    <div className="fixed sm:bottom-6 bottom-5 left-1/2 -translate-x-1/2 w-fit max-w-72 h-14 bg-default/50 backdrop-blur-md shadow-md shadow-shadow rounded-full overflow-clip z-2 flex items-center justify-between px-2 gap-1.5">
       <Tooltip>
         <TooltipTrigger asChild>
           <button className="w-10 h-10 pressable rounded-full bg-default/50 backdrop-blur-md flex items-center justify-center shadow shadow-shadow">

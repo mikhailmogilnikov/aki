@@ -41,7 +41,7 @@ export const PortalOverlay = ({
             <div
               id={overlayId}
               data-state={isOpen ? "open" : "closed"}
-              className="absolute inset-0 data-[state=open]:motion-opacity-in-0 data-[state=closed]:motion-opacity-out-0 motion-duration-200 bg-background/50 backdrop-blur-lg z-1"
+              className="absolute inset-0 data-[state=open]:motion-opacity-in-0 data-[state=closed]:motion-opacity-out-0 motion-duration-200 bg-background/70 backdrop-blur-lg z-1"
               onClick={onClose}
             />
             {children}

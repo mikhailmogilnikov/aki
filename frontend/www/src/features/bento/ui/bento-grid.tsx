@@ -6,19 +6,25 @@ import { sortBy } from "~/shared/lib/utils/sort-by";
 import { useBlendy } from "~/shared/lib/hooks/useBlendy";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
 import { AddBentoItemButton } from "./add-item/add-item-button";
-import type { RefObject } from "react";
+import { useEffect, type RefObject } from "react";
 import type { Blendy } from "blendy";
 
 export const BentoGrid = () => {
   const { sizerRef, size } = useBentoSize();
   const { blendy } = useBlendy();
 
+  useEffect(() => {
+    if (blendy.current) {
+      blendy.current.update();
+    }
+  }, [size]);
+
   return (
     <div className="relative w-full">
       <div
         ref={sizerRef}
         id="grid-sizer"
-        className="w-full aspect-square absolute top-0 invisible m-2"
+        className="w-full aspect-square absolute top-0 invisible"
       ></div>
       {size && <BentoGridE size={size} blendy={blendy} />}
       <AddBentoItemButton onAdd={() => blendy.current?.update()} />
