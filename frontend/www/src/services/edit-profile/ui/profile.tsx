@@ -19,7 +19,6 @@ export const Profile = () => {
         <EditName />
         <EditDescription />
       </header>
-
       <section className="w-full max-w-[428px] mx-auto px-[8px] lg:px-0 motion-opacity-in-0">
         <BentoGrid />
       </section>

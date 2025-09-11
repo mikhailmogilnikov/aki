@@ -1,5 +1,7 @@
 ---
+import { Loader2 } from "lucide-react";
 import { Profile } from "~/services/edit-profile/ui/profile";
+
 import RootLayout from "~/shared/ui/layouts/RootLayout.astro";
 
 export const prerender = false;
@@ -8,11 +10,19 @@ const { username } = Astro.params;
 
 <RootLayout
   title={`Edit ${username}`}
-  className="overflow-x-hidden overflow-y-scroll open-runde dark"
+  className="overflow-x-hidden open-runde dark"
 >
   <main
     class="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 lg:px-20 lg:gap-20 py-10 lg:py-20"
   >
-    <Profile client:only />
+    <Profile client:only>
+      <div
+        slot="fallback"
+        class="w-full flex flex-col h-[calc(100vh-5rem)] lg:h-[calc(100vh-10rem)] items-center justify-center animate-pulse"
+      >
+        <p class="sr-only">Loading page editor...</p>
+        <Loader2 strokeWidth={3} className="size-8 animate-spin" />
+      </div>
+    </Profile>
   </main>
 </RootLayout>

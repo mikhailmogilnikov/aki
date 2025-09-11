@@ -12,6 +12,7 @@ import {
   SparklesIcon,
   type SparklesIconHandle,
 } from "~/shared/ui/icons/sparkles";
+import { ExternalLink } from "lucide-react";
 
 export const EditAvatar = ({
   className,

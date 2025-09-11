@@ -38,8 +38,8 @@ export const BentoItemSize = ({
           type="button"
           onClick={() => onSelect(size)}
           className={cn(
-            "w-full h-10 hover:bg-default/50 rounded-full outline-outline flex items-center justify-center pressable transition-colors",
-            activeSize === size && "bg-default outline hover:bg-default"
+            "w-full h-10 hover:bg-foreground/5 rounded-full flex items-center justify-center pressable transition-colors",
+            activeSize === size && "bg-foreground/10 hover:bg-foreground/10"
           )}
         >
           {getIcon(size)}

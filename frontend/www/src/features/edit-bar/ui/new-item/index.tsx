@@ -7,13 +7,15 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/shared/ui/kit/overlays/dropdown-menu";
 import {
   GalleryHorizontalEndIcon,
   type GalleryHorizontalEndIconHandle,
 } from "~/shared/ui/icons/gallery";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import {
   ScanTextIcon,
   type ScanTextIconHandle,
@@ -75,13 +77,13 @@ export const EditBarNewItem = () => {
     >
       <DropdownMenuTrigger
         tabIndex={1}
-        className="size-10 pressable cursor-pointer rounded-full bg-default/50 backdrop-blur-md "
+        className="size-12 pressable cursor-pointer rounded-full bg-default/50 backdrop-blur-md border border-foreground/8"
       >
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className="size-full flex items-center justify-center shadow shadow-shadow">
+            <div className="size-full flex items-center justify-center ">
               <PlusIcon
-                size={24}
+                size={26}
                 ref={plusIconRef}
                 className="text-foreground"
               />
@@ -93,6 +95,8 @@ export const EditBarNewItem = () => {
         </Tooltip>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        <DropdownMenuLabel>New block</DropdownMenuLabel>
+
         <DropdownMenuItem
           className="text-foreground"
           onMouseEnter={() =>
@@ -105,26 +109,29 @@ export const EditBarNewItem = () => {
         >
           <GalleryHorizontalEndIcon
             ref={galleryHorizontalEndIconRef}
-            size={42}
-            className=""
+            size={20}
+            className="opacity-50"
           />
-          Media Gallery
+          Media gallery
         </DropdownMenuItem>
         <DropdownMenuItem
+          disabled
           onMouseEnter={() => scanTextIconRef.current?.startAnimation()}
           onMouseLeave={() => scanTextIconRef.current?.stopAnimation()}
         >
           <ScanTextIcon
             ref={scanTextIconRef}
-            className="size-4 text-foreground"
+            size={20}
+            className="opacity-50"
           />
           Text
         </DropdownMenuItem>
         <DropdownMenuItem
+          disabled
           onMouseEnter={() => linkIconRef.current?.startAnimation()}
           onMouseLeave={() => linkIconRef.current?.stopAnimation()}
         >
-          <LinkIcon ref={linkIconRef} className="size-4 text-foreground" />
+          <LinkIcon ref={linkIconRef} size={20} className="opacity-50" />
           Link
         </DropdownMenuItem>
       </DropdownMenuContent>

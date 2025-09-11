@@ -33,6 +33,7 @@
   --border-width: 1px;
 
   --animate-squircle-shadow: squircle-shadow 1s ease-in-out infinite;
+  --animate-ping: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 @layer components {
@@ -42,10 +43,6 @@
 }
 
 @layer base {
-  html {
-    overflow-y: scroll;
-  }
-
   :root {
     *:focus-visible {
       outline: 2px solid var(--color-foreground);

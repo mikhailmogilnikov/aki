@@ -60,18 +60,26 @@ export const BentoItemComponent = ({
     });
   };
 
-  const handleUnfocus = () => {
-    if (isAnimatingRef.current) return;
-
+  const closePanel = () => {
     const panel = document.getElementById(`bento-item-${id}-panel`);
-    const overlays = document.querySelectorAll(`#portal-overlay`);
-    const handle = document.getElementById(`bento-item-${id}-handle`);
+    if (panel) panel.dataset.state = "closed";
+  };
 
+  const closeOverlay = () => {
+    const overlays = document.querySelectorAll(`#portal-overlay`);
     if (overlays)
       overlays.forEach(
         (overlay) => ((overlay as HTMLElement).dataset.state = "closed")
       );
-    if (panel) panel.dataset.state = "closed";
+  };
+
+  const handleUnfocus = () => {
+    if (isAnimatingRef.current) return;
+
+    closePanel();
+    closeOverlay();
+
+    const handle = document.getElementById(`bento-item-${id}-handle`);
 
     blendy.current?.untoggle(`bento-item-${id}`, () => {
       setIsFocused(false);
@@ -80,6 +88,21 @@ export const BentoItemComponent = ({
         handle.style.transition = "opacity 0.1s";
       }
     });
+  };
+
+  const handleDelete = () => {
+    if (isAnimatingRef.current) return;
+
+    const wrapper = document.getElementById(`bento-item-${id}-wrapper`);
+
+    if (wrapper) {
+      wrapper.style.opacity = "0";
+      wrapper.style.scale = "0.5";
+      wrapper.style.transition = "opacity 0.2s, scale 0.2s";
+    }
+
+    closePanel();
+    closeOverlay();
   };
 
   const responsiveStyle = useMemo(
@@ -139,9 +162,10 @@ export const BentoItemComponent = ({
             <div
               style={transitionStyle}
               className={clsx(
-                "transition-[width,height] will-change-[width,height] duration-300 mx-auto",
+                "transition-[width,height] will-change-[width,height] duration-300",
                 BentoColors[style]
               )}
+              id={`bento-item-${id}-wrapper`}
               data-blendy-to={`bento-item-${id}`}
               onClick={(e) => e.stopPropagation()}
             >
@@ -177,10 +201,7 @@ export const BentoItemComponent = ({
             <BentoItemOptions
               id={id}
               onSizeChange={handleChangeSize}
-              onDelete={() => {
-                handleUnfocus();
-                blendy.current?.update();
-              }}
+              onDelete={handleDelete}
             />
           </div>
         </div>
