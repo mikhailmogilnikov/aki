@@ -23,6 +23,7 @@
     "astro-seo": "^0.8.4",
     "blendy": "^0.0.1",
     "clsx": "^2.1.1",
+    "create-gstore": "^0.2.0",
     "css-houdini-squircle": "^0.3.0",
     "css-paint-polyfill": "^3.4.0",
     "lucide-react": "^0.543.0",
@@ -33,12 +34,13 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-focus-lock": "^2.13.6",
-    "create-gstore": "^0.2.0",
     "react-remove-scroll": "^2.7.1",
+    "react-textarea-autosize": "^8.5.9",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.13",
     "tailwindcss-animate": "^1.0.7",
     "typed-local-store": "^2.0.2",
+    "use-fit-text": "^2.4.0",
     "usehooks-ts": "^3.1.1"
   },
   "devDependencies": {

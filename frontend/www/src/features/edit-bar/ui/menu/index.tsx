@@ -47,10 +47,7 @@ export const EditBarMenu = () => {
         }
       }}
     >
-      <DropdownMenuTrigger
-        tabIndex={1}
-        className="size-12 pressable cursor-pointer rounded-full bg-default/50 backdrop-blur-md border border-foreground/8"
-      >
+      <DropdownMenuTrigger className="size-12 pressable cursor-pointer rounded-full bg-default/50 backdrop-blur-md border border-foreground/8">
         <Tooltip>
           <TooltipTrigger asChild>
             <div className="size-full flex items-center justify-center ">
@@ -66,6 +63,7 @@ export const EditBarMenu = () => {
           </TooltipContent>
         </Tooltip>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent>
         <DropdownMenuLabel>Menu</DropdownMenuLabel>
 

@@ -80,7 +80,7 @@ function DropdownMenuItem({
       data-inset={inset}
       data-variant={variant}
       className={cn(
-        "focus-visible:bg-foreground/10 hover:bg-foreground/10 data-[variant=destructive]:text-danger data-[variant=destructive]:focus-visible:bg-danger/10 dark:data-[variant=destructive]:focus-visible:bg-danger/20 data-[variant=destructive]:focus-visible:text-danger data-[variant=destructive]:*:[svg]:!text-danger relative flex cursor-default items-center gap-2.5 rounded-full px-3 py-2 outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0  transition-colors text-[15px] pl-2.5 pr-4",
+        "focus-visible:bg-foreground/5 hover:bg-foreground/5 active:bg-foreground/10 data-[variant=destructive]:text-danger data-[variant=destructive]:focus-visible:bg-danger/10 dark:data-[variant=destructive]:focus-visible:bg-danger/20 data-[variant=destructive]:focus-visible:text-danger data-[variant=destructive]:*:[svg]:!text-danger relative flex cursor-default items-center gap-2.5 rounded-full px-3 py-2 outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0  transition-colors text-[15px] pl-2.5 pr-4",
         className
       )}
       {...props}

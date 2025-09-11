@@ -20,6 +20,10 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
+  devToolbar: {
+    enabled: false,
+  },
+
   adapter:
     DEPLOY_ADAPTER === "node"
       ? node({

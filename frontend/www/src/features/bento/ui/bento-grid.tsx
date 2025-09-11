@@ -6,10 +6,12 @@ import { sortBy } from "~/shared/lib/utils/sort-by";
 import { useBlendy } from "~/shared/lib/hooks/useBlendy";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
 import { useEffect } from "react";
+import { CircleQuestionMark } from "lucide-react";
 
 export const BentoGrid = () => {
   const { sizerRef, size } = useBentoSize();
   const { blendy } = useBlendy();
+  const { profile } = useProfile();
 
   useEffect(() => {
     if (blendy.current) {
@@ -24,7 +26,20 @@ export const BentoGrid = () => {
         id="grid-sizer"
         className="w-full aspect-square absolute top-0 invisible"
       ></div>
-      {size && <BentoGridE size={size} />}
+      {size && profile.bento.length > 0 && <BentoGridE size={size} />}
+
+      {profile.bento.length === 0 && (
+        <div className="px-2 motion-opacity-in-0">
+          <div className="squircle-outline p-4 flex gap-3">
+            <CircleQuestionMark className="opacity-50 shrink-0" />
+            <p className="font-medium">
+              You dont have any blocks on your page now. Add first by clicking
+              on the <span className="text-link font-bold">+</span> button in
+              the bottom menu.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -81,7 +96,7 @@ const BentoGridE = ({ size }: { size: number }) => {
           // @ts-expect-error
           const itemElement = item.getElement();
           const element = document.createElement("div");
-          element.className = "bg-foreground opacity-30 squircle";
+          element.className = "bg-foreground opacity-50 squircle";
           element.style.width = itemElement.style.width;
           element.style.height = itemElement.style.height;
           return element;

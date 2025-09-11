@@ -4,6 +4,7 @@ import { EditAvatar } from "./avatar";
 import { EditName } from "./name";
 import { EditDescription } from "./description";
 import { EditBar } from "~/features/edit-bar/ui/edit-bar";
+import { createPortal } from "react-dom";
 
 export const Profile = () => {
   return (
@@ -23,7 +24,7 @@ export const Profile = () => {
         <BentoGrid />
       </section>
 
-      <EditBar />
+      {createPortal(<EditBar />, document.body) as unknown as React.ReactNode}
     </ProfileProvider>
   );
 };

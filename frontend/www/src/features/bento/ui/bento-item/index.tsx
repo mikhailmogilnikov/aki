@@ -139,7 +139,7 @@ export const BentoItemComponent = ({
               }
               alt="bento"
             />
-            <GalleryBadge currentIndex={1} total={2} />
+            <GalleryBadge currentIndex={1} total={3} />
           </button>
           <div
             id={`bento-item-${id}-handle`}

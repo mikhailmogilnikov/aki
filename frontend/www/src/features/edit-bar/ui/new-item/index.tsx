@@ -25,6 +25,14 @@ import { PlusIcon, type PlusIconHandle } from "~/shared/ui/icons/plus";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
 import type { BentoItem } from "~/features/bento/model/bento.type";
 import { useBlendy } from "~/shared/lib/hooks/useBlendy";
+import {
+  AArrowUpIcon,
+  type AArrowUpIconHandle,
+} from "~/shared/ui/icons/a-arrow-up";
+import {
+  BookTextIcon,
+  type BookTextIconHandle,
+} from "~/shared/ui/icons/book-text";
 
 export const EditBarNewItem = () => {
   const { profile, updateProfile } = useProfile();
@@ -36,10 +44,12 @@ export const EditBarNewItem = () => {
     useRef<GalleryHorizontalEndIconHandle>(null);
   const scanTextIconRef = useRef<ScanTextIconHandle>(null);
   const linkIconRef = useRef<LinkIconHandle>(null);
+  const aArrowUpIconRef = useRef<AArrowUpIconHandle>(null);
+  const bookTextIconRef = useRef<BookTextIconHandle>(null);
 
   const handleAddItem = () => {
     const newItem: BentoItem = {
-      id: crypto.randomUUID(),
+      id: Math.random().toString(36).substring(2, 15),
       size: "2x2",
       order: profile.bento.length + 1,
       style: "plain",
@@ -69,16 +79,15 @@ export const EditBarNewItem = () => {
             galleryHorizontalEndIconRef.current?.startAnimation();
             scanTextIconRef.current?.startAnimation();
             linkIconRef.current?.startAnimation();
+            aArrowUpIconRef.current?.startAnimation();
+            bookTextIconRef.current?.startAnimation();
           });
         } else {
           plusIconRef.current?.stopAnimation();
         }
       }}
     >
-      <DropdownMenuTrigger
-        tabIndex={1}
-        className="size-12 pressable cursor-pointer rounded-full bg-default/50 backdrop-blur-md border border-foreground/8"
-      >
+      <DropdownMenuTrigger className="size-12 pressable cursor-pointer rounded-full bg-default/50 backdrop-blur-md border border-foreground/8">
         <Tooltip>
           <TooltipTrigger asChild>
             <div className="size-full flex items-center justify-center ">
@@ -99,11 +108,11 @@ export const EditBarNewItem = () => {
 
         <DropdownMenuItem
           className="text-foreground"
-          onMouseEnter={() =>
+          onPointerEnter={() =>
             galleryHorizontalEndIconRef.current?.startAnimation()
           }
           onClick={handleAddItem}
-          onMouseLeave={() =>
+          onPointerLeave={() =>
             galleryHorizontalEndIconRef.current?.stopAnimation()
           }
         >
@@ -116,8 +125,8 @@ export const EditBarNewItem = () => {
         </DropdownMenuItem>
         <DropdownMenuItem
           disabled
-          onMouseEnter={() => scanTextIconRef.current?.startAnimation()}
-          onMouseLeave={() => scanTextIconRef.current?.stopAnimation()}
+          onPointerEnter={() => scanTextIconRef.current?.startAnimation()}
+          onPointerLeave={() => scanTextIconRef.current?.stopAnimation()}
         >
           <ScanTextIcon
             ref={scanTextIconRef}
@@ -128,11 +137,36 @@ export const EditBarNewItem = () => {
         </DropdownMenuItem>
         <DropdownMenuItem
           disabled
-          onMouseEnter={() => linkIconRef.current?.startAnimation()}
-          onMouseLeave={() => linkIconRef.current?.stopAnimation()}
+          onPointerEnter={() => linkIconRef.current?.startAnimation()}
+          onPointerLeave={() => linkIconRef.current?.stopAnimation()}
         >
           <LinkIcon ref={linkIconRef} size={20} className="opacity-50" />
           Link
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          disabled
+          onPointerEnter={() => aArrowUpIconRef.current?.startAnimation()}
+          onPointerLeave={() => aArrowUpIconRef.current?.stopAnimation()}
+        >
+          <AArrowUpIcon
+            ref={aArrowUpIconRef}
+            size={20}
+            className="opacity-50"
+          />
+          Title
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          disabled
+          onPointerEnter={() => bookTextIconRef.current?.startAnimation()}
+          onPointerLeave={() => bookTextIconRef.current?.stopAnimation()}
+        >
+          <BookTextIcon
+            ref={bookTextIconRef}
+            size={20}
+            className="opacity-50"
+          />
+          Description
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
