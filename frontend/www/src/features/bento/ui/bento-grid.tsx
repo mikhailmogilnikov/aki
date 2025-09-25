@@ -3,21 +3,15 @@ import { BentoItemComponent, type BentoItemProps } from "./bento-item/index";
 import type { BentoSize } from "../model/bento.type";
 import { useBentoSize } from "../model/useBentoSize";
 import { sortBy } from "~/shared/lib/utils/sort-by";
-import { useBlendy } from "~/shared/lib/hooks/useBlendy";
+
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
-import { useEffect } from "react";
+
 import { CircleQuestionMark } from "lucide-react";
 
 export const BentoGrid = () => {
   const { sizerRef, size } = useBentoSize();
-  const { blendy } = useBlendy();
-  const { profile } = useProfile();
 
-  useEffect(() => {
-    if (blendy.current) {
-      blendy.current.update();
-    }
-  }, [size]);
+  const { profile } = useProfile();
 
   return (
     <div className="relative w-full">
@@ -46,7 +40,6 @@ export const BentoGrid = () => {
 
 const BentoGridE = ({ size }: { size: number }) => {
   const { profile, updateProfile } = useProfile();
-  const { blendy } = useBlendy();
 
   const items = sortBy(profile.bento, "order");
 
@@ -71,9 +64,6 @@ const BentoGridE = ({ size }: { size: number }) => {
       dragEnabled
       dragRelease={{
         duration: 300,
-      }}
-      onMount={() => {
-        blendy.current?.update();
       }}
       layoutOnResize={false}
       layoutDuration={300}

@@ -1,7 +1,6 @@
-import { Trash2 } from "lucide-react";
 import { useRef } from "react";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
-import { useBlendy } from "~/shared/lib/hooks/useBlendy";
+
 import { DeleteIcon, type DeleteIconHandle } from "~/shared/ui/icons/delete";
 
 interface BentoItemDeleteProps {
@@ -11,7 +10,7 @@ interface BentoItemDeleteProps {
 
 export const BentoItemDelete = ({ id, onDelete }: BentoItemDeleteProps) => {
   const { profile, updateProfile } = useProfile();
-  const { blendy } = useBlendy();
+
   const deleteIconRef = useRef<DeleteIconHandle>(null);
 
   const handleDelete = () => {
@@ -22,7 +21,6 @@ export const BentoItemDelete = ({ id, onDelete }: BentoItemDeleteProps) => {
         ...profile,
         bento: profile.bento.filter((item) => item.id !== id),
       });
-      blendy.current?.update();
     }, 300);
   };
 

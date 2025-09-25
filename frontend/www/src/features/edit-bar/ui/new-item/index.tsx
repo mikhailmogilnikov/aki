@@ -24,7 +24,7 @@ import { LinkIcon, type LinkIconHandle } from "~/shared/ui/icons/link";
 import { PlusIcon, type PlusIconHandle } from "~/shared/ui/icons/plus";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
 import type { BentoItem } from "~/features/bento/model/bento.type";
-import { useBlendy } from "~/shared/lib/hooks/useBlendy";
+
 import {
   AArrowUpIcon,
   type AArrowUpIconHandle,
@@ -36,7 +36,6 @@ import {
 
 export const EditBarNewItem = () => {
   const { profile, updateProfile } = useProfile();
-  const { blendy } = useBlendy();
 
   const plusIconRef = useRef<PlusIconHandle>(null);
 
@@ -62,7 +61,6 @@ export const EditBarNewItem = () => {
       bento: newBento,
     });
 
-    blendy.current?.update();
     window.scrollTo({
       top: document.body.scrollHeight,
       behavior: "smooth",
