@@ -16,4 +16,43 @@ export interface BentoItem {
   size: BentoSize;
   order: number;
   style: BentoStyle;
+  type: BentoItemType;
 }
+
+export enum BentoItemType {
+  GALLERY = "gallery",
+  TEXT = "text",
+  LINK = "link",
+  TITLE = "title",
+}
+
+export const NewBentoItemDefaults: Record<BentoItemType, BentoItem> = {
+  [BentoItemType.GALLERY]: {
+    id: Math.random().toString(36).substring(2, 15),
+    size: "2x2",
+    order: 0,
+    style: "plain",
+    type: BentoItemType.GALLERY,
+  },
+  [BentoItemType.TEXT]: {
+    id: Math.random().toString(36).substring(2, 15),
+    size: "2x2",
+    order: 0,
+    style: "plain",
+    type: BentoItemType.TEXT,
+  },
+  [BentoItemType.LINK]: {
+    id: Math.random().toString(36).substring(2, 15),
+    size: "2x2",
+    order: 0,
+    style: "plain",
+    type: BentoItemType.LINK,
+  },
+  [BentoItemType.TITLE]: {
+    id: Math.random().toString(36).substring(2, 15),
+    size: "4x1",
+    order: 0,
+    style: "transparent",
+    type: BentoItemType.TITLE,
+  },
+};

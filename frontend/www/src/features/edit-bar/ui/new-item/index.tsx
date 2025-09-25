@@ -23,16 +23,17 @@ import {
 import { LinkIcon, type LinkIconHandle } from "~/shared/ui/icons/link";
 import { PlusIcon, type PlusIconHandle } from "~/shared/ui/icons/plus";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
-import type { BentoItem } from "~/features/bento/model/bento.type";
+import {
+  BentoItemType,
+  NewBentoItemDefaults,
+  type BentoItem,
+} from "~/features/bento/model/bento.type";
 
 import {
   AArrowUpIcon,
   type AArrowUpIconHandle,
 } from "~/shared/ui/icons/a-arrow-up";
-import {
-  BookTextIcon,
-  type BookTextIconHandle,
-} from "~/shared/ui/icons/book-text";
+import { type BookTextIconHandle } from "~/shared/ui/icons/book-text";
 
 export const EditBarNewItem = () => {
   const { profile, updateProfile } = useProfile();
@@ -46,13 +47,8 @@ export const EditBarNewItem = () => {
   const aArrowUpIconRef = useRef<AArrowUpIconHandle>(null);
   const bookTextIconRef = useRef<BookTextIconHandle>(null);
 
-  const handleAddItem = () => {
-    const newItem: BentoItem = {
-      id: Math.random().toString(36).substring(2, 15),
-      size: "2x2",
-      order: profile.bento.length + 1,
-      style: "plain",
-    };
+  const handleAddItem = (type: BentoItemType) => {
+    const newItem: BentoItem = NewBentoItemDefaults[type];
 
     const newBento = [...profile.bento, newItem];
 
@@ -109,7 +105,7 @@ export const EditBarNewItem = () => {
           onPointerEnter={() =>
             galleryHorizontalEndIconRef.current?.startAnimation()
           }
-          onClick={handleAddItem}
+          onClick={() => handleAddItem(BentoItemType.GALLERY)}
           onPointerLeave={() =>
             galleryHorizontalEndIconRef.current?.stopAnimation()
           }
@@ -143,7 +139,7 @@ export const EditBarNewItem = () => {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          disabled
+          onClick={() => handleAddItem(BentoItemType.TITLE)}
           onPointerEnter={() => aArrowUpIconRef.current?.startAnimation()}
           onPointerLeave={() => aArrowUpIconRef.current?.stopAnimation()}
         >
@@ -153,18 +149,6 @@ export const EditBarNewItem = () => {
             className="opacity-50"
           />
           Title
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          disabled
-          onPointerEnter={() => bookTextIconRef.current?.startAnimation()}
-          onPointerLeave={() => bookTextIconRef.current?.stopAnimation()}
-        >
-          <BookTextIcon
-            ref={bookTextIconRef}
-            size={20}
-            className="opacity-50"
-          />
-          Description
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

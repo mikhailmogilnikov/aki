@@ -12,6 +12,8 @@ import { Move } from "lucide-react";
 import { GalleryBadge } from "./variants/gallery/gallery-badge";
 
 import { AnimatePresence, motion, type Transition } from "motion/react";
+import { useBentoItems } from "../../model/use-bento-items";
+import { useProfile } from "~/services/edit-profile/model/profile-provider";
 
 const springTransition: Transition = {
   type: "spring",
@@ -31,11 +33,15 @@ export const BentoItemComponent = ({
   onSizeChange,
   style,
 }: BentoItemProps) => {
+  const { profile } = useProfile();
+
   const [isFocused, setIsFocused] = useState(false);
   const [itemSize, setItemSize] = useState<BentoSize>(size);
   const [isRestrictedToClose, setIsRestrictedToClose] = useState(false);
 
   const isAnimatingRef = useRef(false);
+
+  const { renderBentoItem } = useBentoItems();
 
   useRefresh([itemSize]);
 
@@ -100,6 +106,11 @@ export const BentoItemComponent = ({
     closeOverlay();
   };
 
+  const bentoItem = useMemo(
+    () => profile.bento.find((item) => item.id === id),
+    [profile.bento, id]
+  );
+
   const responsiveStyle = useMemo(
     () =>
       getResponsiveStyle({
@@ -130,7 +141,7 @@ export const BentoItemComponent = ({
             className={clsx("size-full", BentoColors[style])}
             onClick={handleFocus}
           >
-            <img
+            {/* <img
               className="size-full object-cover"
               draggable={false}
               src={
@@ -138,7 +149,8 @@ export const BentoItemComponent = ({
               }
               alt="bento"
             />
-            <GalleryBadge currentIndex={1} total={3} />
+            <GalleryBadge currentIndex={1} total={3} /> */}
+            {renderBentoItem(bentoItem!, false)}
           </button>
           <div
             id={`bento-item-${id}-handle`}
@@ -171,34 +183,7 @@ export const BentoItemComponent = ({
                   onClick={(e) => e.stopPropagation()}
                   transition={springTransition}
                 >
-                  {/* <img
-                className="size-full object-cover"
-                draggable={false}
-                src={
-                  "https://i.scdn.co/image/ab67616d0000b27398d711627751989d1ae8b0fb"
-                }
-                alt="bento"
-              /> */}
-                  <BentoItemGallery
-                    onBlock={() => {
-                      console.log("block");
-                      setIsRestrictedToClose(true);
-                    }}
-                    onUnblock={() => {
-                      console.log("unblock");
-                      setIsRestrictedToClose(false);
-                    }}
-                  />
-                  {/* <div className="size-full p-4 flex items-center"> */}
-                  {/* <div
-                  contentEditable
-                  className="w-full min-h-6 max-h-full h-fit outline-none text-center overflow-y-auto"
-                /> */}
-                  {/* <textarea
-                  className="size-full outline-none text-left text-lg resize-none"
-                  placeholder="Enter your text"
-                /> */}
-                  {/* </div> */}
+                  {renderBentoItem(bentoItem!, true)}
                 </motion.div>
               )}
             </AnimatePresence>
