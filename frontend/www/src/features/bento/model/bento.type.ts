@@ -26,33 +26,42 @@ export enum BentoItemType {
   TITLE = "title",
 }
 
-export const NewBentoItemDefaults: Record<BentoItemType, BentoItem> = {
-  [BentoItemType.GALLERY]: {
-    id: Math.random().toString(36).substring(2, 15),
-    size: "2x2",
-    order: 0,
-    style: "plain",
-    type: BentoItemType.GALLERY,
-  },
-  [BentoItemType.TEXT]: {
-    id: Math.random().toString(36).substring(2, 15),
-    size: "2x2",
-    order: 0,
-    style: "plain",
-    type: BentoItemType.TEXT,
-  },
-  [BentoItemType.LINK]: {
-    id: Math.random().toString(36).substring(2, 15),
-    size: "2x2",
-    order: 0,
-    style: "plain",
-    type: BentoItemType.LINK,
-  },
-  [BentoItemType.TITLE]: {
-    id: Math.random().toString(36).substring(2, 15),
-    size: "4x1",
-    order: 0,
-    style: "transparent",
-    type: BentoItemType.TITLE,
-  },
+export const generateNewBentoItemDefaults = (
+  order: number,
+  type: BentoItemType
+) => {
+  const id = Math.random().toString(36).substring(2, 15);
+
+  const defaults: Record<BentoItemType, BentoItem> = {
+    [BentoItemType.GALLERY]: {
+      id,
+      size: "2x2",
+      order: order,
+      style: "plain",
+      type: BentoItemType.GALLERY,
+    },
+    [BentoItemType.TEXT]: {
+      id,
+      size: "2x2",
+      order: order,
+      style: "plain",
+      type: BentoItemType.TEXT,
+    },
+    [BentoItemType.LINK]: {
+      id,
+      size: "2x2",
+      order: order,
+      style: "plain",
+      type: BentoItemType.LINK,
+    },
+    [BentoItemType.TITLE]: {
+      id,
+      size: "4x1",
+      order: order,
+      style: "transparent",
+      type: BentoItemType.TITLE,
+    },
+  };
+
+  return defaults[type];
 };

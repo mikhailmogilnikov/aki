@@ -9,11 +9,18 @@ export const useBentoItems = () => {
     (item: BentoItem, isFullscreen: boolean) => {
       switch (item.type) {
         case BentoItemType.GALLERY:
-          return <BentoItemGallery onBlock={() => {}} onUnblock={() => {}} isFullscreen={isFullscreen} />;
+          return (
+            <BentoItemGallery
+              itemId={item.id}
+              onBlock={() => {}}
+              onUnblock={() => {}}
+              isFullscreen={isFullscreen}
+            />
+          );
         case BentoItemType.TEXT:
           return <BentoItemText isFullscreen={isFullscreen} />;
         case BentoItemType.TITLE:
-          return <BentoItemTitle isFullscreen={isFullscreen} />;
+          return <BentoItemTitle itemId={item.id} isFullscreen={isFullscreen} />;
         default:
           return null;
       }

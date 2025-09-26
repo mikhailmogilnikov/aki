@@ -4,15 +4,21 @@ import useFancybox from "~/shared/lib/hooks/useFancybox";
 import { GalleryBadge } from "./gallery-badge";
 
 interface BentoItemGalleryProps {
+  itemId: string;
   onBlock: () => void;
   onUnblock: () => void;
+  activeSlide: number;
+  setActiveSlide: (slide: number) => void;
 }
 
 export const BentoItemGalleryFull = ({
+  itemId,
   onBlock,
   onUnblock,
+  activeSlide,
 }: BentoItemGalleryProps) => {
-  const [currentIndex, setCurrentIndex] = useState(1);
+  console.log("activeSlide", activeSlide);
+  const [currentIndex, setCurrentIndex] = useState(activeSlide + 1);
 
   const pointerDownRef = useRef(false);
 
@@ -28,7 +34,9 @@ export const BentoItemGalleryFull = ({
     },
   });
 
-  const [carouselRef, carouselInstance] = useCarousel({});
+  const [carouselRef, carouselInstance] = useCarousel({
+    initialSlide: activeSlide,
+  });
 
   // @ts-ignore
   useEffect(() => {
@@ -39,8 +47,6 @@ export const BentoItemGalleryFull = ({
       };
 
       carouselInstance.on("change", handleChange);
-
-      console.log(carouselInstance.getSlides());
 
       return () => {
         carouselInstance.off("change", handleChange);
@@ -69,6 +75,7 @@ export const BentoItemGalleryFull = ({
         }
       }}
       className="size-full relative"
+      id={`bento-item-${itemId}-gallery-full`}
     >
       <GalleryBadge
         currentIndex={currentIndex}

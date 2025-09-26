@@ -25,7 +25,7 @@ import { PlusIcon, type PlusIconHandle } from "~/shared/ui/icons/plus";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
 import {
   BentoItemType,
-  NewBentoItemDefaults,
+  generateNewBentoItemDefaults,
   type BentoItem,
 } from "~/features/bento/model/bento.type";
 
@@ -48,7 +48,10 @@ export const EditBarNewItem = () => {
   const bookTextIconRef = useRef<BookTextIconHandle>(null);
 
   const handleAddItem = (type: BentoItemType) => {
-    const newItem: BentoItem = NewBentoItemDefaults[type];
+    const newItem: BentoItem = generateNewBentoItemDefaults(
+      profile.bento.length + 1,
+      type
+    );
 
     const newBento = [...profile.bento, newItem];
 

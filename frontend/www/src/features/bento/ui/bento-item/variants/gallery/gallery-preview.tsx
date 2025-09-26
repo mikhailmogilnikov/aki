@@ -2,10 +2,18 @@ import { useEffect, useState } from "react";
 import useCarousel from "~/shared/lib/hooks/useCarousel";
 import { GalleryBadge } from "./gallery-badge";
 
-interface BentoItemGalleryProps {}
+interface BentoItemGalleryProps {
+  itemId: string;
+  activeSlide: number;
+  setActiveSlide: (slide: number) => void;
+}
 
-export const BentoItemGalleryPreview = ({}: BentoItemGalleryProps) => {
-  const [currentIndex, setCurrentIndex] = useState(1);
+export const BentoItemGalleryPreview = ({
+  itemId,
+  activeSlide,
+  setActiveSlide,
+}: BentoItemGalleryProps) => {
+  const [currentIndex, setCurrentIndex] = useState(activeSlide + 1);
 
   const [carouselRef, carouselInstance] = useCarousel({});
 
@@ -15,11 +23,10 @@ export const BentoItemGalleryPreview = ({}: BentoItemGalleryProps) => {
       const handleChange = () => {
         const index = carouselInstance.getPageIndex() + 1;
         setCurrentIndex(index);
+        setActiveSlide(carouselInstance.getPageIndex());
       };
 
       carouselInstance.on("change", handleChange);
-
-      console.log(carouselInstance.getSlides());
 
       return () => {
         carouselInstance.off("change", handleChange);
@@ -33,6 +40,7 @@ export const BentoItemGalleryPreview = ({}: BentoItemGalleryProps) => {
         carouselRef(ref);
       }}
       className="size-full relative"
+      id={`bento-item-${itemId}-gallery-preview`}
     >
       <GalleryBadge
         currentIndex={currentIndex}
