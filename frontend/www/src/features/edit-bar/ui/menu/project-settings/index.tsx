@@ -18,7 +18,13 @@ export function ProjectSettingsModal({
     <AdaptiveModal open={open} onOpenChange={onOpenChange}>
       <AdaptiveModalHeader>Project settings</AdaptiveModalHeader>
       <AdaptiveModalContent>
-        <div className="w-1 h-300 bg-default" />
+        <div className="flex flex-col gap-6">
+          {Array.from({ length: 20 }).map((_, index) => (
+            <p key={index} className="text-2xl font-bold">
+              test
+            </p>
+          ))}
+        </div>
       </AdaptiveModalContent>
       <AdaptiveModalFooter
         modalProps={{ cancelButton: true }}

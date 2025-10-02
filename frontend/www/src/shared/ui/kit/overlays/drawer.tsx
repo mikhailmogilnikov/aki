@@ -106,7 +106,7 @@ export function DrawerContent(props: DrawerContentProps) {
       }}
       {...rest}
     >
-      <div className="flex flex-col gap-4">{children}</div>
+      {children}
     </ScrollArea>
   );
 }

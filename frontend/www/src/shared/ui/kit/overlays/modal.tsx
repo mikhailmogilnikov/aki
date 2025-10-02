@@ -131,7 +131,7 @@ export function ModalContent(props: ModalContentProps) {
 
   return (
     <ScrollArea
-      className="shrink-1 mb-4 flex h-full flex-col gap-6 overflow-y-auto px-6"
+      className="shrink-1 mb-6 flex h-full flex-col gap-6 overflow-y-auto px-6"
       classNames={{
         scrollbar: "px-1",
         verticalScrollbar: "w-3.5",
@@ -139,7 +139,7 @@ export function ModalContent(props: ModalContentProps) {
       }}
       {...rest}
     >
-      <div className="flex flex-col gap-4 px-1">{children}</div>
+      {children}
     </ScrollArea>
   );
 }
@@ -155,7 +155,7 @@ export function ModalFooter(props: ModalFooterProps) {
     <div className="flex shrink-0 items-center gap-6 px-6 pb-6" {...rest}>
       {cancelButton && (
         <Dialog.Close asChild>
-          <button className="bg-default w-full cursor-pointer rounded px-4 py-2 font-medium shadow">
+          <button className="bg-default w-full cursor-pointer rounded px-4 py-3 font-medium shadow">
             Cancel
           </button>
         </Dialog.Close>
