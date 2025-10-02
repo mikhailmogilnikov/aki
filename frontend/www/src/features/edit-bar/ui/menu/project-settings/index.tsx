@@ -1,9 +1,11 @@
 import {
   AdaptiveModal,
   AdaptiveModalContent,
-  AdaptiveModalFooter,
   AdaptiveModalHeader,
 } from "~/shared/ui/kit/overlays/adaptive-modal";
+import { SectionTitle } from "~/shared/ui/kit/primitives/section-title";
+import { ThemeSelector } from "./theme-selector";
+import { FontSelector } from "./font-selector";
 
 interface ProjectSettingsProps {
   open: boolean;
@@ -18,18 +20,19 @@ export function ProjectSettingsModal({
     <AdaptiveModal open={open} onOpenChange={onOpenChange}>
       <AdaptiveModalHeader>Project settings</AdaptiveModalHeader>
       <AdaptiveModalContent>
-        <div className="flex flex-col gap-6">
-          {Array.from({ length: 20 }).map((_, index) => (
-            <p key={index} className="text-2xl font-bold">
-              test
-            </p>
-          ))}
+        <div className="flex flex-col gap-6 pb-1">
+          <SectionTitle title="General">
+            <div className="flex justify-between items-center pr-1">
+              <p className="text-base font-medium">Theme</p>
+              <ThemeSelector />
+            </div>
+            <div className="flex justify-between items-center pr-1">
+              <p className="text-base font-medium">Font</p>
+              <FontSelector />
+            </div>
+          </SectionTitle>
         </div>
       </AdaptiveModalContent>
-      <AdaptiveModalFooter
-        modalProps={{ cancelButton: true }}
-        drawerProps={{ cancelButton: true }}
-      ></AdaptiveModalFooter>
     </AdaptiveModal>
   );
 }

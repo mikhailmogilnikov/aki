@@ -35,9 +35,9 @@ export const Drawer = (props: DrawerProps) => {
       {...rest}
     >
       <VaulDrawer.Portal>
-        <VaulDrawer.Overlay className="z-8900 fixed inset-0 bg-black/60" />
+        <VaulDrawer.Overlay className="z-20 fixed inset-0 bg-black/60" />
 
-        <VaulDrawer.Content className="bg-background z-9000 fixed bottom-0 left-0 right-0 h-fit max-h-[95svh] rounded-t outline-none focus:outline-none border-t border-outline">
+        <VaulDrawer.Content className="bg-background z-21 fixed bottom-0 left-0 right-0 h-fit max-h-[95svh] rounded-t outline-none focus:outline-none border-t border-outline">
           <div className="z-10 overflow-hidden">
             {!hideThumb && (
               <div
@@ -76,7 +76,7 @@ export function DrawerHeader(props: DrawerHeaderProps) {
 
   return (
     <div
-      className={cn("flex shrink-0 flex-col gap-6 p-6", className)}
+      className={cn("flex shrink-0 flex-col gap-6 p-6 pb-0", className)}
       {...wrapperProps}
     >
       <VaulDrawer.Title
@@ -98,7 +98,7 @@ export function DrawerContent(props: DrawerContentProps) {
 
   return (
     <ScrollArea
-      className="shrink-1 mb-4 flex h-full flex-col gap-6 overflow-y-auto px-6"
+      className="shrink-1 flex h-full flex-col gap-6 overflow-y-auto px-6"
       classNames={{
         scrollbar: "px-1",
         verticalScrollbar: "w-3.5",
@@ -106,6 +106,7 @@ export function DrawerContent(props: DrawerContentProps) {
       }}
       {...rest}
     >
+      <div className="py-2"></div>
       {children}
     </ScrollArea>
   );

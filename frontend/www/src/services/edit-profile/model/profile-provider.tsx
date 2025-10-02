@@ -3,30 +3,48 @@ import type {
   BentoItem,
   BentoItemType,
 } from "~/features/bento/model/bento.type";
+
 import { LocalStorageService } from "~/shared/lib/services/storage";
 
-type Font =
-  | "inter"
-  | "vollkorn"
-  | "open-runde"
-  | "montserrat"
-  | "oswald"
-  | "caveat"
-  | "jetbrains-mono";
-
-export interface ThemeColors {
-  background: string;
-  foreground: string;
-  default: string;
-  outline: string;
+export enum Font {
+  INTER = "inter",
+  VOLKORN = "vollkorn",
+  OPEN_RUNDE = "open-runde",
+  MONTSERRAT = "montserrat",
+  OSWALD = "oswald",
+  CAVEAT = "caveat",
+  JETBRAINS_MONO = "jetbrains-mono",
 }
+
+export enum Themes {
+  LIGHT = "light",
+  DARK = "dark",
+
+  GREEN = "green",
+  PINK = "pink",
+  BLUE = "blue",
+  PURPLE = "purple",
+  GOLDEN = "golden",
+
+  DARK_BLUE = "dark-blue",
+}
+export const ThemesNames = {
+  [Themes.LIGHT]: "Light",
+  [Themes.DARK]: "Dark",
+  [Themes.GREEN]: "Green",
+  [Themes.PINK]: "Pink",
+  [Themes.BLUE]: "Blue",
+  [Themes.PURPLE]: "Purple",
+  [Themes.GOLDEN]: "Golden",
+  [Themes.DARK_BLUE]: "Dark Blue",
+};
 
 export interface Theme {
   font: Font;
+  theme: Themes;
   show_avatar_blur: boolean;
   border_radius: number;
   border_width: number;
-  colors: ThemeColors;
 }
 
 export interface Profile {
@@ -43,16 +61,11 @@ const DEFAULT_PROFILE: Profile = {
   description: "Software & Design Engineer",
   bento: [],
   theme: {
-    font: "open-runde",
+    font: Font.OPEN_RUNDE,
+    theme: Themes.DARK,
     show_avatar_blur: true,
     border_radius: 24,
     border_width: 1,
-    colors: {
-      background: "#000",
-      foreground: "#fff",
-      default: "#000",
-      outline: "#000",
-    },
   },
 };
 

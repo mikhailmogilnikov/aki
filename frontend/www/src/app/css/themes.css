@@ -1,4 +1,12 @@
 @layer base {
+  .light {
+    --color-background: hsl(0, 0%, 95%);
+    --color-foreground: hsl(0, 0%, 0%);
+    --color-default: hsl(0, 0%, 100%);
+    --color-outline: hsl(0, 0%, 85%);
+    --color-shadow: hsla(0, 0%, 0%, 0.058);
+  }
+
   .blue {
     --color-background: hsl(205.43, 100%, 93.85%);
     --color-foreground: hsl(203, 56%, 20%);

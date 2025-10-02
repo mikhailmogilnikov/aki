@@ -15,7 +15,7 @@ const modalTV = tv({
     content:
       "bg-background border-outline border fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full rounded z-50 data-[state=closed]:motion-scale-out-98 data-[state=closed]:motion-opacity-out data-[state=open]:motion-scale-in-98 motion-duration-200 flex flex-col data-[state=open]:motion-opacity-in min-h-16 h-auto",
     close:
-      "bg-default absolute right-4 top-4 z-30 flex size-8 items-center justify-center rounded-full shadow cursor-pointer",
+      "bg-default absolute right-6 top-6 z-30 flex size-8 items-center justify-center rounded-full shadow cursor-pointer",
     closeIcon: "size-5 opacity-60",
   },
   variants: {
