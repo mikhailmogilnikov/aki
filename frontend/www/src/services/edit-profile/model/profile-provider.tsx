@@ -1,5 +1,8 @@
 import { createContext, useContext, useState } from "react";
-import type { BentoItem } from "~/features/bento/model/bento.type";
+import type {
+  BentoItem,
+  BentoItemType,
+} from "~/features/bento/model/bento.type";
 import { LocalStorageService } from "~/shared/lib/services/storage";
 
 type Font =
@@ -30,7 +33,7 @@ export interface Profile {
   id: string;
   name: string;
   description: string;
-  bento: BentoItem[];
+  bento: BentoItem<BentoItemType>[];
   theme: Theme;
 }
 

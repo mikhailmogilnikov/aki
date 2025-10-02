@@ -16,7 +16,7 @@ export const BentoItemSize = ({
   const getIcon = (size: BentoSize) => {
     switch (size) {
       case "4x1":
-        return <Square className="size-6" />;
+        return <RectangleHorizontal className="size-4" />;
       case "2x1":
         return <Square className="size-6" />;
       case "2x2":

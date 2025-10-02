@@ -1,3 +1,5 @@
+import type { BentoItemProperties } from "./bento-props.type";
+
 export const enum BentoItemSize {
   TWO_BY_TWO = "2x2",
   TWO_BY_ONE = "2x1",
@@ -11,12 +13,13 @@ export type BentoSize = `${BentoItemSize}`;
 
 export type BentoStyle = "plain" | "shadow" | "outline" | "transparent";
 
-export interface BentoItem {
+export interface BentoItem<T extends BentoItemType> {
   id: string;
   size: BentoSize;
   order: number;
   style: BentoStyle;
   type: BentoItemType;
+  properties: BentoItemProperties<T>;
 }
 
 export enum BentoItemType {
@@ -32,13 +35,16 @@ export const generateNewBentoItemDefaults = (
 ) => {
   const id = Math.random().toString(36).substring(2, 15);
 
-  const defaults: Record<BentoItemType, BentoItem> = {
+  const defaults: Record<BentoItemType, BentoItem<BentoItemType>> = {
     [BentoItemType.GALLERY]: {
       id,
       size: "2x2",
       order: order,
       style: "plain",
       type: BentoItemType.GALLERY,
+      properties: {
+        media: [],
+      },
     },
     [BentoItemType.TEXT]: {
       id,
@@ -46,6 +52,9 @@ export const generateNewBentoItemDefaults = (
       order: order,
       style: "plain",
       type: BentoItemType.TEXT,
+      properties: {
+        content: "",
+      },
     },
     [BentoItemType.LINK]: {
       id,
@@ -53,6 +62,9 @@ export const generateNewBentoItemDefaults = (
       order: order,
       style: "plain",
       type: BentoItemType.LINK,
+      properties: {
+        url: null,
+      },
     },
     [BentoItemType.TITLE]: {
       id,
@@ -60,6 +72,9 @@ export const generateNewBentoItemDefaults = (
       order: order,
       style: "transparent",
       type: BentoItemType.TITLE,
+      properties: {
+        content: "",
+      },
     },
   };
 

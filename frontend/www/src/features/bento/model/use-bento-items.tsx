@@ -6,7 +6,7 @@ import { BentoItemTitle } from "../ui/bento-item/variants/title";
 
 export const useBentoItems = () => {
   const renderBentoItem = useCallback(
-    (item: BentoItem, isFullscreen: boolean) => {
+    (item: BentoItem<BentoItemType>, isFullscreen: boolean) => {
       switch (item.type) {
         case BentoItemType.GALLERY:
           return (

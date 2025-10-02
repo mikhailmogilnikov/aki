@@ -141,15 +141,6 @@ export const BentoItemComponent = ({
             className={clsx("size-full", BentoColors[style])}
             onClick={handleFocus}
           >
-            {/* <img
-              className="size-full object-cover"
-              draggable={false}
-              src={
-                "https://i.scdn.co/image/ab67616d0000b27398d711627751989d1ae8b0fb"
-              }
-              alt="bento"
-            />
-            <GalleryBadge currentIndex={1} total={3} /> */}
             {renderBentoItem(bentoItem!, false)}
           </button>
           <div
