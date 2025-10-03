@@ -1,5 +1,9 @@
 import { useMemo, useRef, useState, type CSSProperties } from "react";
-import { type BentoItem, type BentoSize } from "../../model/bento.type";
+import {
+  BentoItemType,
+  type BentoItem,
+  type BentoSize,
+} from "../../model/bento.type";
 import { getResponsiveStyle, useRefresh } from "muuri-react";
 import { BentoSizes, BentoTransitionSizes } from "../../view-model/bento-sizes";
 import { clsx } from "clsx";
@@ -7,9 +11,8 @@ import { clsx } from "clsx";
 import { BentoColors } from "../../view-model/bento-colors";
 import { PortalOverlay } from "~/shared/ui/kit/overlays/portal-overlay";
 import { BentoItemOptions } from "./options";
-import { BentoItemGallery } from "./variants/gallery";
+
 import { Move } from "lucide-react";
-import { GalleryBadge } from "./variants/gallery/gallery-badge";
 
 import { AnimatePresence, motion, type Transition } from "motion/react";
 import { useBentoItems } from "../../model/use-bento-items";
@@ -21,7 +24,7 @@ const springTransition: Transition = {
   damping: 35,
 };
 
-export interface BentoItemProps extends BentoItem {
+export interface BentoItemProps extends BentoItem<BentoItemType> {
   gridSize: number;
   onSizeChange?: (id: string, size: BentoSize) => void;
 }
