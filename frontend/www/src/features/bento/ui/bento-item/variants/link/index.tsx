@@ -7,20 +7,50 @@ import type {
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
 
 const buildFaviconUrl = (url: URL) => {
-  return `https://www.google.com/s2/favicons?domain=${url.hostname}&sz=128`;
+  // Google Favicon API - высокое качество, автоматически находит лучшую иконку
+  return `https://www.google.com/s2/favicons?domain=${url.hostname}&sz=256`;
+};
+
+const buildDuckDuckGoFaviconUrl = (url: URL) => {
+  // DuckDuckGo Icons API - надежный fallback
+  return `https://icons.duckduckgo.com/ip3/${url.hostname}.ico`;
 };
 
 const buildOgImageUrl = (url: URL) => {
-  // Кодируем URL в Base64 для Google Cloud Storage API
-  const base64Url = btoa(url.toString());
-
-  // Формируем URL для creatorspace-public API (с автоматическим fallback на Microlink)
-  return `https://storage.googleapis.com/creatorspace-public/sites/ogimages/${base64Url}.jpeg`;
-};
-
-const buildMicrolinkOgUrl = (url: URL) => {
+  // Microlink API - получает реальные OG изображения сайтов
   return `https://api.microlink.io/?url=${encodeURIComponent(url.toString())}&screenshot=true&meta=false&embed=screenshot.url`;
 };
+
+const buildScreenshotUrl = (url: URL) => {
+  // Screenshot API как fallback
+  return `https://api.screenshotone.com/take?url=${encodeURIComponent(url.toString())}&viewport_width=1200&viewport_height=630&format=jpeg&access_key=demo`;
+};
+
+// Компонент для Favicon с автоматическим fallback
+function FaviconImage({
+  url,
+  alt,
+  className,
+}: {
+  url: URL;
+  alt: string;
+  className?: string;
+}) {
+  const [imgSrc, setImgSrc] = useState(buildFaviconUrl(url));
+  const [useFallback, setUseFallback] = useState(false);
+
+  const handleError = () => {
+    if (!useFallback) {
+      // Переключаемся на DuckDuckGo Icons API при ошибке
+      setUseFallback(true);
+      setImgSrc(buildDuckDuckGoFaviconUrl(url));
+    }
+  };
+
+  return (
+    <img src={imgSrc} alt={alt} className={className} onError={handleError} />
+  );
+}
 
 // Компонент для OG изображения с автоматическим fallback
 function OGImage({
@@ -37,9 +67,9 @@ function OGImage({
 
   const handleError = () => {
     if (!useFallback) {
-      // Переключаемся на Microlink API при ошибке
+      // Переключаемся на Screenshot API при ошибке
       setUseFallback(true);
-      setImgSrc(buildMicrolinkOgUrl(url));
+      setImgSrc(buildScreenshotUrl(url));
     }
   };
 
@@ -66,8 +96,8 @@ export function BentoItemLink({ itemId }: { itemId: string }) {
   const url = new URL(bentoItem.properties.url);
 
   const faviconImg = (
-    <img
-      src={buildFaviconUrl(url)}
+    <FaviconImage
+      url={url}
       className="size-full"
       alt={bentoItem.properties.title}
     />
@@ -107,7 +137,7 @@ export function BentoItemLink({ itemId }: { itemId: string }) {
       </div>
 
       {(bentoItem.size === "4x4" || bentoItem.size === "2x4") && (
-        <div className="overflow-hidden h-full rounded-xl border border-outline">
+        <div className="overflow-hidden aspect-[1.91/1] rounded-xl border border-outline">
           {ogImage}
         </div>
       )}

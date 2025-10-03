@@ -59,7 +59,7 @@ export const BentoItemOptions = ({
       onClick={(e) => e.stopPropagation()}
       id={`bento-item-${id}-panel`}
       data-state="open"
-      className="w-60 data-[state=closed]:motion-opacity-out-0 data-[state=open]:motion-opacity-in-0 data-[state=open]:motion-scale-in-0 motion-duration-300 data-[state=open]:motion-delay-200 origin-top-left squircle p-4 flex flex-col gap-4"
+      className="w-60 data-[state=closed]:motion-opacity-out-0 data-[state=open]:motion-opacity-in-0 data-[state=open]:motion-scale-in-0 motion-duration-300 data-[state=open]:motion-delay-200 origin-top-left bg-background rounded border border-outline p-4 flex flex-col gap-4"
     >
       {renderOptions()}
     </div>

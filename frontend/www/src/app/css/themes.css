@@ -12,7 +12,7 @@
     --color-foreground: hsl(203, 56%, 20%);
     --color-default: hsl(206, 50%, 77%);
     --color-outline: hsl(205, 61%, 81%);
-    --color-shadow: hsla(206, 28%, 43%, 0.1);
+    --color-shadow: hsla(0, 0%, 57%, 0.1);
   }
 
   .green {
@@ -20,7 +20,7 @@
     --color-foreground: hsl(124, 57%, 20%);
     --color-default: hsl(127, 50%, 77%);
     --color-outline: hsl(126, 61%, 81%);
-    --color-shadow: hsla(126, 54%, 63%, 0.2);
+    --color-shadow: hsla(0, 0%, 70%, 0.2);
   }
 
   .purple {
@@ -28,7 +28,7 @@
     --color-foreground: hsl(270, 56%, 20%);
     --color-default: hsl(268, 57%, 81%);
     --color-outline: hsl(270, 61%, 81%);
-    --color-shadow: hsla(270, 59%, 51%, 0.1);
+    --color-shadow: hsla(0, 0%, 50%, 0.1);
   }
 
   .pink {
@@ -36,7 +36,7 @@
     --color-foreground: hsl(320, 56%, 20%);
     --color-default: hsl(320, 57%, 81%);
     --color-outline: hsl(320, 61%, 81%);
-    --color-shadow: hsla(320, 37%, 44%, 0.1);
+    --color-shadow: hsla(0, 0%, 52%, 0.1);
   }
 
   .golden {
@@ -44,7 +44,7 @@
     --color-foreground: hsl(30, 56%, 20%);
     --color-default: hsl(30, 57%, 81%);
     --color-outline: hsl(30, 61%, 81%);
-    --color-shadow: hsla(30, 39%, 53%, 0.1);
+    --color-shadow: hsla(0, 0%, 49%, 0.1);
   }
 
   .dark {
@@ -60,6 +60,6 @@
     --color-foreground: hsl(205, 53%, 83%);
     --color-default: hsl(204, 79%, 13%);
     --color-outline: hsl(206, 63%, 23%);
-    --color-shadow: hsla(206, 63%, 23%, 0.1);
+    --color-shadow: hsla(0, 0%, 0%, 0.1);
   }
 }
