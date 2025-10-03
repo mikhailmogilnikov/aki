@@ -46,7 +46,7 @@ export const Drawer = (props: DrawerProps) => {
               >
                 <div
                   aria-hidden
-                  className="bg-default mx-auto mt-4 h-1.5 w-10 flex-shrink-0 rounded-full"
+                  className="bg-foreground/20 mx-auto mt-4 h-1.5 w-10 flex-shrink-0 rounded-full"
                   id="drawer-thumb"
                 />
               </div>

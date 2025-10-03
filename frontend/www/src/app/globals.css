@@ -36,6 +36,11 @@
   --animate-ping: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+.border {
+  border-style: var(--tw-border-style);
+  border-width: var(--border-width);
+}
+
 @layer components {
   .pressable {
     @apply active:scale-98 transition-transform;

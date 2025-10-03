@@ -48,7 +48,7 @@ export function ThemeSelector() {
             <div
               className={cn(
                 theme,
-                "size-6 rounded-full bg-gradient-to-bl from-background to-default"
+                "size-6 rounded-full bg-gradient-to-bl from-background to-default border border-outline"
               )}
             ></div>
             <p className="text-base font-medium">{ThemesNames[theme]}</p>

@@ -3,9 +3,10 @@ import {
   AdaptiveModalContent,
   AdaptiveModalHeader,
 } from "~/shared/ui/kit/overlays/adaptive-modal";
-import { SectionTitle } from "~/shared/ui/kit/primitives/section-title";
 import { ThemeSelector } from "./theme-selector";
 import { FontSelector } from "./font-selector";
+import { RoundSlider } from "./round-slider";
+import { BorderSlider } from "./border-slider";
 
 interface ProjectSettingsProps {
   open: boolean;
@@ -21,16 +22,16 @@ export function ProjectSettingsModal({
       <AdaptiveModalHeader>Project settings</AdaptiveModalHeader>
       <AdaptiveModalContent>
         <div className="flex flex-col gap-6 pb-1">
-          <SectionTitle title="General">
-            <div className="flex justify-between items-center pr-1">
-              <p className="text-base font-medium">Theme</p>
-              <ThemeSelector />
-            </div>
-            <div className="flex justify-between items-center pr-1">
-              <p className="text-base font-medium">Font</p>
-              <FontSelector />
-            </div>
-          </SectionTitle>
+          <div className="flex justify-between items-center pr-1">
+            <p className="text-base font-medium">Theme</p>
+            <ThemeSelector />
+          </div>
+          <div className="flex justify-between items-center pr-1">
+            <p className="text-base font-medium">Font</p>
+            <FontSelector />
+          </div>
+          <RoundSlider />
+          <BorderSlider />
         </div>
       </AdaptiveModalContent>
     </AdaptiveModal>

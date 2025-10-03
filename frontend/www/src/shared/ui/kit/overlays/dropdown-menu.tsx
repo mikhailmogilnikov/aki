@@ -48,7 +48,7 @@ function DropdownMenuContent({
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
         className={cn(
-          "bg-default rounded-2xl border border-outline text-foreground  motion-duration-200 motion-ease-in-out-quad data-[state=closed]:motion-opacity-out-0 data-[state=open]:motion-opacity-in-0 data-[state=closed]:motion-scale-out-95 data-[state=open]:motion-scale-in-90 data-[side=bottom]:motion-translate-y-in-[1rem] data-[side=left]:motion-translate-x-in-[1rem] data-[side=right]:motion-translate-x-in-[1rem] data-[side=top]:motion-translate-y-in-[1rem] z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[10rem] origin-(--radix-dropdown-menu-content-transform-origin) flex flex-col gap-1 overflow-x-hidden overflow-y-auto p-2 shadow-shadow",
+          "bg-background rounded-2xl border border-outline text-foreground  motion-duration-200 motion-ease-in-out-quad data-[state=closed]:motion-opacity-out-0 data-[state=open]:motion-opacity-in-0 data-[state=closed]:motion-scale-out-95 data-[state=open]:motion-scale-in-90 data-[side=bottom]:motion-translate-y-in-[1rem] data-[side=left]:motion-translate-x-in-[1rem] data-[side=right]:motion-translate-x-in-[1rem] data-[side=top]:motion-translate-y-in-[1rem] z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[10rem] origin-(--radix-dropdown-menu-content-transform-origin) flex flex-col gap-1 overflow-x-hidden overflow-y-auto p-2 shadow-shadow",
           className
         )}
         {...props}
