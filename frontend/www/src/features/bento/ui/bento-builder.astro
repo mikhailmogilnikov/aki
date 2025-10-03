@@ -1,9 +1,9 @@
 ---
 import { sortBy } from "~/shared/lib/utils/sort-by";
-import type { BentoItem, BentoSize } from "../model/bento.type";
+import type { BentoItem, BentoItemType, BentoSize } from "../model/bento.type";
 
 type Props = {
-  items: BentoItem[];
+  items: BentoItem<BentoItemType>[];
 };
 
 const { items } = Astro.props;

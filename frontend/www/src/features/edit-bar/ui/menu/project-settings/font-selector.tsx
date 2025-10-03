@@ -36,7 +36,7 @@ export function FontSelector() {
           {currentFont}
         </p>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent isInsideDialog>
         <DropdownMenuLabel>Font</DropdownMenuLabel>
         {Object.values(Font).map((font) => (
           <DropdownMenuItem

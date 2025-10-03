@@ -46,8 +46,8 @@ const modalTV = tv({
 export type ModalVariants = VariantProps<typeof modalTV>;
 
 export interface ModalProps extends Dialog.DialogProps, ModalVariants {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   /**
    * ClassNames for modal
    */

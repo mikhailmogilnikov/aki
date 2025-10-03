@@ -8,12 +8,13 @@ import { LocalStorageService } from "~/shared/lib/services/storage";
 
 export enum Font {
   INTER = "inter",
-  VOLKORN = "vollkorn",
   OPEN_RUNDE = "open-runde",
+  GILROY = "gilroy",
+  VOLKORN = "vollkorn",
+  JETBRAINS_MONO = "jetbrains-mono",
   MONTSERRAT = "montserrat",
   OSWALD = "oswald",
   CAVEAT = "caveat",
-  JETBRAINS_MONO = "jetbrains-mono",
 }
 
 export enum Themes {

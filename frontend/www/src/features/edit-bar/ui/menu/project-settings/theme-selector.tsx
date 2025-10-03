@@ -37,7 +37,7 @@ export function ThemeSelector() {
 
         <p className="text-base font-medium">{ThemesNames[currentTheme]}</p>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent isInsideDialog>
         <DropdownMenuLabel>Theme</DropdownMenuLabel>
         {Object.values(Themes).map((theme) => (
           <DropdownMenuItem

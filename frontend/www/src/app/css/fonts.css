@@ -1,6 +1,7 @@
-@import "../../../public/fonts/open-runde/open-runde.css";
-
 @layer components {
+  .inter {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  }
   .open-runde {
     font-family: "Open Runde", "Inter", ui-sans-serif, system-ui, sans-serif;
     font-weight: 400;
@@ -35,5 +36,8 @@
   }
   .vollkorn {
     font-family: "Vollkorn", "Inter", ui-sans-serif, system-ui, sans-serif;
+  }
+  .gilroy {
+    font-family: "Gilroy", "Inter", ui-sans-serif, system-ui, sans-serif;
   }
 }

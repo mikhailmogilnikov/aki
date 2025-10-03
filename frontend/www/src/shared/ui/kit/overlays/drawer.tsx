@@ -52,7 +52,7 @@ export const Drawer = (props: DrawerProps) => {
               </div>
             )}
             {!hideClose && (
-              <VaulDrawer.Close className="bg-default absolute right-4 top-4 z-10 rounded-full p-1">
+              <VaulDrawer.Close className="bg-default absolute right-4 top-4 rounded-full p-1">
                 <X className="size-5 opacity-30" />
               </VaulDrawer.Close>
             )}
