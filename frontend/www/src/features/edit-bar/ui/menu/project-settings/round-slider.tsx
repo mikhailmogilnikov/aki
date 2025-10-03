@@ -27,6 +27,7 @@ export function RoundSlider() {
         step={1}
         value={[currentRound]}
         onValueChange={handleRoundChange}
+        className="mb-1"
       />
     </div>
   );

@@ -21,7 +21,7 @@ export function ProjectSettingsModal({
     <AdaptiveModal open={open} onOpenChange={onOpenChange}>
       <AdaptiveModalHeader>Project settings</AdaptiveModalHeader>
       <AdaptiveModalContent>
-        <div className="flex flex-col gap-6 pb-1">
+        <div className="flex flex-col gap-6 py-1">
           <div className="flex justify-between items-center pr-1">
             <p className="text-base font-medium">Theme</p>
             <ThemeSelector />

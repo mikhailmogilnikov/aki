@@ -25,6 +25,7 @@ export function BorderSlider() {
         step={1}
         value={[currentBorder]}
         onValueChange={handleRoundChange}
+        className="mb-1"
       />
     </div>
   );

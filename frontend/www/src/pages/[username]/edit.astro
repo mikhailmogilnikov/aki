@@ -8,10 +8,7 @@ export const prerender = false;
 const { username } = Astro.params;
 ---
 
-<RootLayout
-  title={`Edit ${username}`}
-  className="overflow-x-hidden open-runde dark"
->
+<RootLayout title={`Edit ${username}`} className="overflow-x-hidden">
   <main
     class="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 lg:px-20 lg:gap-20 py-10 lg:py-20 mb-30"
   >
