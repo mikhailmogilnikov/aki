@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import type { BentoItemProperties } from "~/features/bento/model/bento-props.type";
 import type {
   BentoItem,
   BentoItemType,
@@ -73,6 +74,10 @@ const DEFAULT_PROFILE: Profile = {
 export const ProfileContext = createContext<{
   profile: Profile;
   updateProfile: (profile: Profile) => void;
+  updateBentoItem: (
+    id: string,
+    properties: BentoItemProperties<BentoItemType>
+  ) => void;
 } | null>(null);
 
 export const ProfileProvider = ({
@@ -90,8 +95,22 @@ export const ProfileProvider = ({
     LocalStorageService.setItem("localProfile", profile);
   };
 
+  const updateBentoItem = (
+    id: string,
+    properties: BentoItemProperties<BentoItemType>
+  ) => {
+    setProfile({
+      ...profile,
+      bento: profile.bento.map((item) =>
+        item.id === id ? { ...item, properties } : item
+      ),
+    });
+  };
+
   return (
-    <ProfileContext.Provider value={{ profile, updateProfile }}>
+    <ProfileContext.Provider
+      value={{ profile, updateProfile, updateBentoItem }}
+    >
       {children}
     </ProfileContext.Provider>
   );

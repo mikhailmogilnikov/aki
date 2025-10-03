@@ -23,5 +23,7 @@ export interface BentoItemPropertiesText {
 }
 
 export interface BentoItemPropertiesLink {
-  url: string | null;
+  url: string;
+  title: string;
+  url_valid: boolean;
 }

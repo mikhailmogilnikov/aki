@@ -3,6 +3,7 @@ import { BentoItemType, type BentoItem } from "./bento.type";
 import { BentoItemGallery } from "../ui/bento-item/variants/gallery";
 import { BentoItemText } from "../ui/bento-item/variants/text";
 import { BentoItemTitle } from "../ui/bento-item/variants/title";
+import { BentoItemLink } from "../ui/bento-item/variants/link";
 
 export const useBentoItems = () => {
   const renderBentoItem = useCallback(
@@ -20,7 +21,11 @@ export const useBentoItems = () => {
         case BentoItemType.TEXT:
           return <BentoItemText isFullscreen={isFullscreen} />;
         case BentoItemType.TITLE:
-          return <BentoItemTitle itemId={item.id} isFullscreen={isFullscreen} />;
+          return (
+            <BentoItemTitle itemId={item.id} isFullscreen={isFullscreen} />
+          );
+        case BentoItemType.LINK:
+          return <BentoItemLink itemId={item.id} />;
         default:
           return null;
       }

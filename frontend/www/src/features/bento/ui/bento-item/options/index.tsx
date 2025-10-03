@@ -6,6 +6,7 @@ import { useProfile } from "~/services/edit-profile/model/profile-provider";
 import { BentoItemTitleOptions } from "../variants/title/options";
 import { useCallback } from "react";
 import { BentoItemGalleryOptions } from "../variants/gallery/options";
+import { BentoItemLinkOptions } from "../variants/link/options";
 
 export interface BentoItemOptionsProps {
   id: string;
@@ -35,6 +36,14 @@ export const BentoItemOptions = ({
       case BentoItemType.TITLE:
         return (
           <BentoItemTitleOptions
+            id={id}
+            onSizeChange={onSizeChange}
+            onDelete={onDelete}
+          />
+        );
+      case BentoItemType.LINK:
+        return (
+          <BentoItemLinkOptions
             id={id}
             onSizeChange={onSizeChange}
             onDelete={onDelete}

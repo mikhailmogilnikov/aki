@@ -48,7 +48,7 @@ export const EditBarNewItem = () => {
   const bookTextIconRef = useRef<BookTextIconHandle>(null);
 
   const handleAddItem = (type: BentoItemType) => {
-    const newItem: BentoItem = generateNewBentoItemDefaults(
+    const newItem: BentoItem<BentoItemType> = generateNewBentoItemDefaults(
       profile.bento.length + 1,
       type
     );
@@ -133,9 +133,9 @@ export const EditBarNewItem = () => {
           Text
         </DropdownMenuItem>
         <DropdownMenuItem
-          disabled
           onPointerEnter={() => linkIconRef.current?.startAnimation()}
           onPointerLeave={() => linkIconRef.current?.stopAnimation()}
+          onClick={() => handleAddItem(BentoItemType.LINK)}
         >
           <LinkIcon ref={linkIconRef} size={20} className="opacity-50" />
           Link

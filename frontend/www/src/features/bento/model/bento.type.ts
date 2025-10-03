@@ -60,10 +60,12 @@ export const generateNewBentoItemDefaults = (
       id,
       size: "2x2",
       order: order,
-      style: "plain",
+      style: "outline",
       type: BentoItemType.LINK,
       properties: {
-        url: null,
+        url: "",
+        title: "",
+        url_valid: false,
       },
     },
     [BentoItemType.TITLE]: {
