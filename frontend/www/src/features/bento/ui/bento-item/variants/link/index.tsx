@@ -1,10 +1,17 @@
-import { ArrowUpRightIcon } from "lucide-react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type {
   BentoItem,
+  BentoItemSize,
   BentoItemType,
 } from "~/features/bento/model/bento.type";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
+
+import {
+  BentoItemLink2x2,
+  BentoItemLink2x4,
+  BentoItemLink4x1,
+  BentoItemLink4x2,
+} from "./variants";
 
 const buildFaviconUrl = (url: URL) => {
   // Google Favicon API - высокое качество, автоматически находит лучшую иконку
@@ -111,36 +118,57 @@ export function BentoItemLink({ itemId }: { itemId: string }) {
     />
   );
 
+  const Components = useCallback(
+    (size: `${BentoItemSize}`) => {
+      const components: Record<BentoItemSize, React.ReactNode> = {
+        "2x1": null,
+        "4x1": (
+          <BentoItemLink4x1
+            faviconImg={faviconImg}
+            title={bentoItem.properties.title}
+            url={url}
+          />
+        ),
+        "2x2": (
+          <BentoItemLink2x2
+            faviconImg={faviconImg}
+            title={bentoItem.properties.title}
+            url={url}
+          />
+        ),
+        "2x4": (
+          <BentoItemLink2x4
+            faviconImg={faviconImg}
+            title={bentoItem.properties.title}
+            url={url}
+            ogImg={ogImage}
+          />
+        ),
+        "4x2": (
+          <BentoItemLink4x2
+            faviconImg={faviconImg}
+            title={bentoItem.properties.title}
+            url={url}
+            ogImg={ogImage}
+          />
+        ),
+        "4x4": (
+          <BentoItemLink2x4
+            faviconImg={faviconImg}
+            title={bentoItem.properties.title}
+            url={url}
+            ogImg={ogImage}
+          />
+        ),
+      };
+      return components[size];
+    },
+    [bentoItem.size, faviconImg, ogImage, url]
+  );
+
   return (
     <div className="size-full relative flex p-4 group flex-col gap-4 overflow-hidden justify-between">
-      <div className="absolute left-7 z-0 top-7 size-24 flex items-center justify-center opacity-30 blur-xl pointer-events-none">
-        {faviconImg}
-      </div>
-
-      <div className="flex flex-col gap-3">
-        <div className="size-18 rounded-2xl z-10 overflow-hidden flex items-center justify-center shrink-0 bg-background/50 border border-outline">
-          {faviconImg}
-        </div>
-
-        <div className="absolute top-4 right-4 z-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-link duration-300">
-          <ArrowUpRightIcon className="size-7" />
-        </div>
-
-        <div className="flex flex-col gap-1 z-10">
-          <h6 className="text-base font-medium text-start line-clamp-2">
-            {bentoItem.properties.title || url.hostname}
-          </h6>
-          <p className="text-sm text-foreground/50 text-start">
-            {url.hostname}
-          </p>
-        </div>
-      </div>
-
-      {(bentoItem.size === "4x4" || bentoItem.size === "2x4") && (
-        <div className="overflow-hidden aspect-[1.91/1] rounded-xl border border-outline">
-          {ogImage}
-        </div>
-      )}
+      {Components(bentoItem.size)}
     </div>
   );
 }

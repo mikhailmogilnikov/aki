@@ -46,7 +46,7 @@ export function BentoItemLinkOptions({
   return (
     <>
       <BentoItemSize
-        sizes={["2x2", "2x4", "4x2", "4x4"]}
+        sizes={["4x1", "2x2", "2x4", "4x2", "4x4"]}
         activeSize={size}
         onSelect={onSizeChange}
       />
