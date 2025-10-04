@@ -4,16 +4,10 @@ import { GalleryBadge } from "./gallery-badge";
 
 interface BentoItemGalleryProps {
   itemId: string;
-  activeSlide: number;
-  setActiveSlide: (slide: number) => void;
 }
 
-export const BentoItemGalleryPreview = ({
-  itemId,
-  activeSlide,
-  setActiveSlide,
-}: BentoItemGalleryProps) => {
-  const [currentIndex, setCurrentIndex] = useState(activeSlide + 1);
+export const BentoItemGalleryPreview = ({ itemId }: BentoItemGalleryProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const [carouselRef, carouselInstance] = useCarousel({});
 
@@ -23,7 +17,6 @@ export const BentoItemGalleryPreview = ({
       const handleChange = () => {
         const index = carouselInstance.getPageIndex() + 1;
         setCurrentIndex(index);
-        setActiveSlide(carouselInstance.getPageIndex());
       };
 
       carouselInstance.on("change", handleChange);

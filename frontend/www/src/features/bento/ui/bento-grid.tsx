@@ -7,6 +7,7 @@ import { sortBy } from "~/shared/lib/utils/sort-by";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
 
 import { CircleQuestionMark } from "lucide-react";
+import { useMemo } from "react";
 
 export const BentoGrid = () => {
   const { sizerRef, size } = useBentoSize();
@@ -41,7 +42,7 @@ export const BentoGrid = () => {
 const BentoGridE = ({ size }: { size: number }) => {
   const { profile, updateProfile } = useProfile();
 
-  const items = sortBy(profile.bento, "order");
+  const items = useMemo(() => sortBy(profile.bento, "order"), [profile.bento]);
 
   const handleSizeChange = (id: string, size: BentoSize) => {
     const newItems = items.map((item) =>

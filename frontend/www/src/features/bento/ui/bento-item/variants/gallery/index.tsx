@@ -17,21 +17,13 @@ export const BentoItemGallery = ({
   onUnblock,
   isFullscreen,
 }: BentoItemGalleryProps) => {
-  const [activeSlide, setActiveSlide] = useState(0);
-
   return isFullscreen ? (
     <BentoItemGalleryFull
       itemId={itemId}
       onBlock={onBlock}
       onUnblock={onUnblock}
-      activeSlide={activeSlide}
-      setActiveSlide={setActiveSlide}
     />
   ) : (
-    <BentoItemGalleryPreview
-      itemId={itemId}
-      activeSlide={activeSlide}
-      setActiveSlide={setActiveSlide}
-    />
+    <BentoItemGalleryPreview itemId={itemId} />
   );
 };

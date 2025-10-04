@@ -7,18 +7,14 @@ interface BentoItemGalleryProps {
   itemId: string;
   onBlock: () => void;
   onUnblock: () => void;
-  activeSlide: number;
-  setActiveSlide: (slide: number) => void;
 }
 
 export const BentoItemGalleryFull = ({
   itemId,
   onBlock,
   onUnblock,
-  activeSlide,
 }: BentoItemGalleryProps) => {
-  console.log("activeSlide", activeSlide);
-  const [currentIndex, setCurrentIndex] = useState(activeSlide + 1);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const pointerDownRef = useRef(false);
 
@@ -34,9 +30,7 @@ export const BentoItemGalleryFull = ({
     },
   });
 
-  const [carouselRef, carouselInstance] = useCarousel({
-    initialSlide: activeSlide,
-  });
+  const [carouselRef, carouselInstance] = useCarousel({});
 
   // @ts-ignore
   useEffect(() => {
