@@ -133,7 +133,7 @@ export const BentoItemComponent = ({
       <div style={responsiveStyle}>
         <motion.div
           className={clsx(
-            "relative size-full transition-[width,height] will-change-[width,height] duration-300"
+            "relative size-full transition-[width,height] will-change-[width,height] duration-300 "
           )}
           style={transitionStyle}
           layoutId={`bento-item-${id}`}

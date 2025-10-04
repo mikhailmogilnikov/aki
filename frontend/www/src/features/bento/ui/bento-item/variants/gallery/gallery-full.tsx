@@ -14,7 +14,7 @@ export const BentoItemGalleryFull = ({
   onBlock,
   onUnblock,
 }: BentoItemGalleryProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
 
   const pointerDownRef = useRef(false);
 
