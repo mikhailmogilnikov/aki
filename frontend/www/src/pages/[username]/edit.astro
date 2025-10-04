@@ -1,6 +1,7 @@
 ---
 import { Loader2 } from "lucide-react";
 import { Profile } from "~/services/edit-profile/ui/profile";
+import RainbowAppear from "~/shared/ui/kit/utils/RainbowAppear.astro";
 
 import RootLayout from "~/shared/ui/layouts/RootLayout.astro";
 
@@ -12,6 +13,7 @@ const { username } = Astro.params;
   title={`Edit ${username}`}
   className="overflow-x-hidden dark open-runde"
 >
+  <RainbowAppear />
   <main
     class="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 lg:px-20 lg:gap-20 py-10 lg:py-20 mb-30"
   >

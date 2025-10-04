@@ -5,8 +5,24 @@ import { EditName } from "./name";
 import { EditDescription } from "./description";
 import { EditBar } from "~/features/edit-bar/ui/edit-bar";
 import { createPortal } from "react-dom";
+import { useEffect } from "react";
 
 export const Profile = () => {
+  useEffect(() => {
+    const rainbowAppear = document.getElementById("rainbow-appear");
+    const rainbowAppearContent = document.getElementById(
+      "rainbow-appear-content"
+    );
+
+    rainbowAppear?.classList.add("rainbow-appear");
+    rainbowAppearContent?.classList.add("rainbow-appear-content");
+
+    rainbowAppear?.addEventListener("animationend", () => {
+      rainbowAppear?.remove();
+      rainbowAppearContent?.remove();
+    });
+  }, []);
+
   return (
     <ProfileProvider>
       <header
