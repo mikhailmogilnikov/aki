@@ -10,6 +10,8 @@ import { useEffect } from "react";
 export const Profile = () => {
   useEffect(() => {
     const content = document.getElementById("content");
+    if (!content?.classList.contains("grayscale")) return;
+
     const rainbowAppearContent = document.getElementById(
       "rainbow-appear-content"
     );
@@ -18,7 +20,7 @@ export const Profile = () => {
     rainbowAppearContent?.classList.add("rainbow-appear-content");
 
     rainbowAppearContent?.addEventListener("animationend", () => {
-      rainbowAppearContent?.remove();
+      rainbowAppearContent?.parentElement?.remove();
       content?.classList.remove("rainbow-appear");
       content?.classList.remove("grayscale");
     });
