@@ -10,6 +10,7 @@ type Props = {
   description?: string;
   faviconUrl?: string;
   className?: string;
+  htmlClassName?: string;
   image?: string;
 };
 
@@ -18,12 +19,13 @@ const {
   description = CONFIG.DESCRIPTION,
   faviconUrl = "/favicon.svg",
   className,
+  htmlClassName,
   image,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class={htmlClassName}>
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href={faviconUrl} />
@@ -78,6 +80,7 @@ const {
     ]}
   >
     <Squircle />
+
     <slot />
   </body>
 </html>

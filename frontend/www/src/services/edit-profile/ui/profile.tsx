@@ -9,17 +9,18 @@ import { useEffect } from "react";
 
 export const Profile = () => {
   useEffect(() => {
-    const rainbowAppear = document.getElementById("rainbow-appear");
+    const content = document.getElementById("content");
     const rainbowAppearContent = document.getElementById(
       "rainbow-appear-content"
     );
 
-    rainbowAppear?.classList.add("rainbow-appear");
+    content?.classList.add("rainbow-appear");
     rainbowAppearContent?.classList.add("rainbow-appear-content");
 
-    rainbowAppear?.addEventListener("animationend", () => {
-      rainbowAppear?.remove();
+    rainbowAppearContent?.addEventListener("animationend", () => {
       rainbowAppearContent?.remove();
+      content?.classList.remove("rainbow-appear");
+      content?.classList.remove("grayscale");
     });
   }, []);
 
