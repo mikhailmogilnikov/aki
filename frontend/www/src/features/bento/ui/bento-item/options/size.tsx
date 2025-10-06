@@ -27,6 +27,8 @@ export const BentoItemSize = ({
         return <RectangleHorizontal className="size-6" />;
       case "4x4":
         return <Square className="size-6" />;
+      case "dynamic":
+        return <Square className="size-6" />;
     }
   };
 

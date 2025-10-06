@@ -123,6 +123,7 @@ export function BentoItemLink({ itemId }: { itemId: string }) {
     (size: `${BentoItemSize}`) => {
       const components: Record<BentoItemSize, React.ReactNode> = {
         "2x1": null,
+        dynamic: null,
         "4x1": (
           <BentoItemLink4x1
             faviconImg={faviconImg}

@@ -1,12 +1,11 @@
-import { useProfile } from "~/services/edit-profile/model/profile-provider";
 import type { BentoItemOptionsProps } from "../../../options";
 
 import { BentoItemDelete } from "../../../options/delete";
 
 export function BentoItemTitleOptions({ id, onDelete }: BentoItemOptionsProps) {
-  const { profile } = useProfile();
+  // const { profile } = useProfile();
 
-  const bentoItem = profile.bento.find((item) => item.id === id);
+  // const bentoItem = profile.bento.find((item) => item.id === id);
 
   return (
     <>
