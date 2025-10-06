@@ -14,6 +14,9 @@ const { DEPLOY_ADAPTER } = loadEnv(
   ""
 );
 
+// Fallback to vercel adapter by default
+const deployAdapter = DEPLOY_ADAPTER || process.env.DEPLOY_ADAPTER || "vercel";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -25,7 +28,7 @@ export default defineConfig({
   },
 
   adapter:
-    DEPLOY_ADAPTER === "node"
+    deployAdapter === "node"
       ? node({
           mode: "standalone",
         })
