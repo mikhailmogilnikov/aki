@@ -8,7 +8,9 @@ export type BentoItemProperties<T> = T extends BentoItemType.TITLE
       ? BentoItemPropertiesText
       : T extends BentoItemType.LINK
         ? BentoItemPropertiesLink
-        : never;
+        : T extends BentoItemType.DESCRIPTION
+          ? BentoItemPropertiesDescription
+          : never;
 
 export interface BentoItemPropertiesTitle {
   content: string;
@@ -26,4 +28,9 @@ export interface BentoItemPropertiesLink {
   url: string;
   title: string;
   url_valid: boolean;
+}
+
+export interface BentoItemPropertiesDescription {
+  content: string;
+  opacity: number;
 }

@@ -7,14 +7,16 @@ import { useProfile } from "~/services/edit-profile/model/profile-provider";
 import { useRefresh } from "muuri-react";
 import { useEffect, useRef } from "react";
 
-export function FullscreenTitle({ itemId }: { itemId: string }) {
+export function FullscreenDescription({ itemId }: { itemId: string }) {
   const { profile, updateProfile } = useProfile();
 
   const textRef = useRef<HTMLTextAreaElement>(null);
 
   const bentoItem = profile.bento.find(
     (item) => item.id === itemId
-  ) as BentoItem<BentoItemType.TITLE>;
+  ) as BentoItem<BentoItemType.DESCRIPTION>;
+
+  useRefresh([bentoItem.properties.content]);
 
   useEffect(() => {
     if (textRef.current) {
@@ -24,13 +26,9 @@ export function FullscreenTitle({ itemId }: { itemId: string }) {
     }
   }, [textRef]);
 
-  useRefresh([bentoItem.properties.content]);
-
   if (!bentoItem) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.target.value.length > 100) return;
-
     const newBentoItem = {
       ...bentoItem,
       properties: { ...bentoItem.properties, content: e.target.value },
@@ -46,8 +44,9 @@ export function FullscreenTitle({ itemId }: { itemId: string }) {
   return (
     <textarea
       ref={textRef}
-      className="text-xl font-bold w-full outline-none resize-none field-sizing-content"
-      placeholder="Enter title..."
+      style={{ opacity: bentoItem.properties.opacity }}
+      className="text-base w-full outline-none resize-none field-sizing-content"
+      placeholder="Enter description..."
       value={bentoItem.properties.content}
       onChange={handleChange}
     />

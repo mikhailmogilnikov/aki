@@ -10,7 +10,7 @@ export const BentoSizes = (
   BentoSize,
   {
     columns: number;
-    height: number;
+    height: number | string;
   }
 > => ({
   "4x1": {
@@ -36,6 +36,10 @@ export const BentoSizes = (
   "4x4": {
     columns: 1,
     height: getMaxHeight(gridSize),
+  },
+  dynamic: {
+    columns: 1,
+    height: "min-content",
   },
 });
 
@@ -45,7 +49,9 @@ export const BentoTransitionSizes = (
   BentoSize,
   {
     width: number;
-    height: number;
+    height: number | string;
+    paddingTop?: string;
+    paddingBottom?: string;
   }
 > => ({
   "4x1": {
@@ -71,5 +77,9 @@ export const BentoTransitionSizes = (
   "4x4": {
     width: getMaxHeight(gridSize),
     height: getMaxHeight(gridSize),
+  },
+  dynamic: {
+    width: getMaxHeight(gridSize),
+    height: "min-content",
   },
 });

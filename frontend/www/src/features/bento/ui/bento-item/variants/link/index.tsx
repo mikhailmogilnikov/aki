@@ -12,6 +12,7 @@ import {
   BentoItemLink4x1,
   BentoItemLink4x2,
 } from "./variants";
+import { Link2Off } from "lucide-react";
 
 const buildFaviconUrl = (url: URL) => {
   // Google Favicon API - высокое качество, автоматически находит лучшую иконку
@@ -96,7 +97,7 @@ export function BentoItemLink({ itemId }: { itemId: string }) {
   if (!bentoItem.properties.url_valid)
     return (
       <div className="size-full flex items-center justify-center">
-        <p className="text-sm text-center opacity-50">Empty link</p>
+        <Link2Off className="size-14 text-foreground opacity-50" />
       </div>
     );
 

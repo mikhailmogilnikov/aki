@@ -7,6 +7,7 @@ export const enum BentoItemSize {
   TWO_BY_FOUR = "2x4",
   FOUR_BY_TWO = "4x2",
   FOUR_BY_FOUR = "4x4",
+  DYNAMIC = "dynamic",
 }
 
 export type BentoSize = `${BentoItemSize}`;
@@ -27,6 +28,7 @@ export enum BentoItemType {
   TEXT = "text",
   LINK = "link",
   TITLE = "title",
+  DESCRIPTION = "description",
 }
 
 export const generateNewBentoItemDefaults = (
@@ -70,12 +72,23 @@ export const generateNewBentoItemDefaults = (
     },
     [BentoItemType.TITLE]: {
       id,
-      size: "4x1",
+      size: "dynamic",
       order: order,
       style: "transparent",
       type: BentoItemType.TITLE,
       properties: {
         content: "",
+      },
+    },
+    [BentoItemType.DESCRIPTION]: {
+      id,
+      size: "dynamic",
+      order: order,
+      style: "transparent",
+      type: BentoItemType.DESCRIPTION,
+      properties: {
+        content: "",
+        opacity: 0.5,
       },
     },
   };

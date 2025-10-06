@@ -70,8 +70,9 @@ const BentoGridE = ({ size }: { size: number }) => {
       layoutDuration={300}
       dragHandle=".handle"
       dragSortPredicate={{
-        action: "swap",
-        threshold: 20,
+        action: "move",
+        migrateAction: "move",
+        threshold: 50,
       }}
       dragAutoScroll={{
         targets: [

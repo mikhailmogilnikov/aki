@@ -33,7 +33,10 @@ import {
   AArrowUpIcon,
   type AArrowUpIconHandle,
 } from "~/shared/ui/icons/a-arrow-up";
-import { type BookTextIconHandle } from "~/shared/ui/icons/book-text";
+import {
+  BookTextIcon,
+  type BookTextIconHandle,
+} from "~/shared/ui/icons/book-text";
 
 export const EditBarNewItem = () => {
   const { profile, updateProfile } = useProfile();
@@ -152,6 +155,18 @@ export const EditBarNewItem = () => {
             className="opacity-50"
           />
           Title
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => handleAddItem(BentoItemType.DESCRIPTION)}
+          onPointerEnter={() => bookTextIconRef.current?.startAnimation()}
+          onPointerLeave={() => bookTextIconRef.current?.stopAnimation()}
+        >
+          <BookTextIcon
+            ref={bookTextIconRef}
+            size={20}
+            className="opacity-50"
+          />
+          Description
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

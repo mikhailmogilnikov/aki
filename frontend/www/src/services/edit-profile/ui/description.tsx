@@ -1,5 +1,4 @@
 import { useProfile } from "../model/profile-provider";
-import TextareaAutosize from "react-textarea-autosize";
 
 export const EditDescription = () => {
   const { profile, updateProfile } = useProfile();
@@ -9,7 +8,7 @@ export const EditDescription = () => {
   };
 
   return (
-    <TextareaAutosize
+    <textarea
       value={profile.description}
       onChange={handleChange}
       className="text-lg text-muted-foreground px-2 z-1 outline-none resize-none field-sizing-content w-full"

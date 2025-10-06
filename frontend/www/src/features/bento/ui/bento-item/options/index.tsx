@@ -7,6 +7,7 @@ import { BentoItemTitleOptions } from "../variants/title/options";
 import { useCallback } from "react";
 import { BentoItemGalleryOptions } from "../variants/gallery/options";
 import { BentoItemLinkOptions } from "../variants/link/options";
+import { BentoItemDescriptionOptions } from "../variants/description/options";
 
 export interface BentoItemOptionsProps {
   id: string;
@@ -44,6 +45,14 @@ export const BentoItemOptions = ({
       case BentoItemType.LINK:
         return (
           <BentoItemLinkOptions
+            id={id}
+            onSizeChange={onSizeChange}
+            onDelete={onDelete}
+          />
+        );
+      case BentoItemType.DESCRIPTION:
+        return (
+          <BentoItemDescriptionOptions
             id={id}
             onSizeChange={onSizeChange}
             onDelete={onDelete}
