@@ -1,10 +1,24 @@
 ---
-// import { BentoItems } from "~/features/bento/view-model/mock-items";
+import type { BentoItem } from "~/features/bento/model/bento.type";
+import { BentoItemType } from "~/features/bento/model/bento.type";
+import BentoBuilder from "~/features/bento/ui/bento-builder.astro";
 import Avatar from "~/shared/ui/kit/Avatar.astro";
 import RootLayout from "~/shared/ui/layouts/RootLayout.astro";
 
 export const prerender = false;
-// const { username } = Astro.params;
+
+const MOCK_ITEMS: BentoItem<BentoItemType>[] = [
+  {
+    id: "1",
+    size: "2x2",
+    order: 0,
+    style: "plain",
+    type: BentoItemType.GALLERY,
+    properties: {
+      media: [],
+    },
+  },
+];
 
 const title = "Mikhail Mogilnikov";
 const description = "Software & Design Engineer";
@@ -37,7 +51,7 @@ const avatarUrl = "https://avatars.githubusercontent.com/u/125604210?v=4";
     </header>
 
     <section class="gap-5 max-w-[428px] mx-auto w-full">
-      <!-- <BentoBuilder items={BentoItems} /> -->
+      <BentoBuilder items={MOCK_ITEMS} />
     </section>
   </main>
 </RootLayout>
