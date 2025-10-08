@@ -11,7 +11,7 @@ export const EditDescription = () => {
     <textarea
       value={profile.description}
       onChange={handleChange}
-      className="text-lg text-muted-foreground px-2 z-1 outline-none resize-none field-sizing-content w-full"
+      className="text-lg text-muted-foreground px-1 z-1 outline-none resize-none field-sizing-content w-full"
       placeholder="Add bio..."
     />
   );

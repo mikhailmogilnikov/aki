@@ -14,31 +14,48 @@ import {
 } from "~/shared/ui/kit/overlays/dropdown-menu";
 import { MenuIcon, type MenuIconHandle } from "~/shared/ui/icons/menu";
 import { useRef, useState } from "react";
-import { CogIcon, type CogIconHandle } from "~/shared/ui/icons/settings";
+import { CogIcon } from "~/shared/ui/icons/settings";
 import { Pulse } from "~/shared/ui/kit/pulse";
 import { ArrowUpRight } from "lucide-react";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
-import { UserIcon, type UserIconHandle } from "~/shared/ui/icons/user";
+import { UserIcon } from "~/shared/ui/icons/user";
 import { ProjectSettingsModal } from "./project-settings";
 import { ProfileModal } from "./profile";
+import { ActivityIcon } from "~/shared/ui/icons/activity";
+import { ChartSplineIcon } from "~/shared/ui/icons/chart-spline";
+
+type MenuItemConfig = {
+  id: string;
+  label: string;
+  Icon:
+    | typeof CogIcon
+    | typeof ActivityIcon
+    | typeof UserIcon
+    | typeof ChartSplineIcon;
+};
+
+const menuItems: MenuItemConfig[] = [
+  { id: "settings", label: "Project settings", Icon: CogIcon },
+  // { id: "activity", label: "Social media links", Icon: ActivityIcon },
+  { id: "profile", label: "Profile", Icon: UserIcon },
+  { id: "analytics", label: "Analytics", Icon: ChartSplineIcon },
+];
 
 export const EditBarMenu = () => {
   const { profile } = useProfile();
 
-  const [openSettings, setOpenSettings] = useState(false);
-  const [openProfile, setOpenProfile] = useState(false);
+  const [openModals, setOpenModals] = useState<Record<string, boolean>>({
+    settings: false,
+    activity: false,
+    profile: false,
+    analytics: false,
+  });
 
   const menuIconRef = useRef<MenuIconHandle>(null);
+  const itemIconRefs = useRef<Record<string, any>>({});
 
-  const cogIconRef = useRef<CogIconHandle>(null);
-  const userIconRef = useRef<UserIconHandle>(null);
-
-  const handleCloseSettings = () => {
-    setOpenSettings(false);
-  };
-
-  const handleCloseProfile = () => {
-    setOpenProfile(false);
+  const handleToggleModal = (id: string, value: boolean) => {
+    setOpenModals((prev) => ({ ...prev, [id]: value }));
   };
 
   return (
@@ -49,11 +66,12 @@ export const EditBarMenu = () => {
             menuIconRef.current?.startAnimation();
 
             queueMicrotask(() => {
-              cogIconRef.current?.startAnimation();
-              userIconRef.current?.startAnimation();
+              Object.values(itemIconRefs.current).forEach((ref) =>
+                ref?.startAnimation()
+              );
 
               setTimeout(() => {
-                cogIconRef.current?.stopAnimation();
+                itemIconRefs.current["settings"]?.stopAnimation();
               }, 400);
             });
           } else {
@@ -81,23 +99,22 @@ export const EditBarMenu = () => {
         <DropdownMenuContent>
           <DropdownMenuLabel>Menu</DropdownMenuLabel>
 
-          <DropdownMenuItem
-            onMouseEnter={() => cogIconRef.current?.startAnimation()}
-            onMouseLeave={() => cogIconRef.current?.stopAnimation()}
-            onClick={() => setOpenSettings(true)}
-          >
-            <CogIcon ref={cogIconRef} size={20} className="opacity-50" />
-            Project settings
-          </DropdownMenuItem>
+          {menuItems.map(({ id, label, Icon }) => (
+            <DropdownMenuItem
+              key={id}
+              onMouseEnter={() => itemIconRefs.current[id]?.startAnimation()}
+              onMouseLeave={() => itemIconRefs.current[id]?.stopAnimation()}
+              onClick={() => handleToggleModal(id, true)}
+            >
+              <Icon
+                ref={(el: any) => (itemIconRefs.current[id] = el)}
+                size={20}
+                className="opacity-50"
+              />
+              {label}
+            </DropdownMenuItem>
+          ))}
 
-          <DropdownMenuItem
-            onMouseEnter={() => userIconRef.current?.startAnimation()}
-            onMouseLeave={() => userIconRef.current?.stopAnimation()}
-            onClick={() => setOpenProfile(true)}
-          >
-            <UserIcon ref={userIconRef} size={20} className="opacity-50" />
-            Profile
-          </DropdownMenuItem>
           <DropdownMenuSeparator />
 
           <DropdownMenuItem asChild className="relative">
@@ -116,10 +133,13 @@ export const EditBarMenu = () => {
       </DropdownMenu>
 
       <ProjectSettingsModal
-        open={openSettings}
-        onOpenChange={handleCloseSettings}
+        open={openModals.settings ?? false}
+        onOpenChange={() => handleToggleModal("settings", false)}
       />
-      <ProfileModal open={openProfile} onOpenChange={handleCloseProfile} />
+      <ProfileModal
+        open={openModals.profile ?? false}
+        onOpenChange={() => handleToggleModal("profile", false)}
+      />
     </>
   );
 };

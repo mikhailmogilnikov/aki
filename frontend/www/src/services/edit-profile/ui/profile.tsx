@@ -5,26 +5,10 @@ import { EditName } from "./name";
 import { EditDescription } from "./description";
 import { EditBar } from "~/features/edit-bar/ui/edit-bar";
 import { createPortal } from "react-dom";
-import { useEffect } from "react";
+import { EditSocialMedia } from "./social-media/social-media";
 
 export const Profile = () => {
-  useEffect(() => {
-    const content = document.getElementById("content");
-    if (!content?.classList.contains("grayscale")) return;
-
-    const rainbowAppearContent = document.getElementById(
-      "rainbow-appear-content"
-    );
-
-    content?.classList.add("rainbow-appear");
-    rainbowAppearContent?.classList.add("rainbow-appear-content");
-
-    rainbowAppearContent?.addEventListener("animationend", () => {
-      rainbowAppearContent?.parentElement?.remove();
-      content?.classList.remove("rainbow-appear");
-      content?.classList.remove("grayscale");
-    });
-  }, []);
+  // useAppearRainbow();
 
   return (
     <ProfileProvider>
@@ -38,6 +22,7 @@ export const Profile = () => {
         />
         <EditName />
         <EditDescription />
+        <EditSocialMedia />
       </header>
       <section className="w-full max-w-116 mx-auto px-[8px] lg:px-0 motion-opacity-in-0">
         <BentoGrid />

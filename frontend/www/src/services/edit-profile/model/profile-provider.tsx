@@ -7,53 +7,17 @@ import type {
 
 import { LocalStorageService } from "~/shared/lib/services/storage";
 
-export enum Font {
-  INTER = "inter",
-  OPEN_RUNDE = "open-runde",
-  GILROY = "gilroy",
-  VOLKORN = "vollkorn",
-  JETBRAINS_MONO = "jetbrains-mono",
-  MONTSERRAT = "montserrat",
-  OSWALD = "oswald",
-  CAVEAT = "caveat",
-}
-
-export enum Themes {
-  LIGHT = "light",
-  DARK = "dark",
-
-  GREEN = "green",
-  PINK = "pink",
-  BLUE = "blue",
-  PURPLE = "purple",
-  GOLDEN = "golden",
-
-  DARK_BLUE = "dark-blue",
-}
-export const ThemesNames = {
-  [Themes.LIGHT]: "Light",
-  [Themes.DARK]: "Dark",
-  [Themes.GREEN]: "Green",
-  [Themes.PINK]: "Pink",
-  [Themes.BLUE]: "Blue",
-  [Themes.PURPLE]: "Purple",
-  [Themes.GOLDEN]: "Golden",
-  [Themes.DARK_BLUE]: "Dark Blue",
-};
-
-export interface Theme {
-  font: Font;
-  theme: Themes;
-  show_avatar_blur: boolean;
-  border_radius: number;
-  border_width: number;
-}
+import type { SocialMedia } from "~/shared/domain/entities.type";
+import type { Theme } from "~/shared/domain/entities.type";
+import { Font } from "~/shared/domain/entities.type";
+import { Themes } from "~/shared/domain/entities.type";
 
 export interface Profile {
   id: string;
   name: string;
   description: string;
   bento: BentoItem<BentoItemType>[];
+  social_media: SocialMedia[];
   theme: Theme;
 }
 
@@ -62,6 +26,7 @@ const DEFAULT_PROFILE: Profile = {
   name: "Mikhail Mogilnikov",
   description: "Software & Design Engineer",
   bento: [],
+  social_media: [],
   theme: {
     font: Font.OPEN_RUNDE,
     theme: Themes.DARK,

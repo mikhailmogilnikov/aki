@@ -6,11 +6,9 @@ import {
   DropdownMenuTrigger,
 } from "~/shared/ui/kit/overlays/dropdown-menu";
 import { ChevronDownIcon } from "lucide-react";
-import {
-  Font,
-  useProfile,
-} from "~/services/edit-profile/model/profile-provider";
+import { useProfile } from "~/services/edit-profile/model/profile-provider";
 import { cn } from "~/shared/lib/utils/cn";
+import { Font } from "~/shared/domain/entities.type";
 
 export function FontSelector() {
   const { profile, updateProfile } = useProfile();

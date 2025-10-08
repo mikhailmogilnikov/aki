@@ -16,10 +16,7 @@ import {
   type GalleryHorizontalEndIconHandle,
 } from "~/shared/ui/icons/gallery";
 import { useRef } from "react";
-import {
-  ScanTextIcon,
-  type ScanTextIconHandle,
-} from "~/shared/ui/icons/scan-text";
+import { type ScanTextIconHandle } from "~/shared/ui/icons/scan-text";
 import { LinkIcon, type LinkIconHandle } from "~/shared/ui/icons/link";
 import { PlusIcon, type PlusIconHandle } from "~/shared/ui/icons/plus";
 import { useProfile } from "~/services/edit-profile/model/profile-provider";
@@ -123,7 +120,7 @@ export const EditBarNewItem = () => {
           />
           Media gallery
         </DropdownMenuItem>
-        <DropdownMenuItem
+        {/* <DropdownMenuItem
           disabled
           onPointerEnter={() => scanTextIconRef.current?.startAnimation()}
           onPointerLeave={() => scanTextIconRef.current?.stopAnimation()}
@@ -134,7 +131,7 @@ export const EditBarNewItem = () => {
             className="opacity-50"
           />
           Text
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuItem
           onPointerEnter={() => linkIconRef.current?.startAnimation()}
           onPointerLeave={() => linkIconRef.current?.stopAnimation()}

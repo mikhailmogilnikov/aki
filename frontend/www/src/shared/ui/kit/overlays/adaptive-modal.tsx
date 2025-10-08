@@ -102,10 +102,12 @@ interface AdaptiveModalFooterProps {
   children?: React.ReactNode;
   drawerProps?: DrawerFooterProps;
   modalProps?: ModalFooterProps;
+  cancelButton?: boolean;
 }
 
 export const AdaptiveModalFooter = ({
   children,
+  cancelButton = false,
   ...props
 }: AdaptiveModalFooterProps) => {
   const isMobile = useMediaQuery(BREAKPOINT_MOBILE.toString());
@@ -113,8 +115,12 @@ export const AdaptiveModalFooter = ({
   const { drawerProps, modalProps } = props;
 
   return isMobile ? (
-    <DrawerFooter {...drawerProps}>{children}</DrawerFooter>
+    <DrawerFooter cancelButton={cancelButton} {...drawerProps}>
+      {children}
+    </DrawerFooter>
   ) : (
-    <ModalFooter {...modalProps}>{children}</ModalFooter>
+    <ModalFooter cancelButton={cancelButton} {...modalProps}>
+      {children}
+    </ModalFooter>
   );
 };

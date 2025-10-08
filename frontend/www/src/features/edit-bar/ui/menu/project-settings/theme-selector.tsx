@@ -6,12 +6,10 @@ import {
   DropdownMenuTrigger,
 } from "~/shared/ui/kit/overlays/dropdown-menu";
 import { ChevronDownIcon } from "lucide-react";
-import {
-  Themes,
-  ThemesNames,
-  useProfile,
-} from "~/services/edit-profile/model/profile-provider";
+import { useProfile } from "~/services/edit-profile/model/profile-provider";
 import { cn } from "~/shared/lib/utils/cn";
+import { Themes } from "~/shared/domain/entities.type";
+import { ThemesNames } from "~/shared/domain/entities.type";
 
 export function ThemeSelector() {
   const { profile, updateProfile } = useProfile();
